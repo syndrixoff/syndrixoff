@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syndrix — Engineering Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="grain">
+
+  <nav class="nav" id="nav">
+    <div class="nav-track">
+      <a href="#" class="nav-logo">SYNDRIX</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#projects">Projects</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="section hero-section">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+
+      <div class="hero-telemetry">
+        <span class="tele-label">SYNDRIX // v1</span>
+        <span class="tele-dot"></span>
+        <span class="tele-label">ENGINEERING COLLECTIVE</span>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-badge">CROSS-DISCIPLINARY ENGINEERING // ECE &middot; CSE &middot; IT</span>
+        <h1 class="hero-headline">
+          <span class="hero-line"><span>Hardware &#10022; Software &#10022; Shipped</span></span>
+          <span class="hero-line"><span class="gold">Idea &#8594; Design &#8594; Deploy</span></span>
+        </h1>
+        <p class="hero-subtitle">
+          A collective of engineers building products across the full stack — from PCB to cloud.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ABOUT (dark) -->
+    <section id="about" class="section about-section">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+
+      <div class="section-label">// ABOUT</div>
+      <h2 class="section-title">We are a collective of <em>engineers</em>.</h2>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Tell us what you need. Electronics, software, firmware, systems — we take your requirements and ship working products, no matter the stack.</p>
+          <p>Every project is owned by a small pod that designs, prototypes, tests, and delivers. No handoffs. No red tape. Just what you asked for, built by engineers who see it through.</p>
+        </div>
+        <div class="telemetry-cards">
+          <div class="tele-card">
+            <span class="tele-card-label">Disciplines</span>
+            <span class="tele-card-value" data-target="3">0</span>
+          </div>
+          <div class="tele-card">
+            <span class="tele-card-label">Projects Delivered</span>
+            <span class="tele-card-value" data-target="24">0</span>
+          </div>
+          <div class="tele-card">
+            <span class="tele-card-label">Commitment</span>
+            <span class="tele-card-value" data-target="100">0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES (light — Apple tile) -->
+    <section id="capabilities" class="section caps-section light-tile">
+      <div class="section-label">// CAPABILITIES</div>
+      <h2 class="section-title">Full Spectrum <em>Engineering</em></h2>
+
+      <div class="caps-grid">
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+          </div>
+          <h3>Embedded Systems</h3>
+          <p>Firmware, RTOS, PCB design, sensor integration, and low-power wireless.</p>
+          <div class="tags"><span>ARM</span><span>RISC-V</span><span>ESP32</span></div>
+        </div>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <h3>Full-Stack Software</h3>
+          <p>Web apps, APIs, real-time systems, and cloud-native architectures.</p>
+          <div class="tags"><span>React</span><span>Node</span><span>Go</span></div>
+        </div>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3>IoT &amp; Connectivity</h3>
+          <p>End-to-end IoT solutions: BLE, Wi-Fi, LoRaWAN, MQTT, custom protocols.</p>
+          <div class="tags"><span>MQTT</span><span>LoRa</span><span>BLE</span></div>
+        </div>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+          </div>
+          <h3>Product Design</h3>
+          <p>Industrial design, mechanical enclosures, UX, and interface design for physical products.</p>
+          <div class="tags"><span>CAD</span><span>Figma</span><span>DFM</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (dark) -->
+    <section id="projects" class="section projects-section">
+      <div class="section-label">// PROJECTS</div>
+      <h2 class="section-title">Selected <em>Work</em></h2>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-visual pv-aura"></div>
+          <div class="project-body">
+            <span class="project-tag">Hardware + AI</span>
+            <h3>Project Aura</h3>
+            <p>Smart environmental monitoring with on-device ML and mesh networking.</p>
+            <div class="tags"><span>ESP32-S3</span><span>TFLite</span><span>LoRa</span></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual pv-synapse"></div>
+          <div class="project-body">
+            <span class="project-tag">Software</span>
+            <h3>Synapse</h3>
+            <p>Real-time analytics platform for industrial sensor networks.</p>
+            <div class="tags"><span>Go</span><span>React</span><span>Kafka</span></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual pv-cortex"></div>
+          <div class="project-body">
+            <span class="project-tag">Embedded</span>
+            <h3>Cortex</h3>
+            <p>Edge AI inference unit with custom RISC-V accelerator.</p>
+            <div class="tags"><span>RISC-V</span><span>FPGA</span><span>FreeRTOS</span></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual pv-nexus"></div>
+          <div class="project-body">
+            <span class="project-tag">IoT + Cloud</span>
+            <h3>Nexus</h3>
+            <p>IoT ecosystem connecting thousands of smart building devices.</p>
+            <div class="tags"><span>MQTT</span><span>AWS IoT</span><span>Rust</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TEAM (light — Apple tile) -->
+    <section id="team" class="section team-section light-tile">
+      <div class="section-label">// CREW MANIFEST</div>
+      <h2 class="section-title">The <em>Collective</em></h2>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar" style="--h: 190"><span>AK</span></div>
+          <h3>Arjun Kapoor</h3>
+          <span class="team-role">Principal Engineer, Hardware</span>
+          <p>15+ years embedded. Former lead at Bosch R&amp;D.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="--h: 330"><span>MR</span></div>
+          <h3>Maya Rodrigues</h3>
+          <span class="team-role">Lead Architect, Software</span>
+          <p>Distributed systems. Ex-Datadog, 1M+ events/sec.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="--h: 140"><span>SV</span></div>
+          <h3>Samir Verma</h3>
+          <span class="team-role">Systems Integrator</span>
+          <p>Mechatronics. HW&ndash;SW boundary specialist.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="--h: 40"><span>PL</span></div>
+          <h3>Priya Lakshmi</h3>
+          <span class="team-role">Product &amp; Design</span>
+          <p>Complex tech &rarr; intuitive products.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (dark) -->
+    <section id="contact" class="section contact-section">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+
+      <div class="section-label centered">// CONTACT</div>
+      <div class="contact-content">
+        <h2 class="section-title centered">Let's build something <em>extraordinary</em>.</h2>
+        <p class="contact-body">Have a project in mind? Reach out.</p>
+        <a href="mailto:syndrixoff@gmail.com" class="btn btn-primary btn-large">syndrixoff@gmail.com</a>
+        <div class="social-links">
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">X / Twitter</a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logos">
+        <span class="footer-brand">SYNDRIX</span>
+        <span class="footer-tag">ECE · CSE · IT</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:syndrixoff@gmail.com">syndrixoff@gmail.com</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <div class="footer-legal">
+        &copy; 2026 Syndrix Collective &mdash; Built by engineers, for builders.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
