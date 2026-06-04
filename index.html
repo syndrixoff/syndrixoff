@@ -40,11 +40,10 @@
           <use href="#loaderPaths" fill="white" />
         </mask>
       </defs>
-      <rect class="loader-fallback" width="634" height="632" fill="#0066cc" opacity="0.15" mask="url(#loaderShape)" />
-      <g class="loader-bg" opacity="0.06">
+      <rect width="634" height="632" fill="#555555" mask="url(#loaderShape)" />
+      <g class="loader-colored" id="loaderColored">
         <use href="#loaderPaths" />
       </g>
-      <rect class="loader-fill-rect" id="loaderFillRect" width="634" height="632" fill="var(--accent)" mask="url(#loaderShape)" />
     </svg>
     <div class="loader-pct" id="loaderPct">0%</div>
   </div>
@@ -137,9 +136,6 @@
               <a href="#projects" class="btn btn-primary">View Projects</a>
               <a href="#contact" class="btn btn-ghost">Get in Touch</a>
             </div>
-          </div>
-          <div class="hero-spline">
-            <canvas id="splineCanvas"></canvas>
           </div>
         </div>
       </div>
@@ -441,14 +437,14 @@
 
     <!-- CONTACT (dark) -->
     <section id="contact" class="section contact-section">
-      <div class="hud-corner tl"></div>
-      <div class="hud-corner tr"></div>
-      <div class="hud-corner bl"></div>
-      <div class="hud-corner br"></div>
-
       <div class="section-label centered">// CONTACT</div>
+
+      <div class="contact-card">
+      <div class="spline-wrapper">
+        <canvas id="splineCanvas"></canvas>
+      </div>
       <div class="contact-content">
-        <h2 class="section-title centered">Let's build something <em>extraordinary</em>.</h2>
+        <h2 class="section-title">Let's build something <em>extraordinary</em>.</h2>
         <p class="contact-body">Have a project in mind? Reach out.</p>
         <a href="mailto:syndrixoff@gmail.com" class="btn btn-primary btn-large">syndrixoff@gmail.com</a>
         <div class="social-links">
@@ -457,6 +453,7 @@
           <a href="#">X / Twitter</a>
         </div>
       </div>
+      </div>
 
     </section>
 
@@ -464,15 +461,6 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-logos">
-        <span class="footer-brand">SYNDRIX</span>
-        <span class="footer-tag">ECE · CSE · IT</span>
-      </div>
-      <div class="footer-links">
-        <a href="mailto:syndrixoff@gmail.com">syndrixoff@gmail.com</a>
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-      </div>
       <div class="footer-legal">
         &copy; 2026 Syndrix Collective&thinsp;&ndash;&thinsp;Built by engineers, for builders.
       </div>
@@ -557,7 +545,7 @@ window.addEventListener('load', function() {
     heroEl.addEventListener('mouseenter', function() { mouseOver = true; });
     heroEl.addEventListener('mouseleave', function() { mouseOver = false; mPos.set(9999, 9999, 0); mVel.set(0, 0, 0); });
     heroEl.addEventListener('mousemove', function(e) { track(e.clientX, e.clientY); });
-    heroEl.addEventListener('touchmove', function(e) { if (e.touches.length) track(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+    heroEl.addEventListener('touchmove', function(e) { mouseOver = true; if (e.touches.length) track(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
     heroEl.addEventListener('touchend', function() { mouseOver = false; mPos.set(9999, 9999, 0); }, { passive: true });
   }
 
@@ -683,5 +671,7 @@ window.addEventListener('load', function() {
 });
 </script>
 </div>
+
+</body>
 </body>
 </html>

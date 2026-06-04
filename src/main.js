@@ -244,8 +244,10 @@ themeToggle.addEventListener("click", (e) => {
 /* ─── LOADER (tracks real load progress) ─── */
 const loader = document.getElementById("loader");
 const pctEl = document.getElementById("loaderPct");
-const fillRect = document.getElementById("loaderFillRect");
+const loaderColored = document.getElementById("loaderColored");
 const page = document.getElementById("page");
+
+document.body.style.overflow = "hidden";
 
 let currentProgress = 0;
 let targetProgress = 0;
@@ -257,9 +259,10 @@ function setLoadTarget(p) {
 function finishLoader() {
   currentProgress = 1;
   pctEl.textContent = "100%";
-  fillRect.style.clipPath = "inset(0% 0 0 0)";
+  loaderColored.style.clipPath = "inset(0% 0 0 0)";
   page.classList.add("page-visible");
   loader.classList.add("loader-hidden");
+  document.body.style.overflow = "";
 }
 
 function tick() {
@@ -269,7 +272,7 @@ function tick() {
     if (currentProgress > targetProgress) currentProgress = targetProgress;
   }
   pctEl.textContent = Math.round(currentProgress * 100) + "%";
-  fillRect.style.clipPath = `inset(${(1 - currentProgress) * 100}% 0 0 0)`;
+  loaderColored.style.clipPath = `inset(${(1 - currentProgress) * 100}% 0 0 0)`;
   if (currentProgress >= 0.999) {
     finishLoader();
   }
@@ -284,6 +287,7 @@ if (splineCanvas) {
     .load("/scene.splinecode")
     .then(() => {
       splineCanvas.style.opacity = "1";
+      spline.setZoom(1.6);
       milestones.spline = true;
       setLoadTarget(0.75);
       checkComplete();
@@ -295,26 +299,22 @@ if (splineCanvas) {
       checkComplete();
     });
 
-  const section = document.querySelector(".hero-spline");
-  if (section) {
-    section.addEventListener("wheel", (e) => {
-      e.stopPropagation();
-    }, { capture: true, passive: true });
+  let splineInView = false;
+  const contactSection = document.getElementById("contact");
+  if (contactSection && IntersectionObserver) {
+    new IntersectionObserver(([e]) => {
+      splineInView = e.isIntersecting;
+    }, { threshold: 0 }).observe(contactSection);
   }
 
-  const heroSection = document.querySelector(".hero-section");
   document.addEventListener("pointermove", (e) => {
-    if (!heroSection) return;
-    const r = heroSection.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    if (e.target === splineCanvas || splineCanvas.contains(e.target)) return;
+    if (!splineInView) return;
     splineCanvas.dispatchEvent(new PointerEvent("pointermove", {
       clientX: e.clientX, clientY: e.clientY,
-      screenX: e.screenX, screenY: e.screenY,
-      pointerId: e.pointerId, pointerType: e.pointerType,
-      buttons: e.buttons, bubbles: true, cancelable: true
+      bubbles: true
     }));
-  }, { passive: true });
+  });
+
 } else {
   milestones.spline = true;
   checkComplete();
