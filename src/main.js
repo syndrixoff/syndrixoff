@@ -1,5 +1,6 @@
 import "./style.css";
 import gsap from "gsap";
+import { Application } from "@splinetool/runtime";
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -271,37 +272,80 @@ function tick() {
   fillRect.style.clipPath = `inset(${(1 - currentProgress) * 100}% 0 0 0)`;
   if (currentProgress >= 0.999) {
     finishLoader();
-  } else {
-    requestAnimationFrame(tick);
   }
+  requestAnimationFrame(tick);
+}
+
+/* ─── SPLINE SCENE ─── */
+const splineCanvas = document.getElementById("splineCanvas");
+if (splineCanvas) {
+  const spline = new Application(splineCanvas);
+  spline
+    .load("/scene.splinecode")
+    .then(() => {
+      splineCanvas.style.opacity = "1";
+      milestones.spline = true;
+      setLoadTarget(0.75);
+      checkComplete();
+    })
+    .catch((err) => {
+      console.warn("Spline scene failed to load:", err);
+      splineCanvas.style.display = "none";
+      milestones.spline = true;
+      checkComplete();
+    });
+
+  const section = document.querySelector(".hero-spline");
+  if (section) {
+    section.addEventListener("wheel", (e) => {
+      e.stopPropagation();
+    }, { capture: true, passive: true });
+  }
+
+  const heroSection = document.querySelector(".hero-section");
+  document.addEventListener("pointermove", (e) => {
+    if (!heroSection) return;
+    const r = heroSection.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    if (e.target === splineCanvas || splineCanvas.contains(e.target)) return;
+    splineCanvas.dispatchEvent(new PointerEvent("pointermove", {
+      clientX: e.clientX, clientY: e.clientY,
+      screenX: e.screenX, screenY: e.screenY,
+      pointerId: e.pointerId, pointerType: e.pointerType,
+      buttons: e.buttons, bubbles: true, cancelable: true
+    }));
+  }, { passive: true });
+} else {
+  milestones.spline = true;
+  checkComplete();
 }
 
 window.setLoadTarget = setLoadTarget;
 
-let milestones = { dom: false, fonts: false, win: false, three: false };
+let milestones = { dom: false, fonts: false, win: false, three: false, spline: false };
 function checkComplete() {
-  if (milestones.dom && milestones.fonts && milestones.win && milestones.three) setLoadTarget(1);
+  if (milestones.dom && milestones.fonts && milestones.win && milestones.three && milestones.spline) setLoadTarget(1);
 }
 
 window.onThreeReady = function () {
   milestones.three = true;
-  setLoadTarget(0.75);
+  setLoadTarget(0.52);
   checkComplete();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   milestones.dom = true;
-  setLoadTarget(0.15);
+  setLoadTarget(0.12);
   checkComplete();
 });
 document.fonts.ready.then(() => {
   milestones.fonts = true;
-  setLoadTarget(0.35);
+  setLoadTarget(0.24);
   checkComplete();
 });
 window.addEventListener("load", () => {
   milestones.win = true;
-  setLoadTarget(0.55);
+  setLoadTarget(0.36);
   checkComplete();
 });
 
