@@ -255,6 +255,21 @@ filterBtns.forEach((btn) => {
   });
 });
 
+/* ─── TEAM SCROLL HINT ─── */
+const teamGrid = document.querySelector(".team-grid");
+const teamHint = document.getElementById("teamScrollHint");
+
+function updateTeamHint() {
+  if (!teamGrid || !teamHint) return;
+  const atEnd = teamGrid.scrollLeft + teamGrid.clientWidth >= teamGrid.scrollWidth - 8;
+  teamHint.classList.toggle("hidden", atEnd);
+}
+
+if (teamGrid) {
+  teamGrid.addEventListener("scroll", updateTeamHint, { passive: true });
+  updateTeamHint();
+}
+
 /* ─── THEME SPLASH (View Transition API) ─── */
 const themeToggle = document.getElementById("themeToggle");
 let themeToggleInProgress = false;

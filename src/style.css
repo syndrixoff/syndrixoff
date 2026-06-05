@@ -1421,6 +1421,33 @@ body::before {
 }
 .team-grid::-webkit-scrollbar { display: none; }
 
+/* ─── TEAM HORIZONTAL SCROLL HINT ─── */
+.team-scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+.team-scroll-hint.hidden {
+  opacity: 0;
+}
+.team-scroll-arrow {
+  animation: hintBounce 1.8s ease-in-out infinite;
+}
+@keyframes hintBounce {
+  0%, 100% { transform: translateX(0); opacity: 0.4; }
+  50% { transform: translateX(5px); opacity: 1; }
+}
+
 .team-card {
   flex: 0 0 calc(25% - 12px);
   min-width: 200px;
