@@ -1393,9 +1393,9 @@ body::before {
 /* ─── TEAM ─── */
 .team-scroll-wrap {
   position: relative;
-  overflow: hidden;
+  overflow-x: clip;
   margin: 0 calc(-1 * (100vw - min(100%, var(--max-w))) / 2);
-  padding: 14px calc((100vw - min(100%, var(--max-w))) / 2) 10px;
+  padding: 0 calc((100vw - min(100%, var(--max-w))) / 2);
 }
 
 .team-scroll-wrap::after {
@@ -1417,7 +1417,7 @@ body::before {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-bottom: 8px;
+  padding: 8px 0 36px;
 }
 .team-grid::-webkit-scrollbar { display: none; }
 
