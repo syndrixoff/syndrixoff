@@ -252,6 +252,8 @@ filterBtns.forEach((btn) => {
         card.classList.add("hidden");
       }
     });
+    // Re-evaluate scroll hint — filter might remove overflow
+    requestAnimationFrame(updateTeamHint);
   });
 });
 
