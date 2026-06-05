@@ -90,12 +90,12 @@ The wordmark represents:
 ## Typography
 
 ### Primary Typeface
-**Space Grotesk**
+**Geist**
 - Headlines, marketing, website
 - Modern, geometric, technical
 
 ### Secondary Typeface
-**Inter**
+**Geist**
 - Documentation, reports, UI text, presentations
 - Highly readable and professional
 
