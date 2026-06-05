@@ -26,52 +26,22 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-/* ─── SECTION STAGGERED REVEALS + EXIT ANIMATIONS ─── */
-const sectionContentSelector =
-  ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *";
-
-gsap.set(sectionContentSelector, { y: 60, opacity: 0 });
-
+/* ─── CONTACT SPLINE SLIDE-IN ─── */
 const splineWrapper = document.querySelector(".spline-wrapper");
-if (splineWrapper) gsap.set(splineWrapper, { y: "-120%" });
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      const els = entry.target.querySelectorAll(sectionContentSelector);
-      if (!els.length) return;
-      const entered = entry.target.dataset.entered === "true";
-
+const contactSection = document.getElementById("contact");
+if (splineWrapper && contactSection) {
+  gsap.set(splineWrapper, { y: "-120%" });
+  const contactObserver = new IntersectionObserver(
+    ([entry]) => {
       if (entry.isIntersecting) {
-        entry.target.dataset.entered = "true";
-        gsap.to(els, {
-          y: 0, opacity: 1,
-          duration: 0.1, stagger: 0.01,
-          ease: "power3.out",
-          overwrite: "auto"
-        });
-        if (entry.target.id === "contact" && splineWrapper) {
-          gsap.to(splineWrapper, {
-            y: "0%",
-            duration: 0.1,
-            ease: "power3.out",
-            overwrite: "auto"
-          });
-        }
-      } else if (entered) {
-        gsap.to(els, {
-          y: -60, opacity: 0,
-          duration: 0.1,
-          ease: "power2.in",
-          overwrite: "auto"
-        });
+        gsap.to(splineWrapper, { y: "0%", duration: 0.3, ease: "power3.out", overwrite: "auto" });
+        contactObserver.unobserve(contactSection);
       }
-    });
-  },
-  { threshold: 0, rootMargin: "-5% 0px -5% 0px" }
-);
-
-document.querySelectorAll(".section").forEach((s) => sectionObserver.observe(s));
+    },
+    { threshold: 0.2 }
+  );
+  contactObserver.observe(contactSection);
+}
 
 /* ─── ANIMATED COUNTERS ─── */
 const counterObserver = new IntersectionObserver(
