@@ -562,12 +562,10 @@ body::before {
   width: 100%;
   padding: 0 20px;
   position: relative;
-  pointer-events: none;
 }
 
 .syndrix-line {
-  width: 100%;
-  max-width: var(--max-w);
+  width: min(95vw, 1800px);
   aspect-ratio: 307.225 / 92.65;
 }
 
@@ -575,10 +573,6 @@ body::before {
   width: 100%;
   height: 100%;
   display: block;
-}
-
-@media (max-width: 640px) {
-  .syndrix-section { padding: 0 16px; }
 }
 
 .hero-scroll-hint {
@@ -787,6 +781,42 @@ body::before {
   animation: heroFade 0.6s 0.8s forwards;
 }
 
+/* ─── SYNDRIX BANNER ─── */
+.syndrix-section {
+  width: 100%;
+  padding: 0 44px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  pointer-events: none;
+  margin-bottom: 24px;
+}
+
+.syndrix-line {
+  width: 100%;
+  max-width: var(--max-w);
+  height: 150px;
+  pointer-events: none;
+}
+
+.syndrix-emb {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .syndrix-line { height: 100px; }
+  .syndrix-section { padding: 0 16px; margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+  .syndrix-line { height: 70px; }
+  .syndrix-section { padding: 0 8px; margin-bottom: 12px; }
+}
+
+@media (max-width: 640px) {
+  .hero-badge { padding-left: 24px; padding-top: 24px; }
+}
 
 /* ─── BUTTONS ─── */
 .btn {

@@ -1,6 +1,9 @@
 import "./style.css";
 import gsap from "gsap";
 import { Application } from "@splinetool/runtime";
+import * as THREE from "three";
+
+window.THREE = THREE;
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
