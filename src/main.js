@@ -30,7 +30,10 @@ onScroll();
 const sectionContentSelector =
   ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *";
 
-gsap.set(sectionContentSelector, { y: 100, opacity: 0 });
+gsap.set(sectionContentSelector, { y: 60, opacity: 0 });
+
+const splineWrapper = document.querySelector(".spline-wrapper");
+if (splineWrapper) gsap.set(splineWrapper, { y: "-120%" });
 
 const sectionObserver = new IntersectionObserver(
   (entries) => {
@@ -43,14 +46,22 @@ const sectionObserver = new IntersectionObserver(
         entry.target.dataset.entered = "true";
         gsap.to(els, {
           y: 0, opacity: 1,
-          duration: 1, stagger: 0.06,
+          duration: 0.1, stagger: 0.01,
           ease: "power3.out",
           overwrite: "auto"
         });
+        if (entry.target.id === "contact" && splineWrapper) {
+          gsap.to(splineWrapper, {
+            y: "0%",
+            duration: 0.1,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
+        }
       } else if (entered) {
         gsap.to(els, {
           y: -60, opacity: 0,
-          duration: 0.5,
+          duration: 0.1,
           ease: "power2.in",
           overwrite: "auto"
         });
