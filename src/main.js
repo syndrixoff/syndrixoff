@@ -1,6 +1,9 @@
 import "./style.css";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Application } from "@splinetool/runtime";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -18,77 +21,68 @@ function updateProgress() {
   progressBar.style.width = pct + "%";
 }
 
-/* ─── PARALLAX HERO BG ─── */
-function updateParallax() {
-  const bg = document.querySelector(".hero-bg");
-  if (!bg) return;
-  const rate = 0.15;
-  bg.style.transform = "translateY(" + (window.scrollY * rate) + "px) scale(1.05)";
-}
-
 function onScroll() {
   nav?.classList.toggle("scrolled", window.scrollY > 60);
   updateProgress();
-  updateParallax();
 }
 
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-/* ─── TWO-WAY INTERSECTION OBSERVER ─── */
-const twoWayObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      entry.target.classList.toggle("visible", entry.isIntersecting);
-    });
-  },
-  { threshold: 0.15 }
-);
+/* ─── GSAP SECTION REVEALS + SLIDE TRANSITIONS ─── */
+const sections = document.querySelectorAll(".section");
 
-document.querySelectorAll(
-  ".about-text p, .team-filters"
-).forEach((el) => twoWayObserver.observe(el));
+sections.forEach((section, i) => {
+  const els = section.querySelectorAll(
+    ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *"
+  );
 
-/* ─── GSAP SECTION TITLE REVEALS ─── */
-const gsapObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const els = entry.target.querySelectorAll(".section-label, .section-title");
-        if (!els.length) return;
-        gsap.fromTo(els,
-          { y: 30, opacity: 0, scale: 0.97 },
-          {
-            y: 0, opacity: 1, scale: 1,
-            duration: 1.1,
-            stagger: 0.1,
+  if (i === 0) {
+    if (els.length) {
+      gsap.set(els, { y: 50, opacity: 0 });
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 90%",
+        onEnter: () => {
+          gsap.to(els, {
+            y: 0, opacity: 1,
+            duration: 0.9, stagger: 0.04,
             ease: "power3.out",
-            overwrite: "auto",
-          }
-        );
-        gsapObserver.unobserve(entry.target);
+            overwrite: "auto"
+          });
+        }
+      });
+    }
+    return;
+  }
+
+  const st = ScrollTrigger.create({
+    trigger: section,
+    start: "top bottom",
+    end: "top top",
+    scrub: 1.2,
+    pin: true,
+    pinSpacing: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+  });
+
+  if (els.length) {
+    gsap.set(els, { y: 50, opacity: 0 });
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 90%",
+      onEnter: () => {
+        gsap.to(els, {
+          y: 0, opacity: 1,
+          duration: 0.8, stagger: 0.04,
+          ease: "power3.out",
+          overwrite: "auto"
+        });
       }
     });
-  },
-  { threshold: 0.1 }
-);
-document.querySelectorAll(".section").forEach((s) => gsapObserver.observe(s));
-
-/* ─── ONE-WAY INTERSECTION OBSERVER (reveal once) ─── */
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-document.querySelectorAll(
-  ".tele-card, .glass-card, .project-card, .team-card, .contact-body, .social-links"
-).forEach((el) => revealObserver.observe(el));
+  }
+});
 
 /* ─── ANIMATED COUNTERS ─── */
 const counterObserver = new IntersectionObserver(
@@ -310,8 +304,7 @@ if (splineCanvas) {
   document.addEventListener("pointermove", (e) => {
     if (!splineInView) return;
     splineCanvas.dispatchEvent(new PointerEvent("pointermove", {
-      clientX: e.clientX, clientY: e.clientY,
-      bubbles: true
+      clientX: e.clientX, clientY: e.clientY
     }));
   });
 
@@ -347,6 +340,12 @@ window.addEventListener("load", () => {
   milestones.win = true;
   setLoadTarget(0.36);
   checkComplete();
+});
+
+/* ─── REFRESH SCROLLTRIGGER ON LOAD ─── */
+window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
+  requestAnimationFrame(() => ScrollTrigger.refresh());
 });
 
 requestAnimationFrame(tick);
