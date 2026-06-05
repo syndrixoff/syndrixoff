@@ -543,9 +543,9 @@ body::before {
 .hero-spline-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.6;
   overflow: hidden;
 }
 
@@ -562,7 +562,6 @@ body::before {
   width: 100%;
   padding: 0 20px;
   position: relative;
-  z-index: 1;
 }
 
 .syndrix-line {
@@ -1181,11 +1180,7 @@ body::before {
   justify-content: center;
   gap: 8px;
   margin-bottom: 36px;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-.team-filters.visible { opacity: 1; transform: translateY(0); }
 
 .team-filter {
   font-family: var(--mono);

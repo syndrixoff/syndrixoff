@@ -26,23 +26,6 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-/* ─── CONTACT SPLINE SLIDE-IN ─── */
-const splineWrapper = document.querySelector(".spline-wrapper");
-const contactSection = document.getElementById("contact");
-if (splineWrapper && contactSection) {
-  gsap.set(splineWrapper, { y: "-120%" });
-  const contactObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        gsap.to(splineWrapper, { y: "0%", duration: 0.3, ease: "power3.out", overwrite: "auto" });
-        contactObserver.unobserve(contactSection);
-      }
-    },
-    { threshold: 0.2 }
-  );
-  contactObserver.observe(contactSection);
-}
-
 /* ─── ANIMATED COUNTERS ─── */
 const counterObserver = new IntersectionObserver(
   (entries) => {
