@@ -545,7 +545,7 @@ body::before {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.3;
   overflow: hidden;
 }
 
@@ -565,7 +565,7 @@ body::before {
 }
 
 .syndrix-line {
-  width: min(90vw, 900px);
+  width: min(95vw, 1800px);
   aspect-ratio: 307.225 / 92.65;
 }
 
@@ -795,7 +795,7 @@ body::before {
 .syndrix-line {
   width: 100%;
   max-width: var(--max-w);
-  height: 100px;
+  height: 150px;
   pointer-events: none;
 }
 
@@ -805,7 +805,7 @@ body::before {
 }
 
 @media (max-width: 640px) {
-  .syndrix-line { height: 56px; }
+  .syndrix-line { height: 100px; }
   .syndrix-section { padding: 0 24px; margin-bottom: 16px; }
   .hero-badge { padding-left: 24px; padding-top: 24px; }
 }
