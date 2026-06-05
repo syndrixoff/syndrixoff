@@ -540,12 +540,29 @@ body::before {
   position: relative;
 }
 
+.hero-spline-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  overflow: hidden;
+}
+
+.hero-spline-bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .syndrix-section {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .syndrix-line {

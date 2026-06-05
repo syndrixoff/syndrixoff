@@ -232,12 +232,21 @@ function tick() {
   requestAnimationFrame(tick);
 }
 
-/* ─── SPLINE SCENE ─── */
+/* ─── HERO SPLINE 3D LOGO ─── */
+const heroSplineCanvas = document.getElementById("heroSplineCanvas");
+if (heroSplineCanvas) {
+  const heroSpline = new Application(heroSplineCanvas);
+  heroSpline.load("/3D_LOGO.splinecode").catch(() => {
+    heroSplineCanvas.style.display = "none";
+  });
+}
+
+/* ─── SPLINE CONTACT SCENE ─── */
 const splineCanvas = document.getElementById("splineCanvas");
 if (splineCanvas) {
   const spline = new Application(splineCanvas);
   spline
-    .load("/scene.splinecode")
+    .load("/contact_us.splinecode")
     .then(() => {
       splineCanvas.style.opacity = "1";
       spline.setZoom(1.6);
