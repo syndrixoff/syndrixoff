@@ -67,41 +67,135 @@ const navIndicator = document.createElement("div");
 navIndicator.className = "nav-indicator";
 document.querySelector(".nav-links")?.appendChild(navIndicator);
 
-function moveIndicator(link) {
+function moveIndicator(link, instant) {
   if (!link) return;
   const rect = link.getBoundingClientRect();
   const parent = navIndicator.parentElement.getBoundingClientRect();
   gsap.to(navIndicator, {
     x: rect.left - parent.left,
     width: rect.width,
-    duration: 0.45,
+    y: rect.top - parent.top,
+    height: rect.height,
+    duration: instant ? 0 : 0.45,
     ease: "power2.out",
     overwrite: "auto",
   });
 }
 
 let lastActive = null;
+let navClickLock = false;
 
-/* ─── ACTIVE NAV TRACKING ─── */
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach((l) => {
-          l.classList.toggle("active", l.getAttribute("href") === "#" + id);
-        });
-        const active = document.querySelector(".nav-links a.active");
-        if (active && active !== lastActive) {
-          lastActive = active;
-          moveIndicator(active);
-        }
-      }
+function getActiveSectionId() {
+  const sections = document.querySelectorAll("section[id]");
+  let closestId = null;
+  let closestDist = Infinity;
+  sections.forEach((s) => {
+    const rect = s.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    const viewMid = window.innerHeight / 2;
+    const dist = Math.abs(mid - viewMid);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closestId = s.id;
+    }
+  });
+  return closestId;
+}
+
+function setActiveSection(id, instant) {
+  navLinks.forEach((l) => {
+    l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+  });
+  const active = document.querySelector(".nav-links a.active");
+  if (active && active !== lastActive) {
+    lastActive = active;
+    moveIndicator(active, instant);
+  } else if (!active) {
+    lastActive = null;
+    gsap.to(navIndicator, {
+      x: 0,
+      width: 0,
+      duration: instant ? 0 : 0.45,
+      ease: "power2.out",
+      overwrite: "auto",
     });
-  },
-  { threshold: 0, rootMargin: "-80px 0px -55% 0px" }
-);
-document.querySelectorAll("section[id]").forEach((s) => navObserver.observe(s));
+  }
+  updateRail(id);
+}
+
+/* ─── SECTION RAIL ─── */
+const railCursor = document.querySelector('.rail-cursor');
+const railLabels = document.querySelectorAll('.rail-labels span');
+
+const sectionIds = ['hero', 'about', 'capabilities', 'tools', 'projects', 'team', 'contact'];
+
+function updateRail(id) {
+  const idx = sectionIds.indexOf(id);
+  if (idx < 0 || !railCursor) return;
+
+  const track = railCursor.closest('.rail-track');
+  if (!track) return;
+
+  const sectionCount = sectionIds.length;
+  const trackHeight = track.offsetHeight || 216;
+  const step = trackHeight / (sectionCount - 1);
+  railCursor.style.top = idx * step + 'px';
+
+  railLabels.forEach((span) => {
+    span.classList.toggle('active', span.dataset.section === id);
+  });
+}
+
+/* ─── ACTIVE SECTION TRACKING (scrollend + debounced fallback) ─── */
+// With scroll-snap, the scroll always lands on a settled section.
+// scrollend fires when scroll + snap fully settles.
+// A longer debounce fallback handles browsers without scrollend support.
+let scrollTimer;
+
+function syncActiveSection() {
+  if (!navClickLock) {
+    const id = getActiveSectionId();
+    if (id) setActiveSection(id);
+  }
+}
+
+window.addEventListener("scroll", () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(syncActiveSection, 250);
+}, { passive: true });
+
+if ("onscrollend" in window) {
+  window.addEventListener("scrollend", () => {
+    clearTimeout(scrollTimer);
+    syncActiveSection();
+  }, { passive: true });
+}
+
+/* ─── INITIAL SYNC ─── */
+// Once loader hides, and again after first paint, sync to the active section
+window.addEventListener("load", () => requestAnimationFrame(syncActiveSection));
+
+/* ─── RAIL LABEL CLICK ─── */
+railLabels.forEach((span) => {
+  span.addEventListener("click", () => {
+    const id = span.dataset.section;
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+/* ─── RE-SYNC ON RESIZE ─── */
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (!navClickLock) {
+      const id = getActiveSectionId();
+      if (id) setActiveSection(id, true);
+    }
+  }, 200);
+}, { passive: true });
 
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
@@ -109,7 +203,11 @@ navLinks.forEach((link) => {
     const target = href?.startsWith("#") ? document.querySelector(href) : null;
     if (!target) return;
     e.preventDefault();
+
+    // Lock observer during smooth-scroll to prevent mid-flight hijack
+    navClickLock = true;
     moveIndicator(link);
+
     const start = window.scrollY;
     const end = target.getBoundingClientRect().top + start - 80;
     const duration = Math.min(Math.abs(end - start) * 0.12 + 80, 200);
@@ -118,8 +216,16 @@ navLinks.forEach((link) => {
     requestAnimationFrame(function scroll(now) {
       const p = Math.min((now - startTime) / duration, 1);
       window.scrollTo(0, start + (end - start) * ease(p));
-      if (p < 1) requestAnimationFrame(scroll);
+      if (p < 1) {
+        requestAnimationFrame(scroll);
+      } else {
+        // Scroll complete — unlock and sync to final section
+        navClickLock = false;
+        const id = getActiveSectionId();
+        if (id) setActiveSection(id);
+      }
     });
+
     navLinksContainer.classList.remove("open");
     navToggle.classList.remove("active");
   });
@@ -202,6 +308,11 @@ function finishLoader() {
   page.classList.add("page-visible");
   loader.classList.add("loader-hidden");
   document.body.style.overflow = "";
+  // Sync nav after loader completes
+  requestAnimationFrame(() => {
+    const id = getActiveSectionId();
+    if (id) setActiveSection(id, true);
+  });
 }
 
 function tick() {
@@ -235,7 +346,7 @@ if (splineCanvas) {
     .load("/contact_us.splinecode")
     .then(() => {
       splineCanvas.style.opacity = "1";
-      spline.setZoom(1.6);
+      spline.setZoom(0.7);
       milestones.spline = true;
       setLoadTarget(0.75);
       checkComplete();
