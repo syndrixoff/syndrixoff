@@ -1467,6 +1467,35 @@ body::before {
   display: none;
 }
 
+/* ─── TEAM SCROLL DOTS ─── */
+.team-scroll-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  min-height: 8px;
+}
+
+.team-scroll-dots .tdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fg-muted) 20%, transparent);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.35s, transform 0.35s;
+  pointer-events: auto;
+}
+.team-scroll-dots .tdot:hover {
+  background: color-mix(in srgb, var(--fg-muted) 40%, transparent);
+}
+.team-scroll-dots .tdot.active {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
+  transform: scale(1.35);
+}
+
 .team-card-visual {
   position: relative;
   width: 100%;

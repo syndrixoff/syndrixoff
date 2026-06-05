@@ -239,6 +239,42 @@ navToggle.addEventListener("click", () => {
 /* ─── TEAM FILTERS ─── */
 const filterBtns = document.querySelectorAll(".team-filter");
 const teamCards = document.querySelectorAll(".team-card");
+const teamGrid = document.getElementById("teamGrid");
+const teamDots = document.getElementById("teamScrollDots");
+
+function rebuildTeamDots() {
+  const visible = [...teamCards].filter((c) => !c.classList.contains("hidden"));
+  const containerW = teamGrid.clientWidth;
+  const gap = 16;
+  const firstCard = visible[0];
+  if (!firstCard || !containerW) { teamDots.innerHTML = ""; return; }
+  const cardW = firstCard.getBoundingClientRect().width + gap;
+  const pages = Math.max(1, Math.ceil((visible.length * cardW) / containerW));
+
+  teamDots.innerHTML = "";
+  for (let i = 0; i < pages; i++) {
+    const dot = document.createElement("button");
+    dot.className = "tdot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", "Page " + (i + 1));
+    dot.addEventListener("click", () => {
+      const maxScroll = teamGrid.scrollWidth - teamGrid.clientWidth;
+      teamGrid.scrollTo({ left: (i / (pages - 1)) * maxScroll, behavior: "smooth" });
+    });
+    teamDots.appendChild(dot);
+  }
+}
+
+function syncTeamDots() {
+  const dots = teamDots.querySelectorAll(".tdot");
+  if (!dots.length) return;
+  const scrollL = teamGrid.scrollLeft;
+  const maxScroll = teamGrid.scrollWidth - teamGrid.clientWidth;
+  const pct = maxScroll > 0 ? scrollL / maxScroll : 0;
+  const active = Math.min(dots.length - 1, Math.round(pct * (dots.length - 1)));
+  dots.forEach((d, i) => d.classList.toggle("active", i === active));
+}
+
+teamGrid?.addEventListener("scroll", syncTeamDots, { passive: true });
 
 filterBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -252,8 +288,13 @@ filterBtns.forEach((btn) => {
         card.classList.add("hidden");
       }
     });
+    rebuildTeamDots();
+    syncTeamDots();
   });
 });
+
+rebuildTeamDots();
+syncTeamDots();
 
 /* ─── THEME SPLASH (View Transition API) ─── */
 const themeToggle = document.getElementById("themeToggle");
