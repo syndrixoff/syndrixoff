@@ -1,9 +1,6 @@
 import "./style.css";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Application } from "@splinetool/runtime";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -29,60 +26,41 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
-/* ─── GSAP SECTION REVEALS + SLIDE TRANSITIONS ─── */
-const sections = document.querySelectorAll(".section");
+/* ─── SECTION STAGGERED REVEALS + EXIT ANIMATIONS ─── */
+const sectionContentSelector =
+  ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *";
 
-sections.forEach((section, i) => {
-  const els = section.querySelectorAll(
-    ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *"
-  );
+gsap.set(".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *", {
+  y: 100, opacity: 0
+});
 
-  if (i === 0) {
-    if (els.length) {
-      gsap.set(els, { y: 50, opacity: 0 });
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 90%",
-        onEnter: () => {
-          gsap.to(els, {
-            y: 0, opacity: 1,
-            duration: 0.9, stagger: 0.04,
-            ease: "power3.out",
-            overwrite: "auto"
-          });
-        }
-      });
-    }
-    return;
-  }
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const els = entry.target.querySelectorAll(sectionContentSelector);
+      if (!els.length) return;
 
-  const st = ScrollTrigger.create({
-    trigger: section,
-    start: "top bottom",
-    end: "top top",
-    scrub: 1.2,
-    pin: true,
-    pinSpacing: true,
-    anticipatePin: 1,
-    invalidateOnRefresh: true,
-  });
-
-  if (els.length) {
-    gsap.set(els, { y: 50, opacity: 0 });
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top 90%",
-      onEnter: () => {
+      if (entry.isIntersecting) {
         gsap.to(els, {
           y: 0, opacity: 1,
-          duration: 0.8, stagger: 0.04,
+          duration: 1, stagger: 0.06,
           ease: "power3.out",
+          overwrite: "auto"
+        });
+      } else {
+        gsap.to(els, {
+          y: -60, opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
           overwrite: "auto"
         });
       }
     });
-  }
-});
+  },
+  { threshold: 0, rootMargin: "-5% 0px -5% 0px" }
+);
+
+document.querySelectorAll(".section").forEach((s) => sectionObserver.observe(s));
 
 /* ─── ANIMATED COUNTERS ─── */
 const counterObserver = new IntersectionObserver(
@@ -340,12 +318,6 @@ window.addEventListener("load", () => {
   milestones.win = true;
   setLoadTarget(0.36);
   checkComplete();
-});
-
-/* ─── REFRESH SCROLLTRIGGER ON LOAD ─── */
-window.addEventListener("load", () => {
-  ScrollTrigger.refresh();
-  requestAnimationFrame(() => ScrollTrigger.refresh());
 });
 
 requestAnimationFrame(tick);
