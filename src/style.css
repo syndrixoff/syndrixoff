@@ -1261,18 +1261,20 @@ body::before {
   transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .team-card:nth-child(1) { transition-delay: 0s; }
-.team-card:nth-child(2) { transition-delay: 0.03s; }
-.team-card:nth-child(3) { transition-delay: 0.06s; }
-.team-card:nth-child(4) { transition-delay: 0.09s; }
-.team-card:nth-child(5) { transition-delay: 0.12s; }
-.team-card:nth-child(6) { transition-delay: 0.15s; }
-.team-card:nth-child(7) { transition-delay: 0.18s; }
-.team-card:nth-child(8) { transition-delay: 0.21s; }
-.team-card:nth-child(9) { transition-delay: 0.24s; }
-.team-card:nth-child(10) { transition-delay: 0.27s; }
-.team-card:nth-child(11) { transition-delay: 0.30s; }
-.team-card:nth-child(12) { transition-delay: 0.33s; }
-.team-card:nth-child(13) { transition-delay: 0.36s; }
+.team-card:nth-child(2) { transition-delay: 0.025s; }
+.team-card:nth-child(3) { transition-delay: 0.05s; }
+.team-card:nth-child(4) { transition-delay: 0.075s; }
+.team-card:nth-child(5) { transition-delay: 0.1s; }
+.team-card:nth-child(6) { transition-delay: 0.125s; }
+.team-card:nth-child(7) { transition-delay: 0.15s; }
+.team-card:nth-child(8) { transition-delay: 0.175s; }
+.team-card:nth-child(9) { transition-delay: 0.2s; }
+.team-card:nth-child(10) { transition-delay: 0.225s; }
+.team-card:nth-child(11) { transition-delay: 0.25s; }
+.team-card:nth-child(12) { transition-delay: 0.275s; }
+.team-card:nth-child(13) { transition-delay: 0.3s; }
+.team-card:nth-child(14) { transition-delay: 0.325s; }
+.team-card:nth-child(15) { transition-delay: 0.35s; }
 
 [data-theme="light"] .team-card {
   background: var(--neu-bg);

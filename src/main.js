@@ -140,7 +140,7 @@ filterBtns.forEach((btn) => {
     btn.classList.add("active");
     const filter = btn.dataset.filter;
     teamCards.forEach((card) => {
-      if (filter === "all" || card.dataset.category === filter) {
+      if (filter === "all" || (card.dataset.category || "").split(" ").includes(filter)) {
         card.classList.remove("hidden");
       } else {
         card.classList.add("hidden");
