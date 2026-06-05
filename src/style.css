@@ -1393,9 +1393,9 @@ body::before {
 /* ─── TEAM ─── */
 .team-scroll-wrap {
   position: relative;
-  overflow-x: clip;
+  overflow: hidden;
   margin: 0 calc(-1 * (100vw - min(100%, var(--max-w))) / 2);
-  padding: 0 calc((100vw - min(100%, var(--max-w))) / 2);
+  padding: 14px calc((100vw - min(100%, var(--max-w))) / 2) 10px;
 }
 
 .team-scroll-wrap::after {
