@@ -3,3 +3,7 @@ dist
 .playwright-mcp
 .DS_Store
 *.log
+
+# Generated docs / analysis
+.planning/
+graphify-out/
