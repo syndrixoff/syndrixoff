@@ -30,24 +30,24 @@ onScroll();
 const sectionContentSelector =
   ".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *";
 
-gsap.set(".section-label, .section-title, .glass-card, .project-card, .team-card, .tele-card, .about-text p, .contact-body, .social-links, .team-filters, .caps-grid > *", {
-  y: 100, opacity: 0
-});
+gsap.set(sectionContentSelector, { y: 100, opacity: 0 });
 
 const sectionObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       const els = entry.target.querySelectorAll(sectionContentSelector);
       if (!els.length) return;
+      const entered = entry.target.dataset.entered === "true";
 
       if (entry.isIntersecting) {
+        entry.target.dataset.entered = "true";
         gsap.to(els, {
           y: 0, opacity: 1,
           duration: 1, stagger: 0.06,
           ease: "power3.out",
           overwrite: "auto"
         });
-      } else {
+      } else if (entered) {
         gsap.to(els, {
           y: -60, opacity: 0,
           duration: 0.5,

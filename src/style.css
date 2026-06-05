@@ -110,7 +110,7 @@ html::-webkit-scrollbar { display: none; }
 
 /* ─── MOBILE FALLBACK ─── */
 @media (max-width: 768px) {
-  .section { position: relative; height: auto; min-height: 100vh; }
+  .section { min-height: auto; }
   .page-scrollbar { display: none; }
 }
 
@@ -424,9 +424,6 @@ body::before {
 
 /* ─── SECTIONS ─── */
 .section {
-  position: sticky;
-  top: 0;
-  height: 100vh;
   min-height: 100vh;
   padding: var(--section-py) 24px;
   max-width: var(--max-w);
@@ -434,7 +431,7 @@ body::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  position: relative;
 }
 
 .light-tile {
