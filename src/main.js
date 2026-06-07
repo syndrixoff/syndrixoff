@@ -666,6 +666,7 @@ function initTerminal() {
           } else {
             div.innerHTML = `<span class="${s.type}">${s.text}</span>`;
           }
+          out.appendChild(div);
         }
         out.scrollTop = out.scrollHeight;
         next();
