@@ -4,6 +4,25 @@ import gsap from "gsap";
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
 
+/* ─── CUSTOM CURSOR ─── */
+const cursor = document.getElementById("customCursor");
+if (cursor && !("ontouchstart" in window)) {
+  let cx = 0, cy = 0;
+  document.addEventListener("mousemove", e => { cx = e.clientX; cy = e.clientY; });
+  function tickCursor() {
+    cursor.style.left = cx + "px";
+    cursor.style.top = cy + "px";
+    requestAnimationFrame(tickCursor);
+  }
+  requestAnimationFrame(tickCursor);
+  document.addEventListener("mouseenter", () => cursor.classList.add("visible"));
+  document.addEventListener("mouseleave", () => cursor.classList.remove("visible"));
+  document.querySelectorAll("a, button, .glass-card, .project-card, .team-card, .team-filter, .team-scroll-dots .tdot, .btn").forEach(el => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("expanded"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("expanded"));
+  });
+}
+
 /* ─── SCROLL PROGRESS BAR ─── */
 const progressBar = document.getElementById("scrollProgress");
 
@@ -167,8 +186,43 @@ if ("onscrollend" in window) {
 }
 
 /* ─── INITIAL SYNC ─── */
-// Once loader hides, and again after first paint, sync to the active section
 window.addEventListener("load", () => requestAnimationFrame(syncActiveSection));
+
+/* ─── MARQUEE PAUSE ─── */
+document.querySelectorAll(".marquee-row").forEach(row => {
+  row.addEventListener("mouseenter", () => row.classList.add("paused"));
+  row.addEventListener("mouseleave", () => row.classList.remove("paused"));
+});
+
+/* ─── INITIALS AVATARS ─── */
+document.querySelectorAll(".team-card").forEach(card => {
+  const img = card.querySelector(".team-card-visual img");
+  const placeholder = card.querySelector(".team-card-placeholder");
+  if (placeholder && !img) {
+    const nameEl = card.querySelector(".team-card-overlay h3");
+    if (nameEl) {
+      const name = nameEl.textContent.trim();
+      const initials = name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+      placeholder.innerHTML = `<span style="font-family:var(--font);font-size:2rem;font-weight:700;color:var(--accent);opacity:0.9">${initials}</span>`;
+      placeholder.style.background = "var(--bg-card-solid)";
+    }
+  }
+  if (img) {
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+      const nameEl = card.querySelector(".team-card-overlay h3");
+      const parent = img.parentElement;
+      if (nameEl && parent) {
+        const name = nameEl.textContent.trim();
+        const initials = name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+        const div = document.createElement("div");
+        div.className = "team-card-placeholder";
+        div.innerHTML = `<span style="font-family:var(--font);font-size:2rem;font-weight:700;color:var(--accent);opacity:0.9">${initials}</span>`;
+        parent.appendChild(div);
+      }
+    });
+  }
+});
 
 /* ─── RAIL LABEL CLICK ─── */
 railLabels.forEach((span) => {
@@ -552,45 +606,47 @@ function initTerminal() {
   const out = document.getElementById('termOutput');
   if (!out) return;
 
-  const sequence = [
-    { type: 'cmd', text: 'connect --to=your-project', delay: 600 },
-    { type: 'gap', delay: 400 },
-    { type: 'out-cyan', text: 'Initiating handshake...', delay: 0 },
-    { type: 'out-cyan', text: 'Connection ready. Reach out at syndrixoff@gmail.com', delay: 600 },
-    { type: 'gap', delay: 300 },
-    { type: 'cursor', delay: 0 },
-  ];
-
-  let i = 0;
-  function next() {
-    if (i >= sequence.length) return;
-    const s = sequence[i++];
-    const totalDelay = s.delay || 0;
-
-    setTimeout(() => {
-      if (s.type === 'gap') {
-        const br = document.createElement('div');
-        br.style.height = '6px';
-        out.appendChild(br);
-      } else if (s.type === 'cursor') {
-        const div = document.createElement('div');
-        div.className = 'line fade-in';
-        div.innerHTML = `<span class="prompt">›</span><span class="blink"></span>`;
-        out.appendChild(div);
-      } else {
-        const div = document.createElement('div');
-        div.className = 'line fade-in';
-        if (s.type === 'cmd') {
-          div.innerHTML = `<span class="prompt">›</span><span class="cmd">${s.text}</span>`;
-        } else {
-          div.innerHTML = `<span class="${s.type}">${s.text}</span>`;
-        }
-        out.appendChild(div);
+  function runSequence(loop) {
+    out.innerHTML = "";
+    const sequence = [
+      { type: 'cmd', text: 'connect --to=your-project', delay: 600 },
+      { type: 'gap', delay: 400 },
+      { type: 'out-cyan', text: 'Initiating handshake...', delay: 0 },
+      { type: 'out', text: 'Connection ready. Reach out at syndrixoff@gmail.com', delay: 600 },
+      { type: 'gap', delay: 300 },
+      { type: 'cursor', delay: 0 },
+    ];
+    let i = 0;
+    function next() {
+      if (i >= sequence.length) {
+        if (loop) setTimeout(() => runSequence(true), 4000);
+        return;
       }
-      out.scrollTop = out.scrollHeight;
-      next();
-    }, totalDelay);
+      const s = sequence[i++];
+      setTimeout(() => {
+        if (s.type === 'gap') {
+          const br = document.createElement('div');
+          br.style.height = '6px';
+          out.appendChild(br);
+        } else if (s.type === 'cursor') {
+          const div = document.createElement('div');
+          div.className = 'line fade-in';
+          div.innerHTML = `<span class="prompt">›</span><span class="blink"></span>`;
+          out.appendChild(div);
+        } else {
+          const div = document.createElement('div');
+          div.className = 'line fade-in';
+          if (s.type === 'cmd') {
+            div.innerHTML = `<span class="prompt">›</span><span class="cmd">${s.text}</span>`;
+          } else {
+            div.innerHTML = `<span class="${s.type}">${s.text}</span>`;
+          }
+        }
+        out.scrollTop = out.scrollHeight;
+        next();
+      }, s.delay);
+    }
+    setTimeout(next, 500);
   }
-
-  setTimeout(next, 500);
+  runSequence(true);
 }

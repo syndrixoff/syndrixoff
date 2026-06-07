@@ -1,0 +1,41 @@
+- generic [ref=e9]:
+  - navigation [ref=e10]:
+    - generic [ref=e11]:
+      - link "Syndrix home" [ref=e12] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e464]
+      - button "Toggle theme" [ref=e30] [cursor=pointer]
+  - main [ref=e39]:
+    - generic [ref=e40]:
+      - generic
+      - generic [ref=e41]
+      - generic [ref=e50]
+    - generic [ref=e54]:
+      - generic [ref=e55]: // ABOUT
+      - heading "We are a collective of engineers." [level=2] [ref=e56]
+      - generic [ref=e58]
+    - generic [ref=e72]:
+      - generic [ref=e73]: // CAPABILITIES
+      - heading "Full Spectrum Engineering" [level=2] [ref=e74]
+      - generic [ref=e76]
+    - generic [ref=e138]:
+      - generic [ref=e139]: // TOOLCHAIN •
+      - heading "Built with Industry Standards" [level=2] [ref=e140]
+      - paragraph [ref=e142]: An integrated toolchain spanning digital design, embedded systems, software platforms, and AI-driven engineering automation.
+      - generic [ref=e143]
+      - generic [ref=e160]
+      - generic [ref=e170]
+    - generic [ref=e175]:
+      - generic [ref=e176]: // PROJECTS
+      - heading "Featured Projects" [level=2] [ref=e177]
+      - generic [ref=e179]
+    - generic [ref=e204]:
+      - generic [ref=e205]: // CREW MANIFEST
+      - heading "The Collective" [level=2] [ref=e206]
+      - generic [ref=e208]
+      - generic [ref=e214]
+    - generic [ref=e446]:
+      - generic [ref=e447]: // CONTACT
+      - generic [ref=e448]
+  - contentinfo [ref=e461]:
+    - generic [ref=e463]: © 2026 Syndrix Collective – Built by engineers.
