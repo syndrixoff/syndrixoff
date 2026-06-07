@@ -1,5 +1,4 @@
 import "./style.css";
-import gsap from "gsap";
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -86,31 +85,6 @@ let lastActive = null;
 let navClickLock = false;
 let cachedSections = null;
 
-/* ─── GSAP NAV BG GLOW PULSE ─── */
-const navBgGlow = document.getElementById("navBgGlow");
-if (navBgGlow) {
-  gsap.to(navBgGlow, {
-    opacity: 0.7,
-    y: -1,
-    duration: 2.5,
-    ease: "sine.inOut",
-    yoyo: true,
-    repeat: -1,
-  });
-}
-
-/* ─── GSAP NAV GLOW PULSE ─── */
-const navEl = document.getElementById("nav");
-if (navEl) {
-  gsap.to(navEl, {
-    "--nav-glow-opacity": 1,
-    duration: 2.5,
-    ease: "sine.inOut",
-    yoyo: true,
-    repeat: -1,
-  });
-}
-
 function getActiveSectionId() {
   if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
   const sections = cachedSections;
@@ -131,14 +105,8 @@ function getActiveSectionId() {
 
 function moveIndicator(el, instant) {
   if (!el || !navIndicator) return;
-  const dur = instant ? 0 : 0.45;
-  gsap.to(navIndicator, {
-    x: el.offsetLeft,
-    width: el.offsetWidth,
-    duration: dur,
-    ease: "power2.out",
-    overwrite: "auto",
-  });
+  navIndicator.style.transform = `translateX(${el.offsetLeft}px)`;
+  navIndicator.style.width = `${el.offsetWidth}px`;
 }
 
 function setActiveSection(id, instant) {
@@ -151,13 +119,8 @@ function setActiveSection(id, instant) {
     moveIndicator(active, instant);
   } else if (!active) {
     lastActive = null;
-    gsap.to(navIndicator, {
-      x: 0,
-      width: 0,
-      duration: instant ? 0 : 0.45,
-      ease: "power2.out",
-      overwrite: "auto",
-    });
+    navIndicator.style.transform = `translateX(0px)`;
+    navIndicator.style.width = `0px`;
   }
   updateRail(id);
 }
