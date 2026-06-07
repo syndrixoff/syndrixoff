@@ -99,24 +99,6 @@ body {
   transition: background-color 0.6s, color 0.6s;
   font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E"), url("https://images.unsplash.com/photo-1u005pqp-D4?w=1920&q=80&auto=format&fit=crop");
-  background-repeat: repeat, no-repeat;
-  background-size: 128px 128px, cover;
-  background-position: 0 0, center;
-  background-attachment: fixed;
-  background-blend-mode: normal, overlay;
-  opacity: 0.04;
-}
-[data-theme="light"] body::before {
-  opacity: 0.025;
-  background-blend-mode: normal, soft-light;
-}
 
 /* ─── CUSTOM PAGE SCROLLBAR ─── */
 .page-scrollbar {
@@ -180,13 +162,17 @@ p {
   pointer-events: none;
   overflow: hidden;
   background:
+    url("https://images.unsplash.com/photo-1u005pqp-D4?w=1920&q=80&auto=format&fit=crop"),
     radial-gradient(ellipse 90% 75% at 40% 20%, color-mix(in srgb, #8B5CF6 22%, transparent), transparent 65%),
     radial-gradient(ellipse 80% 65% at 70% 20%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 60%),
     radial-gradient(ellipse 70% 75% at 60% 75%, color-mix(in srgb, #F59E0B 14%, transparent), transparent 55%),
     radial-gradient(ellipse 70% 70% at 25% 70%, color-mix(in srgb, #F97316 12%, transparent), transparent 55%),
     radial-gradient(ellipse 75% 55% at 50% 45%, color-mix(in srgb, #A78BFA 13%, transparent), transparent 55%),
     radial-gradient(ellipse 90% 80% at 30% 55%, color-mix(in srgb, #6366F1 10%, transparent), transparent 65%);
+  background-size: cover, auto;
+  background-position: center, 0 0;
   background-attachment: fixed;
+  background-blend-mode: overlay, normal;
   filter: blur(80px) saturate(1.6);
 }
 
