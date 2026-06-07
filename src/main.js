@@ -413,7 +413,7 @@ function finishLoader() {
 function tick() {
   const diff = targetProgress - currentProgress;
   if (diff > 0.001) {
-    currentProgress += diff * Math.min(0.06 + diff * 0.3, 1);
+    currentProgress += diff * Math.min(0.18 + diff * 0.5, 1);
     if (currentProgress > targetProgress) currentProgress = targetProgress;
   }
   pctEl.textContent = Math.round(currentProgress * 100) + "%";
