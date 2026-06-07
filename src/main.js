@@ -36,8 +36,8 @@ function updateProgress() {
 }
 
 function onScroll() {
-  nav?.classList.toggle("scrolled", window.scrollY > 60);
   updateProgress();
+  nav?.classList.toggle("scrolled", window.scrollY > 60);
 }
 
 window.addEventListener("scroll", onScroll, { passive: true });
@@ -424,7 +424,7 @@ window.setLoadTarget = setLoadTarget;
 
 let milestones = { dom: false, fonts: false, win: false };
 function checkComplete() {
-  if (milestones.dom && milestones.fonts && milestones.win) setLoadTarget(1);
+  if (milestones.dom && milestones.fonts) setLoadTarget(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -440,8 +440,7 @@ document.fonts.ready.then(() => {
 });
 window.addEventListener("load", () => {
   milestones.win = true;
-  setLoadTarget(0.36);
-  checkComplete();
+  if (!milestones.dom || !milestones.fonts) setLoadTarget(0.36);
 });
 
 let tickStarted = false;
