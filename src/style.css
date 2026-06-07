@@ -162,17 +162,14 @@ p {
   pointer-events: none;
   overflow: hidden;
   background:
-    url("https://images.unsplash.com/photo-1u005pqp-D4?w=1920&q=80&auto=format&fit=crop"),
     radial-gradient(ellipse 90% 75% at 40% 20%, color-mix(in srgb, #8B5CF6 22%, transparent), transparent 65%),
     radial-gradient(ellipse 80% 65% at 70% 20%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 60%),
     radial-gradient(ellipse 70% 75% at 60% 75%, color-mix(in srgb, #F59E0B 14%, transparent), transparent 55%),
     radial-gradient(ellipse 70% 70% at 25% 70%, color-mix(in srgb, #F97316 12%, transparent), transparent 55%),
     radial-gradient(ellipse 75% 55% at 50% 45%, color-mix(in srgb, #A78BFA 13%, transparent), transparent 55%),
     radial-gradient(ellipse 90% 80% at 30% 55%, color-mix(in srgb, #6366F1 10%, transparent), transparent 65%);
-  background-size: cover, auto;
-  background-position: center, 0 0;
   background-attachment: fixed;
-  background-blend-mode: overlay, normal;
+  background-blend-mode: overlay;
   filter: blur(80px) saturate(1.6);
 }
 
