@@ -639,6 +639,7 @@ body::before {
 .light-tile .section-label { color: var(--accent); }
 .light-tile .section-title em { color: var(--accent); }
 .light-tile .glass-card-icon { color: var(--accent); }
+.light-tile .glass-card:hover .glass-card-icon { color: var(--electric-cyan); }
 .light-tile .project-tag { color: var(--accent); }
 
 .section-label {
@@ -951,6 +952,20 @@ body::before {
     0 1px 0 0 var(--glass-edge) inset,
     0 8px 40px rgba(0,0,0,0.2);
   transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.3s, background 0.6s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 [data-theme="light"] .glass-card {
@@ -967,10 +982,15 @@ body::before {
 .glass-card:nth-child(2) { transition-delay: 0.08s; }
 .glass-card:nth-child(3) { transition-delay: 0.16s; }
 .glass-card:nth-child(4) { transition-delay: 0.24s; }
+.glass-card:nth-child(5) { transition-delay: 0.32s; }
+.glass-card:nth-child(6) { transition-delay: 0.40s; }
+
+.glass-card:hover::before { transform: scaleY(1); }
 
 .glass-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--border-hover);
+  background: var(--bg-card-solid);
   box-shadow:
     0 1px 0 0 var(--glass-edge) inset,
     0 12px 48px rgba(0,0,0,0.25),
@@ -978,6 +998,7 @@ body::before {
 }
 
 [data-theme="light"] .glass-card:hover {
+  background: rgba(255, 255, 255, 0.55);
   box-shadow:
     0 1px 0 0 var(--glass-edge-light) inset,
     0 12px 40px rgba(0,0,0,0.1),
@@ -988,7 +1009,9 @@ body::before {
   width: 26px; height: 26px;
   color: var(--accent);
   margin-bottom: 16px;
+  transition: color 0.3s;
 }
+.glass-card:hover .glass-card-icon { color: var(--electric-cyan); }
 
 .glass-card h3 {
   font-size: 0.95rem;
