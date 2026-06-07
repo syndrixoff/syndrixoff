@@ -110,14 +110,19 @@ function moveIndicator(el, instant) {
 }
 
 function setActiveSection(id, instant) {
+  const next = document.querySelector(`.nav-links a[href="#${id}"]`);
+  let left = 0, width = 0;
+  if (next) { left = next.offsetLeft; width = next.offsetWidth; }
+
   navLinks.forEach((l) => {
     l.classList.toggle("active", l.getAttribute("href") === "#" + id);
   });
-  const active = document.querySelector(".nav-links a.active");
-  if (active && active !== lastActive) {
-    lastActive = active;
-    moveIndicator(active, instant);
-  } else if (!active) {
+
+  if (next && next !== lastActive) {
+    lastActive = next;
+    navIndicator.style.transform = `translateX(${left}px)`;
+    navIndicator.style.width = `${width}px`;
+  } else if (!next) {
     lastActive = null;
     navIndicator.style.transform = `translateX(0px)`;
     navIndicator.style.width = `0px`;
