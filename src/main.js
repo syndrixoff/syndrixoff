@@ -86,6 +86,31 @@ let lastActive = null;
 let navClickLock = false;
 let cachedSections = null;
 
+/* ─── GSAP NAV BG GLOW PULSE ─── */
+const navBgGlow = document.getElementById("navBgGlow");
+if (navBgGlow) {
+  gsap.to(navBgGlow, {
+    opacity: 0.7,
+    y: -1,
+    duration: 2.5,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+  });
+}
+
+/* ─── GSAP NAV GLOW PULSE ─── */
+const navEl = document.getElementById("nav");
+if (navEl) {
+  gsap.to(navEl, {
+    "--nav-glow-opacity": 1,
+    duration: 2.5,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+  });
+}
+
 function getActiveSectionId() {
   if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
   const sections = cachedSections;
