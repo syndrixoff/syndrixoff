@@ -1,9 +1,5 @@
 import "./style.css";
 import gsap from "gsap";
-import { Application } from "@splinetool/runtime";
-import * as THREE from "three";
-
-window.THREE = THREE;
 
 /* ─── DISABLE RIGHT CLICK ─── */
 document.addEventListener("contextmenu", e => e.preventDefault());
@@ -67,26 +63,13 @@ const navIndicator = document.createElement("div");
 navIndicator.className = "nav-indicator";
 document.querySelector(".nav-links")?.appendChild(navIndicator);
 
-function moveIndicator(link, instant) {
-  if (!link) return;
-  const rect = link.getBoundingClientRect();
-  const parent = navIndicator.parentElement.getBoundingClientRect();
-  gsap.to(navIndicator, {
-    x: rect.left - parent.left,
-    width: rect.width,
-    y: rect.top - parent.top,
-    height: rect.height,
-    duration: instant ? 0 : 0.45,
-    ease: "power2.out",
-    overwrite: "auto",
-  });
-}
-
 let lastActive = null;
 let navClickLock = false;
+let cachedSections = null;
 
 function getActiveSectionId() {
-  const sections = document.querySelectorAll("section[id]");
+  if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
+  const sections = cachedSections;
   let closestId = null;
   let closestDist = Infinity;
   sections.forEach((s) => {
@@ -161,7 +144,7 @@ function syncActiveSection() {
 
 window.addEventListener("scroll", () => {
   clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(syncActiveSection, 250);
+  scrollTimer = setTimeout(syncActiveSection, 32);
 }, { passive: true });
 
 if ("onscrollend" in window) {
@@ -243,13 +226,9 @@ const teamGrid = document.getElementById("teamGrid");
 const teamDots = document.getElementById("teamScrollDots");
 
 function rebuildTeamDots() {
-  const visible = [...teamCards].filter((c) => !c.classList.contains("hidden"));
   const containerW = teamGrid.clientWidth;
-  const gap = 16;
-  const firstCard = visible[0];
-  if (!firstCard || !containerW) { teamDots.innerHTML = ""; return; }
-  const cardW = firstCard.getBoundingClientRect().width + gap;
-  const pages = Math.max(1, Math.ceil((visible.length * cardW) / containerW));
+  if (!containerW) { teamDots.innerHTML = ""; return; }
+  const pages = Math.max(1, Math.ceil(teamGrid.scrollWidth / containerW));
 
   teamDots.innerHTML = "";
   for (let i = 0; i < pages; i++) {
@@ -333,13 +312,12 @@ const pctEl = document.getElementById("loaderPct");
 const loaderColored = document.getElementById("loaderColored");
 const page = document.getElementById("page");
 
-document.body.style.overflow = "hidden";
-
 let currentProgress = 0;
 let targetProgress = 0;
 
 function setLoadTarget(p) {
   if (p > targetProgress) targetProgress = p;
+  startTick();
 }
 
 function finishLoader() {
@@ -348,11 +326,21 @@ function finishLoader() {
   loaderColored.style.clipPath = "inset(0% 0 0 0)";
   page.classList.add("page-visible");
   loader.classList.add("loader-hidden");
-  document.body.style.overflow = "";
   // Sync nav after loader completes
   requestAnimationFrame(() => {
     const id = getActiveSectionId();
     if (id) setActiveSection(id, true);
+  });
+  // Choreographed entry animations
+  requestAnimationFrame(() => {
+    nav?.classList.add("animate-nav");
+    document.querySelector(".section-rail")?.classList.add("animate-rail");
+    document.querySelector(".hero-scroll-hint")?.classList.add("animate-scroll-hint");
+    setTimeout(() => {
+      document.querySelector(".hero-static-text")?.classList.add("animate-hero-text");
+      // Flag intro as complete after the last animation finishes
+      setTimeout(() => document.body.classList.add("hero-intro-complete"), 900);
+    }, 80);
   });
 }
 
@@ -366,76 +354,25 @@ function tick() {
   loaderColored.style.clipPath = `inset(${(1 - currentProgress) * 100}% 0 0 0)`;
   if (currentProgress >= 0.999) {
     finishLoader();
+    return;
   }
   requestAnimationFrame(tick);
 }
 
-/* ─── HERO SPLINE 3D LOGO ─── */
-const heroSplineCanvas = document.getElementById("heroSplineCanvas");
-if (heroSplineCanvas) {
-  const heroSpline = new Application(heroSplineCanvas);
-  heroSpline.load("/3D_LOGO.splinecode").catch(() => {
-    heroSplineCanvas.style.display = "none";
-  });
-}
-
-/* ─── SPLINE CONTACT SCENE ─── */
-const splineCanvas = document.getElementById("splineCanvas");
-if (splineCanvas) {
-  const spline = new Application(splineCanvas);
-  spline
-    .load("/contact_us.splinecode")
-    .then(() => {
-      splineCanvas.style.opacity = "1";
-      spline.setZoom(0.7);
-      milestones.spline = true;
-      setLoadTarget(0.75);
-      checkComplete();
-    })
-    .catch((err) => {
-      console.warn("Spline scene failed to load:", err);
-      splineCanvas.style.display = "none";
-      milestones.spline = true;
-      checkComplete();
-    });
-
-  let splineInView = false;
-  const contactSection = document.getElementById("contact");
-  if (contactSection && IntersectionObserver) {
-    new IntersectionObserver(([e]) => {
-      splineInView = e.isIntersecting;
-    }, { threshold: 0 }).observe(contactSection);
-  }
-
-  document.addEventListener("pointermove", (e) => {
-    if (!splineInView) return;
-    splineCanvas.dispatchEvent(new PointerEvent("pointermove", {
-      clientX: e.clientX, clientY: e.clientY
-    }));
-  });
-
-} else {
-  milestones.spline = true;
-  checkComplete();
-}
+/* ─── SCROLL REVEAL ─── */
 
 window.setLoadTarget = setLoadTarget;
 
-let milestones = { dom: false, fonts: false, win: false, three: false, spline: false };
+let milestones = { dom: false, fonts: false, win: false };
 function checkComplete() {
-  if (milestones.dom && milestones.fonts && milestones.win && milestones.three && milestones.spline) setLoadTarget(1);
+  if (milestones.dom && milestones.fonts && milestones.win) setLoadTarget(1);
 }
-
-window.onThreeReady = function () {
-  milestones.three = true;
-  setLoadTarget(0.52);
-  checkComplete();
-};
 
 document.addEventListener("DOMContentLoaded", () => {
   milestones.dom = true;
   setLoadTarget(0.12);
   checkComplete();
+  setTimeout(initTerminal, 1000);
 });
 document.fonts.ready.then(() => {
   milestones.fonts = true;
@@ -448,4 +385,202 @@ window.addEventListener("load", () => {
   checkComplete();
 });
 
-requestAnimationFrame(tick);
+let tickStarted = false;
+function startTick() {
+  if (tickStarted) return;
+  tickStarted = true;
+  requestAnimationFrame(tick);
+}
+
+/* ─── PROJECT MODAL ─── */
+const projectData = {
+  atlas: {
+    tag: "Autonomous Systems",
+    title: "Project ATLAS",
+    overview: "Autonomous drone platforms operating in GPS-denied environments face a fundamental challenge: how to combine real-time flight control with on-board AI reasoning under strict compute constraints. This project developed a simulated hierarchical drone swarm — one mother, two children — controlled entirely over MAVLink without ROS, integrating visual odometry for position estimation and an on-board large language model for mission-level decision-making. The architecture separates low-level flight control (PX4 at 250 Hz) from vision-based perception (YOLO object detection at 30 FPS) and LLM-based mission reasoning, mirroring production autonomous systems. The mother drone coordinates child agents via a custom MAVLink protocol, with leader election for fault tolerance. The entire pipeline was validated in NVIDIA Isaac Sim with hardware-in-the-loop PX4 SITL, demonstrating end-to-end autonomous mission execution from camera input to flight action.",
+    architecture: [
+      "The system addresses the control-to-cognition gap inherent in autonomous drones: flight controllers operate at millisecond timescales, while AI reasoning requires seconds. Rather than forcing an LLM into the real-time loop, the architecture implements three decoupled layers. A PX4 flight controller handles attitude stabilization and waypoint navigation at 250 Hz. A vision layer runs YOLOv26 at 30 FPS on a simulated downward-facing camera, writing structured detection data to shared memory. An LLM reasoner (Qwen3.5 4B, quantized, running locally via llama.cpp) operates at the mission level, reading telemetry and detections to issue high-level commands via tool-calling function interfaces.",
+      "The mother-child swarm protocol uses distributed MAVLink routing: the mother maintains state for two child drones, broadcasts heartbeat messages, and executes leader election if the mother is lost. The simulation environment (Isaac Sim + Pegasus + PX4 SITL) provides photorealistic rendering and physics-accurate flight dynamics, enabling realistic camera feeds and sensor noise. The entire stack runs on a single NVIDIA RTX 4060 laptop GPU, demonstrating that production-grade autonomous drone software can be developed and validated on consumer hardware. The system achieves 19.74 Hz vision-to-action latency on embedded-class compute (Jetson AGX Orin equivalent), aligning with published research on dual-rate VLA architectures for aerial systems."
+    ],
+    tech: ["NVIDIA Isaac Sim", "PX4 Autopilot SITL", "MAVSDK", "MAVLink", "YOLOv26", "Qwen3.5 4B (llama.cpp)", "Pegasus Simulator", "Python", "NVIDIA Jetson"]
+  },
+  aetherforge: {
+    tag: "AI + EDA",
+    title: "AetherForge",
+    overview: "Hardware engineers face significant productivity bottlenecks when translating specifications into verified RTL. AetherForge eliminates this by providing an AI-native copilot that generates synthesizable HDL from natural language descriptions, compiles against industry-standard EDA toolchains, and automatically produces self-checking testbenches with functional pass/fail verification. The system ingests high-level design intent, produces SystemVerilog or VHDL, invokes Verilator or GHDL for compilation and simulation, and reports verification outcomes — all within a single streamlined interface. This dramatically reduces the design-verify iteration cycle from hours to seconds while maintaining strict equivalence between specification and implementation.",
+    architecture: [
+      "AetherForge is an AI-native hardware engineering copilot that generates RTL from natural language, compiles with Verilator/GHDL, produces self-checking testbenches, and runs functional verification — all within a single web interface. The backend orchestrates LLM inference, testbench generation, EDA compilation, and simulation result parsing; the frontend provides real-time streaming of generated code, build output, and pass/fail verdicts. Designed to integrate with local or NVIDIA NIM-hosted LLM backends, it operates entirely offline-capable and requires no cloud dependency. The tool targets professional RTL designers, FPGA engineers, and embedded systems architects seeking to accelerate the specification-to-verified-RTL pipeline."
+    ],
+    tech: ["Rust", "SystemVerilog", "VHDL", "Verilator", "GHDL", "TypeScript", "React"]
+  }
+};
+
+let activeModal = null;
+
+function closeModal() {
+  if (!activeModal) return;
+  const overlay = activeModal;
+  document.removeEventListener("keydown", onKeyDown);
+  overlay.classList.remove("open");
+  overlay.addEventListener("transitionend", () => overlay.remove(), { once: true });
+  activeModal = null;
+}
+
+function openModal(projectId) {
+  const data = projectData[projectId];
+  if (!data) return;
+  if (activeModal) closeModal();
+
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+
+  overlay.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <span class="modal-tag">${data.tag}</span>
+          <h2>${data.title}</h2>
+        </div>
+        <button class="modal-close" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>Project Overview</h4>
+        <p class="modal-text">${data.overview}</p>
+
+        <div class="modal-section-divider"></div>
+
+        <h4>Architecture</h4>
+        ${data.architecture.map(p => `<p class="modal-text">${p}</p>`).join("")}
+
+        <div class="modal-section-divider"></div>
+
+        <h4>Key Specs</h4>
+        <div class="modal-specs-grid">
+          ${data.tech.map(t => `
+            <div class="modal-spec-item">${t}</div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  `;
+
+  const root = document.getElementById("modal-root");
+  root.appendChild(overlay);
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  overlay.querySelector(".modal-close").addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", onKeyDown);
+
+  activeModal = overlay;
+
+  requestAnimationFrame(() => overlay.classList.add("open"));
+}
+
+function onKeyDown(e) {
+  if (e.key === "Escape" && activeModal) closeModal();
+}
+
+/* ─── SCROLL-DRIVEN SECTION REVEALS ─── */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const children = entry.target.querySelectorAll(".reveal");
+      if (entry.isIntersecting) {
+        children.forEach((child, i) => {
+          child.style.setProperty("--stagger-delay", `${i * 60}ms`);
+          child.classList.add("revealed");
+        });
+      } else {
+        /* Directional hysteresis: only strip revealed if section
+           exits through the bottom (user scrolling up past it).
+           Exiting through top (scrolling down past it) preserves state. */
+        const { top, bottom } = entry.boundingClientRect;
+        if (top > entry.rootBounds.bottom) {
+          children.forEach((child) => child.classList.remove("revealed"));
+        }
+      }
+    });
+  },
+  { threshold: 0.1, rootMargin: "-10% 0px -20% 0px" }
+);
+
+document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
+  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p").forEach((el) => {
+    el.classList.add("reveal");
+  });
+  revealObserver.observe(section);
+});
+
+// Sync-reveal sections already in view (matches observer's rootMargin: -10% 0px -20% 0px)
+document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
+  const rect = section.getBoundingClientRect();
+  const effectiveTop = window.innerHeight * 0.1;
+  const effectiveBottom = window.innerHeight * 0.8;
+  if (rect.top < effectiveBottom && rect.bottom > effectiveTop) {
+    const children = section.querySelectorAll(".reveal");
+    children.forEach((child, i) => {
+      child.style.setProperty("--stagger-delay", `${i * 60}ms`);
+      child.classList.add("revealed");
+    });
+  }
+});
+
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card.dataset.project));
+});
+
+/* ─── CAPABILITY DOMAIN HOVER ─── */
+
+/* ─── TERMINAL TYPEWRITER ─── */
+function initTerminal() {
+  const out = document.getElementById('termOutput');
+  if (!out) return;
+
+  const sequence = [
+    { type: 'cmd', text: 'connect --to=your-project', delay: 600 },
+    { type: 'gap', delay: 400 },
+    { type: 'out-cyan', text: 'Initiating handshake...', delay: 0 },
+    { type: 'out-cyan', text: 'Connection ready. Reach out at syndrixoff@gmail.com', delay: 600 },
+    { type: 'gap', delay: 300 },
+    { type: 'cursor', delay: 0 },
+  ];
+
+  let i = 0;
+  function next() {
+    if (i >= sequence.length) return;
+    const s = sequence[i++];
+    const totalDelay = s.delay || 0;
+
+    setTimeout(() => {
+      if (s.type === 'gap') {
+        const br = document.createElement('div');
+        br.style.height = '6px';
+        out.appendChild(br);
+      } else if (s.type === 'cursor') {
+        const div = document.createElement('div');
+        div.className = 'line fade-in';
+        div.innerHTML = `<span class="prompt">›</span><span class="blink"></span>`;
+        out.appendChild(div);
+      } else {
+        const div = document.createElement('div');
+        div.className = 'line fade-in';
+        if (s.type === 'cmd') {
+          div.innerHTML = `<span class="prompt">›</span><span class="cmd">${s.text}</span>`;
+        } else {
+          div.innerHTML = `<span class="${s.type}">${s.text}</span>`;
+        }
+        out.appendChild(div);
+      }
+      out.scrollTop = out.scrollHeight;
+      next();
+    }, totalDelay);
+  }
+
+  setTimeout(next, 500);
+}

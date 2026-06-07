@@ -3,12 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Syndrix</title>
+  <title>Syndrix — Design & Innovation Studio</title>
+  <meta name="description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
+  <meta name="keywords" content="design studio, digital agency, branding, UI/UX, product design, creative studio" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Syndrix" />
+  <link rel="canonical" href="https://syndrix.io/" />
+  <meta property="og:title" content="Syndrix — Design & Innovation Studio" />
+  <meta property="og:description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
+  <meta property="og:url" content="https://syndrix.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://syndrix.io/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Syndrix — Design & Innovation Studio" />
+  <meta name="twitter:description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/lib/geist-400.css" />
-  <link rel="stylesheet" href="/lib/geist-500.css" />
-  <link rel="stylesheet" href="/lib/geist-600.css" />
-  <link rel="stylesheet" href="/lib/geist-700.css" />
+  <link rel="preload" href="/lib/geist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/geist-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/geist-mono/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/lib/geist-400.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/lib/geist-500.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/lib/geist-600.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/lib/geist-700.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="/lib/geist-mono.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="/lib/geist-400.css" />
+    <link rel="stylesheet" href="/lib/geist-500.css" />
+    <link rel="stylesheet" href="/lib/geist-600.css" />
+    <link rel="stylesheet" href="/lib/geist-700.css" />
+    <link rel="stylesheet" href="/lib/geist-mono.css" />
+  </noscript>
   <style>
     #page { opacity: 0; }
     #loader { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; background: #000; }
@@ -17,6 +41,19 @@
     .loader-pct { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; text-align: center; }
     body { background: #000; margin: 0; }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Syndrix",
+    "url": "https://syndrix.io/",
+    "description": "Design & innovation studio crafting digital experiences, brands, and products that push creative boundaries.",
+    "foundingDate": "2025",
+    "sameAs": [
+      "https://x.com/syndrix"
+    ]
+  }
+  </script>
 </head>
 <body class="grain">
 
@@ -54,7 +91,7 @@
 
   <nav class="nav" id="nav">
     <div class="nav-track">
-      <a href="#" class="nav-logo" id="wordmark">
+      <a href="/" class="nav-logo" id="wordmark" aria-label="Syndrix home">
         <svg class="wordmark-svg" viewBox="-2 -2 328.45 101.5" xmlns="http://www.w3.org/2000/svg">
           <g id="svgGroup" stroke-linecap="round" fill-rule="nonzero" fill="currentColor" stroke="none">
             <g class="wm-letter" data-letter="S">
@@ -118,13 +155,14 @@
 
   <main>
 
-    <!-- HERO — only SYNDRIX wordmark dispersal + navbar -->
+    <!-- HERO — canvas crumble typography overlay -->
     <section id="hero" class="section hero-section">
-      <div class="hero-spline-bg">
-        <canvas id="heroSplineCanvas"></canvas>
-      </div>
-      <div class="syndrix-section">
-        <div class="syndrix-line"><div id="syndrix-emb" class="syndrix-emb"></div></div>
+      <div class="hero-container">
+        <div class="hero-static-text" aria-label="IDEA DESIGN DEPLOY">
+          <span class="hero-word">IDEA</span>
+          <span class="hero-word">DESIGN</span>
+          <span class="hero-word">DEPLOY</span>
+        </div>
       </div>
       <div class="hero-scroll-hint">
         <span>Scroll</span>
@@ -203,87 +241,92 @@
       </div>
     </section>
 
-    <!-- TOOLS (dark) -->
+    <!-- TOOLS → CAPABILITY MATRIX (dark) -->
     <section id="tools" class="section tools-section">
-      <div class="section-label">// TOOLCHAIN</div>
+      <div class="section-label">// TOOLCHAIN •</div>
       <h2 class="section-title">Built with <em>Industry Standards</em></h2>
+      <p class="section-subtitle">An integrated toolchain spanning digital design, embedded systems, software platforms, and AI-driven engineering automation.</p>
 
       <div class="tools-grid">
-        <div class="glass-card">
-          <div class="glass-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <div class="tool-domain" data-domain="hw">
+          <div class="domain-label label-hw">HARDWARE</div>
+          <div class="domain-sub">Digital &amp; Analog Design</div>
+          <div class="tools-listing">
+            <span>Verilog</span><span class="tdot"> · </span><span>VHDL</span><span class="tdot"> · </span><span>SystemVerilog</span><span class="tdot"> · </span><span>Verilator</span><span class="tdot"> · </span><span>ModelSim</span><br>
+            <span>Cadence Genus</span><span class="tdot"> · </span><span>Synopsys DC</span><span class="tdot"> · </span><span>PrimeTime</span><br>
+            <span>Quartus Prime</span><span class="tdot"> · </span><span>Vivado</span><span class="tdot"> · </span><span>Lattice Diamond</span><br>
+            <span>KiCad</span><span class="tdot"> · </span><span>Altium Designer</span><span class="tdot"> · </span><span>EasyEDA</span><br>
+            <span>LTspice</span><span class="tdot"> · </span><span>MATLAB</span><span class="tdot"> · </span><span>Simulink</span>
           </div>
-          <h3>Design &amp; Simulation</h3>
-          <p>Industry-standard EDA and simulation tools for rigorous design validation.</p>
-          <div class="tools-list"><span>Altium Designer</span><span>KiCad</span><span>LTspice</span><span>MATLAB/Simulink</span><span>Ansys</span></div>
         </div>
-        <div class="glass-card">
-          <div class="glass-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+
+        <div class="tool-domain" data-domain="fw">
+          <div class="domain-label label-fw">FIRMWARE</div>
+          <div class="domain-sub">Embedded Systems</div>
+          <div class="tools-listing">
+            <span>FreeRTOS</span><span class="tdot"> · </span><span>Zephyr</span><span class="tdot"> · </span><span>RTEMS</span><br>
+            <span>STM32</span><span class="tdot"> · </span><span>ESP32</span><span class="tdot"> · </span><span>ARM Cortex</span><span class="tdot"> · </span><span>PlatformIO</span><br>
+            <span>SPI</span><span class="tdot"> · </span><span>I2C</span><span class="tdot"> · </span><span>CAN</span><span class="tdot"> · </span><span>UART</span><span class="tdot"> · </span><span>Modbus</span><br>
+            <span>Keil µVision</span><span class="tdot"> · </span><span>ARM GCC</span><span class="tdot"> · </span><span>IAR Embedded</span>
           </div>
-          <h3>Embedded &amp; Firmware</h3>
-          <p>Production-proven MCU toolchains and RTOS platforms.</p>
-          <div class="tools-list"><span>STM32Cube</span><span>ESP-IDF</span><span>FreeRTOS</span><span>Zephyr</span><span>Xilinx Vivado</span></div>
         </div>
-        <div class="glass-card">
-          <div class="glass-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+
+        <div class="tool-domain" data-domain="sw">
+          <div class="domain-label label-sw">SOFTWARE</div>
+          <div class="domain-sub">Platforms &amp; Infrastructure</div>
+          <div class="tools-listing">
+            <span>Next.js</span><span class="tdot"> · </span><span>React</span><span class="tdot"> · </span><span>TypeScript</span><span class="tdot"> · </span><span>Node.js</span><br>
+            <span>PostgreSQL</span><span class="tdot"> · </span><span>Supabase</span><span class="tdot"> · </span><span>REST</span><span class="tdot"> · </span><span>GraphQL</span><br>
+            <span>Docker</span><span class="tdot"> · </span><span>Linux</span><span class="tdot"> · </span><span>CI/CD</span>
           </div>
-          <h3>Software &amp; Cloud</h3>
-          <p>Modern infrastructure for scalable, resilient deployments.</p>
-          <div class="tools-list"><span>Docker</span><span>Kubernetes</span><span>AWS</span><span>GitHub Actions</span><span>Terraform</span></div>
         </div>
-        <div class="glass-card">
-          <div class="glass-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+
+        <div class="tool-domain" data-domain="ai">
+          <div class="domain-label label-ai">AI &amp; AUTOMATION</div>
+          <div class="domain-sub">Intelligent Engineering</div>
+          <div class="tools-listing">
+            <span>OpenCV</span><span class="tdot"> · </span><span>YOLO</span><span class="tdot"> · </span><span>TensorRT</span><span class="tdot"> · </span><span>NVIDIA</span><br>
+            <span>LangChain</span><span class="tdot"> · </span><span>LlamaIndex</span><span class="tdot"> · </span><span>NIM</span><span class="tdot"> · </span><span>Qwen</span><br>
+            <span>Python</span><span class="tdot"> · </span><span>TensorFlow</span><span class="tdot"> · </span><span>PyTorch</span><span class="tdot"> · </span><span>scikit-learn</span>
           </div>
-          <h3>CAD &amp; Manufacturing</h3>
-          <p>End-to-end mechanical design from concept to DFM.</p>
-          <div class="tools-list"><span>Fusion 360</span><span>SolidWorks</span><span>Onshape</span><span>Blender</span><span>3D Printing</span></div>
         </div>
+      </div>
+
+      <div class="tools-pipeline">
+        <span class="pipe-step">SPEC</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">RTL</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">SYNTHESIS</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">P&amp;R</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">TAPEOUT</span>
       </div>
     </section>
 
     <!-- PROJECTS (dark) -->
     <section id="projects" class="section projects-section">
       <div class="section-label">// PROJECTS</div>
-      <h2 class="section-title">Flagship <em>Work</em></h2>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
 
       <div class="projects-grid">
-        <article class="project-card">
-          <div class="project-visual pv-aura"></div>
+        <article class="project-card" data-project="atlas">
+          <div class="project-visual pv-atlas"></div>
           <div class="project-body">
-            <span class="project-tag">Hardware + AI</span>
-            <h3>Project Aura</h3>
-            <p>Smart environmental monitoring with on-device ML and mesh networking.</p>
-            <div class="tags"><span>ESP32-S3</span><span>TFLite</span><span>LoRa</span></div>
+            <span class="project-tag">Autonomous Systems</span>
+            <h3>Project ATLAS</h3>
+            <p>Hierarchical drone swarm combining real-time flight control with onboard AI reasoning under strict compute constraints.</p>
+            <div class="tags"><span>PX4 Autopilot</span><span>MAVLink</span><span>YOLOv26</span><span>Qwen3.5</span><span>NVIDIA Isaac Sim</span></div>
           </div>
         </article>
-        <article class="project-card">
-          <div class="project-visual pv-synapse"></div>
+        <article class="project-card" data-project="aetherforge">
+          <div class="project-visual pv-aetherforge"></div>
           <div class="project-body">
-            <span class="project-tag">Software</span>
-            <h3>Synapse</h3>
-            <p>Real-time analytics platform for industrial sensor networks.</p>
-            <div class="tags"><span>Go</span><span>React</span><span>Kafka</span></div>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-visual pv-cortex"></div>
-          <div class="project-body">
-            <span class="project-tag">Embedded</span>
-            <h3>Cortex</h3>
-            <p>Edge AI inference unit with custom RISC-V accelerator.</p>
-            <div class="tags"><span>RISC-V</span><span>FPGA</span><span>FreeRTOS</span></div>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-visual pv-nexus"></div>
-          <div class="project-body">
-            <span class="project-tag">IoT + Cloud</span>
-            <h3>Nexus</h3>
-            <p>IoT ecosystem connecting thousands of smart building devices.</p>
-            <div class="tags"><span>MQTT</span><span>AWS IoT</span><span>Rust</span></div>
+            <span class="project-tag">AI + EDA</span>
+            <h3>AetherForge</h3>
+            <p>AI-native copilot generating synthesizable HDL from natural language with automated verification against EDA toolchains.</p>
+            <div class="tags"><span>Rust</span><span>SystemVerilog</span><span>Verilator</span><span>GHDL</span><span>React</span></div>
           </div>
         </article>
       </div>
@@ -315,8 +358,8 @@
           </div>
           <p>Company strategy, partnerships, business development, client acquisition, and long-term vision for SYNDRIX.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Mithunkumar J on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Mithunkumar J on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -330,8 +373,8 @@
           </div>
           <p>Technical direction, architecture reviews, product strategy, engineering standards, and R&amp;D leadership across all divisions.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Haripriyan R on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Haripriyan R on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -345,8 +388,8 @@
           </div>
           <p>System architecture, analog design, hardware feasibility, and technology selection for next-gen electronic products.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Sudharsan G S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Sudharsan G S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -360,8 +403,8 @@
           </div>
           <p>Hardware architecture, FPGA development, CAD &amp; simulation, and semiconductor research leadership.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Ayden Joshua M on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Ayden Joshua M on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -375,8 +418,8 @@
           </div>
           <p>RTL design, PCB development, digital logic, and FPGA-based system implementation.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Arvindh Arjun S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Arvindh Arjun S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -390,8 +433,8 @@
           </div>
           <p>Digital hardware design, Verilog development, and system modelling for complex electronic systems.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Akhil S B on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Akhil S B on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -405,8 +448,8 @@
           </div>
           <p>Full-stack development, web applications, backend systems, APIs, and AI integration for software platforms.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Raghul Deepan on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Raghul Deepan on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -420,8 +463,8 @@
           </div>
           <p>Embedded systems, AI-enabled edge solutions, IoT integration, and automation system architecture.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Chaarukesh R R on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Chaarukesh R R on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -435,8 +478,8 @@
           </div>
           <p>Embedded development, EV systems, communication protocols, and real-time firmware for embedded solutions.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Haresh S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Haresh S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -450,8 +493,8 @@
           </div>
           <p>Automotive electronics, embedded control systems, microcontroller firmware, and sensor integration for embedded platforms.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Sai Deepak K on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Sai Deepak K on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -465,8 +508,8 @@
           </div>
           <p>Product testing, manufacturing support, validation workflows, and production-ready hardware release.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="T Harish on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="T Harish on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -480,8 +523,8 @@
           </div>
           <p>PCB architecture, prototyping, manufacturing support, product realization, and hardware bring-up for production systems.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Abhisek KR on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Abhisek KR on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -495,8 +538,8 @@
           </div>
           <p>AI automation, embedded systems, computer vision, and intelligent edge solutions.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="GK Venkatesan on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="GK Venkatesan on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -510,8 +553,8 @@
           </div>
           <p>Web platforms, client portals, internal engineering tools, and full-stack frontend/backend systems.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Samraj Joshua S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Samraj Joshua S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -525,8 +568,8 @@
           </div>
           <p>Financial planning, budget management, pricing strategy, vendor relations, resource allocation, and growth planning.</p>
           <div class="team-social">
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="#" aria-label="Tharun on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Tharun on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
           </div>
         </div>
 
@@ -540,9 +583,6 @@
       <div class="section-label centered">// CONTACT</div>
 
       <div class="contact-card">
-      <div class="spline-wrapper">
-        <canvas id="splineCanvas"></canvas>
-      </div>
       <div class="contact-content">
         <h2 class="section-title">Let's build something <em>extraordinary</em>.</h2>
         <p class="contact-body">Have a project in mind? Reach out.</p>
@@ -551,6 +591,17 @@
           <a href="#">GitHub</a>
           <a href="#">LinkedIn</a>
           <a href="#">X / Twitter</a>
+        </div>
+      </div>
+      <div class="terminal-block">
+        <div class="term-wrap">
+          <div class="term-bar">
+            <div class="dot d1"></div>
+            <div class="dot d2"></div>
+            <div class="dot d3"></div>
+            <span class="term-label">SYNDRIX — SIGNAL PATH TERMINAL</span>
+          </div>
+          <div class="term-body" id="termOutput"></div>
         </div>
       </div>
       </div>
@@ -562,253 +613,15 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-legal">
-        &copy; 2026 Syndrix Collective&thinsp;&ndash;&thinsp;Built by engineers, for builders.
+        &copy; 2026 Syndrix Collective&thinsp;&ndash;&thinsp;Built by engineers.
       </div>
     </div>
   </footer>
 
+  <div id="modal-root"></div>
+
   <script type="module" src="/src/main.js"></script>
-<script>
-/* ─── SYNDRIX wordmark particles ─── */
-  window.addEventListener('load', function() {
-  if (typeof THREE === 'undefined') return;
-  var c = document.getElementById('syndrix-emb');
-  var SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="307.225" height="92.65" viewBox="-2 -2 307.225 92.65"><defs/><g id="svgGroup" stroke-linecap="round" fill-rule="nonzero" fill="#000000" stroke="#000000" stroke-width="0.5"><path d="M19.800 69.900L19.800 69.900Q14.325 69.900 9.825 68.438Q5.325 66.975 2.250 64.575L2.250 64.575L5.850 58.575Q8.550 60.825 11.925 62.250Q15.300 63.675 19.800 63.675L19.800 63.675Q25.200 63.675 28.350 61.425Q31.500 59.175 31.500 55.350L31.500 55.350Q31.500 53.175 30.600 51.487Q29.700 49.800 27.113 48.188Q24.525 46.575 19.500 44.700L19.500 44.700Q14.100 42.600 10.875 40.463Q7.650 38.325 6.263 35.587Q4.875 32.850 4.875 29.100L4.875 29.100Q4.875 25.350 6.938 22.313Q9 19.275 13.012 17.438Q17.025 15.600 22.725 15.600L22.725 15.600Q27.375 15.600 31.087 16.538Q34.800 17.475 38.325 19.200L38.325 19.200L35.700 25.275Q33.150 23.775 29.737 22.763Q26.325 21.750 22.575 21.750L22.575 21.750Q17.625 21.750 14.775 23.700Q11.925 25.650 11.925 28.725L11.925 28.725Q11.925 30.675 12.750 32.175Q13.575 33.675 16.012 35.100Q18.450 36.525 23.325 38.325L23.325 38.325Q29.175 40.500 32.587 42.900Q36 45.300 37.425 48.112Q38.850 50.925 38.850 54.525L38.850 54.525Q38.850 59.400 36.413 62.850Q33.975 66.300 29.662 68.100Q25.350 69.900 19.800 69.900ZM67.950 69L60.825 69L60.825 49.050L42.600 19.425L48.600 15.825L64.650 42.450L80.400 16.125L86.025 19.425L67.950 49.050L67.950 69ZM100.275 69L93.525 69L93.525 16.500L102.975 16.500L126.150 60.150L126.150 16.500L132.900 16.500L132.900 69L123.600 69L100.275 25.650L100.275 69ZM160.200 69.600L160.200 69.600Q155.925 69.600 152.738 69.375Q149.550 69.150 146.400 68.850L146.400 68.850L146.400 16.650Q149.925 16.275 153.300 16.087Q156.675 15.900 161.025 15.900L161.025 15.900Q167.775 15.900 172.688 18Q177.600 20.100 180.787 23.775Q183.975 27.450 185.512 32.288Q187.050 37.125 187.050 42.675L187.050 42.675Q187.050 48.150 185.475 53.025Q183.900 57.900 180.637 61.612Q177.375 65.325 172.313 67.463Q167.250 69.600 160.200 69.600ZM160.425 63.375L160.425 63.375Q167.175 63.375 171.450 60.750Q175.725 58.125 177.750 53.438Q179.775 48.750 179.775 42.675L179.775 42.675Q179.775 37.275 177.750 32.550Q175.725 27.825 171.525 24.938Q167.325 22.050 160.800 22.050L160.800 22.050Q158.625 22.050 156.825 22.163Q155.025 22.275 153.525 22.425L153.525 22.425L153.525 63Q155.100 63.225 156.825 63.300Q158.550 63.375 160.425 63.375ZM234.825 66.750L228.150 69.900L221.625 55.650Q219.150 50.325 215.400 48.075Q211.650 45.825 205.800 45.825L205.800 45.825L204.675 45.825L204.675 69L197.550 69L197.550 16.650Q201.525 16.275 205.163 16.087Q208.800 15.900 212.925 15.900L212.925 15.900Q222.525 15.900 227.363 19.800Q232.200 23.700 232.200 29.850L232.200 29.850Q232.200 35.325 228.938 38.663Q225.675 42 219.525 43.650L219.525 43.650Q221.550 44.550 223.125 45.788Q224.700 47.025 226.163 49.088Q227.625 51.150 229.125 54.450L229.125 54.450L234.825 66.750ZM204.675 22.200L204.675 39.825L212.925 39.825Q218.325 39.825 221.700 37.425Q225.075 35.025 225.075 30.525L225.075 30.525Q225.075 26.775 221.925 24.337Q218.775 21.900 212.925 21.900L212.925 21.900Q210.375 21.900 208.350 21.975Q206.325 22.050 204.675 22.200L204.675 22.200ZM250.950 69L243.825 69L243.825 16.500L250.950 16.500L250.950 69ZM302.475 65.325L296.700 69.750L280.125 47.250L264.075 69.600L258.450 65.325L276.075 42.300L259.200 20.250L265.125 15.825L280.350 37.125L295.425 16.050L300.975 20.250L284.625 41.925L302.475 65.325Z"/></g></svg>';
-
-
-  var dim = function() { return { w: c.clientWidth || 900, h: c.clientHeight || 100 }; }();
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(45, dim.w / dim.h, 1, 1000);
-  camera.position.set(0, 0, 280);
-  var renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-  renderer.setSize(dim.w, dim.h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  c.appendChild(renderer.domElement);
-
-  var MAX = 45000;
-  var pos = new Float32Array(MAX * 3), vel = new Float32Array(MAX * 3), tgt = new Float32Array(MAX * 3);
-  var sz = new Float32Array(MAX), alp = new Float32Array(MAX);
-
-  var geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  geo.setAttribute('size', new THREE.BufferAttribute(sz, 1));
-  geo.setAttribute('alpha', new THREE.BufferAttribute(alp, 1));
-  geo.setAttribute('velocity', new THREE.BufferAttribute(vel, 3));
-
-  var mat = new THREE.ShaderMaterial({
-    vertexShader: 'attribute float size;attribute float alpha;attribute vec3 velocity;uniform vec3 uColor;uniform float uScale;varying float vAlpha;void main(){vAlpha=alpha;vec4 mv=modelViewMatrix*vec4(position,1.0);float bs=size*((120.0*uScale)/-mv.z);gl_PointSize=bs;gl_Position=projectionMatrix*mv;}',
-    fragmentShader: 'uniform vec3 uColor;varying float vAlpha;void main(){float d=length(gl_PointCoord-vec2(0.5));if(d>0.5)discard;float in_=smoothstep(0.5,0.0,d);gl_FragColor=vec4(uColor,vAlpha*in_);}',
-    transparent: true, depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    uniforms: { uColor: { value: new THREE.Color(0xffffff) }, uScale: { value: 1.0 } },
-  });
-
-  var pts = new THREE.Points(geo, mat);
-  scene.add(pts);
-
-  var themeColors = { dark: 0xffffff, light: 0x000000 };
-  var lastTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-  function checkTheme() {
-    var cur = document.documentElement.getAttribute('data-theme') || 'dark';
-    if (cur !== lastTheme) {
-      lastTheme = cur;
-      mat.uniforms.uColor.value.setHex(themeColors[cur]);
-      mat.blending = cur === 'dark' ? THREE.AdditiveBlending : THREE.NormalBlending;
-      mat.needsUpdate = true;
-    }
-  }
-  mat.uniforms.uColor.value.setHex(themeColors[lastTheme]);
-  mat.blending = lastTheme === 'dark' ? THREE.AdditiveBlending : THREE.NormalBlending;
-
-  var count = 0, forming = false, prog = 0, t = 0, mouseOver = false;
-  var mPos = new THREE.Vector3(9999, 9999, 0);
-  var mPrev = new THREE.Vector3(9999, 9999, 0);
-  var mVel = new THREE.Vector3(0, 0, 0);
-  var delays = [];
-  var heroEl = document.querySelector('main');
-  var ray = new THREE.Raycaster();
-  var m2d = new THREE.Vector2();
-
-  function track(clientX, clientY) {
-    var r = c.getBoundingClientRect();
-    m2d.x = ((clientX - r.left) / r.width) * 2 - 1;
-    m2d.y = -((clientY - r.top) / r.height) * 2 + 1;
-    ray.setFromCamera(m2d, camera);
-    var pl = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-    var i = new THREE.Vector3();
-    ray.ray.intersectPlane(pl, i);
-    if (i) { mPrev.copy(mPos); mPos.copy(i); mVel.subVectors(mPos, mPrev); }
-  }
-
-  if (heroEl) {
-    heroEl.addEventListener('mouseenter', function() { mouseOver = true; });
-    heroEl.addEventListener('mouseleave', function() { mouseOver = false; mPos.set(9999, 9999, 0); mVel.set(0, 0, 0); });
-    heroEl.addEventListener('mousemove', function(e) { track(e.clientX, e.clientY); });
-    heroEl.addEventListener('touchmove', function(e) { mouseOver = true; if (e.touches.length) track(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-    heroEl.addEventListener('touchend', function() { mouseOver = false; mPos.set(9999, 9999, 0); }, { passive: true });
-  }
-
-  function sampleSVG(svg, n) {
-    return new Promise(function(res) {
-      var c2 = document.createElement('canvas'), ctx = c2.getContext('2d');
-      c2.width = c2.height = 512;
-      var blob = new Blob([svg], { type: 'image/svg+xml' }), url = URL.createObjectURL(blob);
-      var img = new Image();
-      img.onload = function() {
-        var sc = Math.min(512 / img.width, 512 / img.height);
-        ctx.drawImage(img, (512 - img.width * sc) / 2, (512 - img.height * sc) / 2, img.width * sc, img.height * sc);
-        URL.revokeObjectURL(url);
-        var d = ctx.getImageData(0, 0, 512, 512).data;
-        var filled = [];
-        for (var y = 0; y < 512; y++) for (var x = 0; x < 512; x++) if (d[(y * 512 + x) * 4 + 3] > 30) filled.push({ x: x, y: y, a: d[(y * 512 + x) * 4 + 3] / 255 });
-        var pt = [];
-        for (var i = 0; i < n; i++) { if (!filled.length) break; var p = filled[Math.floor(Math.random() * filled.length)]; pt.push({ x: (p.x - 256) * 2.5, y: -(p.y - 256) * 2.5, z: (Math.random() - 0.5) * 8 * p.a, a: p.a }); }
-        res(pt);
-      };
-      img.onerror = function() { URL.revokeObjectURL(url); res([]); };
-      img.src = url;
-    });
-  }
-
-  async function init() {
-    var pt = await sampleSVG(SVG, MAX);
-    if (!pt.length) return;
-    count = pt.length;
-    for (var i = 0; i < count; i++) {
-      var p = pt[i], i3 = i * 3;
-      pos[i3] = (Math.random() - 0.5) * 800;
-      pos[i3 + 1] = (Math.random() - 0.5) * 300;
-      pos[i3 + 2] = (Math.random() - 0.5) * 200;
-      vel[i3] = vel[i3 + 1] = vel[i3 + 2] = 0;
-      tgt[i3] = p.x; tgt[i3 + 1] = p.y; tgt[i3 + 2] = p.z;
-      sz[i] = 2.5 + Math.random() * 2.5;
-      alp[i] = 0.5 + p.a * 0.5;
-    }
-    // Normalise targets so wordmark fits any viewport size
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (var i = 0; i < count; i++) {
-      var tx = tgt[i*3], ty = tgt[i*3+1];
-      if (tx < minX) minX = tx; if (tx > maxX) maxX = tx;
-      if (ty < minY) minY = ty; if (ty > maxY) maxY = ty;
-    }
-    var halfSpan = Math.max(maxX - minX, maxY - minY) / 2 || 1;
-    var desiredHalf = 200;
-    var ns = desiredHalf / halfSpan;
-    var cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
-    for (var i = 0; i < count; i++) {
-      tgt[i*3] = (tgt[i*3] - cx) * ns;
-      tgt[i*3+1] = (tgt[i*3+1] - cy) * ns;
-      tgt[i*3+2] *= ns;
-      sz[i] *= ns;
-    }
-    geo.setDrawRange(0, count);
-    geo.attributes.position.needsUpdate = true;
-    geo.attributes.size.needsUpdate = true;
-    geo.attributes.alpha.needsUpdate = true;
-    var minX = Infinity, maxX = -Infinity;
-    for (var i = 0; i < count; i++) { var x = tgt[i * 3]; if (x < minX) minX = x; if (x > maxX) maxX = x; }
-    var xr = maxX - minX || 1;
-    delays = [];
-    for (var i = 0; i < count; i++) delays.push((tgt[i * 3] - minX) / xr);
-    forming = true; prog = 0;
-    fitCamera();
-  }
-
-  function update(dt) {
-    if (!count) return;
-    t += dt;
-    if (forming) { prog += dt * 2.0; if (prog >= 1.6) { prog = 1.6; forming = false; } }
-    for (var i = 0; i < count; i++) {
-      var i3 = i * 3, tx = tgt[i3], ty = tgt[i3 + 1], tz = tgt[i3 + 2];
-      var dx = tx - pos[i3], dy = ty - pos[i3 + 1], dz = tz - pos[i3 + 2];
-      if (mouseOver) {
-        var mx = pos[i3] - mPos.x, my = pos[i3 + 1] - mPos.y, mz = pos[i3 + 2] - mPos.z;
-        var dsq = mx * mx + my * my + mz * mz;
-        if (dsq < 6400 && dsq > 0.25) {
-          var d = Math.sqrt(dsq), n = d / 80, s2 = ((i * 2654435761) & 0xFFFF) / 65535;
-          var fall = Math.pow(1 - n, 1.2 + s2 * 0.3);
-          var spd = mVel.length(), boost = 1 + Math.min(spd * 0.3, 1.2);
-          var force = fall * 2.5 * boost, inv = 1 / d;
-          var downward = 0.6 + 0.4 * (1 - n);
-          vel[i3] += mx * inv * force * 0.4;
-          vel[i3 + 1] += (my * inv * force * 0.4) - downward * 1.5;
-          vel[i3 + 2] += mz * inv * force * 0.3;
-        }
-      }
-      if (forming) {
-        var phase = prog - delays[i];
-        if (phase > 0) {
-          var pP = Math.min(phase / 0.35, 1);
-          var ep = pP * pP * (3 - 2 * pP);
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist > 2) {
-            var nx = -dy / dist, ny = dx / dist;
-            var sw = (1 - ep) * 4.0 * Math.min(dist / 80, 1);
-            vel[i3] += nx * sw; vel[i3 + 1] += ny * sw;
-          }
-          var sf = 0.03 + ep * 0.12;
-          vel[i3] += dx * sf; vel[i3 + 1] += dy * sf; vel[i3 + 2] += dz * sf;
-          vel[i3] *= 0.85; vel[i3 + 1] *= 0.85; vel[i3 + 2] *= 0.85;
-          pos[i3] += vel[i3]; pos[i3 + 1] += vel[i3 + 1]; pos[i3 + 2] += vel[i3 + 2];
-          var pd = Math.sqrt(dx * dx + dy * dy + dz * dz);
-          alp[i] = 0.4 + 0.4 * (1 - Math.min(pd * 0.05, 1));
-        } else {
-          vel[i3] += dx * 0.006; vel[i3 + 1] += dy * 0.006; vel[i3 + 2] += dz * 0.006;
-          vel[i3] *= 0.96; vel[i3 + 1] *= 0.96; vel[i3 + 2] *= 0.96;
-          pos[i3] += vel[i3]; pos[i3 + 1] += vel[i3 + 1]; pos[i3 + 2] += vel[i3 + 2];
-          alp[i] = 0.2;
-        }
-      } else {
-        vel[i3] += dx * 0.035; vel[i3 + 1] += dy * 0.035; vel[i3 + 2] += dz * 0.035;
-        vel[i3] *= 0.92; vel[i3 + 1] *= 0.92; vel[i3 + 2] *= 0.92;
-        pos[i3] += vel[i3]; pos[i3 + 1] += vel[i3 + 1]; pos[i3 + 2] += vel[i3 + 2];
-        var pd = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        alp[i] = 0.4 + 0.4 * (1 - Math.min(pd * 0.05, 1));
-      }
-    }
-    geo.attributes.position.needsUpdate = true;
-    geo.attributes.alpha.needsUpdate = true;
-  }
-
-  function fitCamera() {
-    if (!count) return;
-    var d = { w: c.clientWidth || 900, h: c.clientHeight || 100 };
-    if (!d.w || !d.h) return;
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (var i = 0; i < count; i++) {
-      var ix = tgt[i*3], iy = tgt[i*3+1];
-      if (ix < minX) minX = ix; if (ix > maxX) maxX = ix;
-      if (iy < minY) minY = iy; if (iy > maxY) maxY = iy;
-    }
-    var wordW = maxX - minX, wordH = maxY - minY;
-    if (!wordW || !wordH) return;
-    var halfFov = Math.tan(45 * Math.PI / 360);
-    var aspect = d.w / d.h;
-    var zW = (wordW / 2 / 0.7) / (halfFov * aspect);
-    var zH = (wordH / 2 / 0.7) / halfFov;
-    var z = Math.max(zW, zH, 30);
-    camera.position.z = z;
-    camera.aspect = aspect;
-    camera.updateProjectionMatrix();
-    renderer.setSize(d.w, d.h);
-    mat.uniforms.uScale.value = 280 / z;
-  }
-  window.addEventListener('resize', fitCamera);
-  fitCamera();
-  init().then(function() { if (window.onThreeReady) window.onThreeReady(); });
-  var clock = new THREE.Clock();
-  (function anim() {
-    requestAnimationFrame(anim);
-    checkTheme();
-    var dt = Math.min(clock.getDelta(), 0.05);
-    update(dt);
-    renderer.render(scene, camera);
-  })();
-});
-</script>
 </div>
 
-</body>
 </body>
 </html>
