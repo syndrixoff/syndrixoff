@@ -1546,7 +1546,6 @@ body::before {
 /* ─── TEAM ─── */
 .team-scroll-wrap {
   position: relative;
-  overflow-x: clip;
   margin: 0 calc(-1 * (100vw - min(100%, var(--max-w))) / 2);
   padding: 0 calc((100vw - min(100%, var(--max-w))) / 2);
 }
@@ -1570,7 +1569,10 @@ body::before {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 28px 4px 36px;
+  padding: 28px 24px 36px;
+  scroll-padding-left: 24px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 24px calc(100% - 60px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0px, black 24px calc(100% - 60px), transparent 100%);
 }
 .team-grid::-webkit-scrollbar { display: none; }
 
