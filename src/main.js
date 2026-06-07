@@ -85,6 +85,18 @@ function getActiveSectionId() {
   return closestId;
 }
 
+function moveIndicator(el, instant) {
+  if (!el || !navIndicator) return;
+  const dur = instant ? 0 : 0.45;
+  gsap.to(navIndicator, {
+    x: el.offsetLeft,
+    width: el.offsetWidth,
+    duration: dur,
+    ease: "power2.out",
+    overwrite: "auto",
+  });
+}
+
 function setActiveSection(id, instant) {
   navLinks.forEach((l) => {
     l.classList.toggle("active", l.getAttribute("href") === "#" + id);
@@ -338,6 +350,8 @@ function finishLoader() {
     document.querySelector(".hero-scroll-hint")?.classList.add("animate-scroll-hint");
     setTimeout(() => {
       document.querySelector(".hero-static-text")?.classList.add("animate-hero-text");
+      heroDust?.start();
+      document.querySelector(".hero-section")?.classList.add("noise-ready");
       // Flag intro as complete after the last animation finishes
       setTimeout(() => document.body.classList.add("hero-intro-complete"), 900);
     }, 80);
@@ -373,6 +387,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setLoadTarget(0.12);
   checkComplete();
   setTimeout(initTerminal, 1000);
+  setTimeout(() => {
+    initNoiseTexture();
+    heroDust = initHeroDust();
+  }, 100);
 });
 document.fonts.ready.then(() => {
   milestones.fonts = true;
@@ -535,7 +553,124 @@ document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', () => openModal(card.dataset.project));
 });
 
-/* ─── CAPABILITY DOMAIN HOVER ─── */
+/* ─── DUST PARTICLES + NOISE ─── */
+
+function initNoiseTexture() {
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 128;
+  const ctx = c.getContext('2d');
+  const imgData = ctx.createImageData(128, 128);
+  for (let i = 0; i < imgData.data.length; i += 4) {
+    const v = Math.random() * 255;
+    imgData.data[i] = v;
+    imgData.data[i+1] = v;
+    imgData.data[i+2] = v;
+    imgData.data[i+3] = Math.random() * 60;
+  }
+  ctx.putImageData(imgData, 0, 0);
+  const url = c.toDataURL();
+  document.querySelector('.hero-section')?.style.setProperty('--noise-bg', `url(${url})`);
+}
+
+function initHeroDust() {
+  const canvas = document.getElementById('heroDust');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const hero = document.querySelector('.hero-section');
+  if (!hero) return;
+
+  let particles = [];
+  let running = false;
+  let frameId = null;
+
+  function resize() {
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    const dpr = devicePixelRatio || 1;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { w, h };
+  }
+
+  function spawn(count, w, h) {
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 0.5 + Math.random() * 2,
+        a: 0.08 + Math.random() * 0.35,
+        da: (Math.random() - 0.5) * 0.002,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: -0.02 - Math.random() * 0.1,
+      });
+    }
+  }
+
+  function tick() {
+    if (!running) return;
+    const { w, h } = resize();
+    ctx.clearRect(0, 0, w, h);
+
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.a += p.da;
+      if (p.a > 0.45 || p.a < 0.03) p.da *= -1;
+
+      if (p.y < -5) { p.y = h + 5; p.x = Math.random() * w; }
+      if (p.x < -5) p.x = w + 5;
+      if (p.x > w + 5) p.x = -5;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+      ctx.fill();
+    }
+
+    frameId = requestAnimationFrame(tick);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    particles = [];
+    spawn(25, hero.clientWidth || 800, hero.clientHeight || 600);
+    canvas.classList.add('visible');
+    tick();
+  }
+
+  function stop() {
+    running = false;
+    canvas.classList.remove('visible');
+    if (frameId) cancelAnimationFrame(frameId);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  }, { passive: true });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!running) return;
+      const { w, h } = resize();
+      for (const p of particles) {
+        p.x = Math.min(p.x, w);
+        p.y = Math.min(p.y, h);
+      }
+    }, 200);
+  }, { passive: true });
+
+  resize();
+  return { start, stop };
+}
+
+let heroDust = null;
 
 /* ─── TERMINAL TYPEWRITER ─── */
 function initTerminal() {
