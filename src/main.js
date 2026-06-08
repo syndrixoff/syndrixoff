@@ -4,6 +4,7 @@ import "./style.css";
 document.addEventListener("contextmenu", e => e.preventDefault());
 
 /* ─── CUSTOM CURSOR ─── */
+requestAnimationFrame(() => {
 const cursor = document.getElementById("customCursor");
 if (cursor && !("ontouchstart" in window)) {
   let cx = 0, cy = 0;
@@ -21,6 +22,7 @@ if (cursor && !("ontouchstart" in window)) {
     el.addEventListener("mouseleave", () => cursor.classList.remove("expanded"));
   });
 }
+});
 
 /* ─── SCROLL PROGRESS BAR ─── */
 const progressBar = document.getElementById("scrollProgress");
@@ -32,7 +34,7 @@ function updateProgress() {
   if (!progressBar) return;
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-  progressBar.style.width = pct + "%";
+  progressBar.style.transform = `scaleX(${pct / 100})`;
 }
 
 function onScroll() {
@@ -146,7 +148,7 @@ function updateRail(id) {
   const sectionCount = sectionIds.length;
   const trackHeight = track.offsetHeight || 216;
   const step = trackHeight / (sectionCount - 1);
-  railCursor.style.top = idx * step + 'px';
+  railCursor.style.transform = `translateY(${idx * step}px)`;
 
   railLabels.forEach((span) => {
     span.classList.toggle('active', span.dataset.section === id);
@@ -424,7 +426,7 @@ window.setLoadTarget = setLoadTarget;
 
 let milestones = { dom: false, fonts: false, win: false };
 function checkComplete() {
-  if (milestones.dom && milestones.fonts) setLoadTarget(1);
+  if (milestones.dom) setLoadTarget(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
