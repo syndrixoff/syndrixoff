@@ -1,31 +1,360 @@
 import "./style.css";
 
-/* ─── DISABLE RIGHT CLICK ─── */
-document.addEventListener("contextmenu", e => e.preventDefault());
+// ===== SYNDRA LOGIC =====
+document.addEventListener("DOMContentLoaded", () => {
+// SYNDRA LOGIC
 
-/* ─── CUSTOM CURSOR ─── */
-requestAnimationFrame(() => {
-const cursor = document.getElementById("customCursor");
-if (cursor && !("ontouchstart" in window)) {
-  let cx = 0, cy = 0;
-  document.addEventListener("mousemove", e => { cx = e.clientX; cy = e.clientY; });
-  function tickCursor() {
-    cursor.style.left = cx + "px";
-    cursor.style.top = cy + "px";
-    requestAnimationFrame(tickCursor);
-  }
-  requestAnimationFrame(tickCursor);
-  document.addEventListener("mouseenter", () => cursor.classList.add("visible"));
-  document.addEventListener("mouseleave", () => cursor.classList.remove("visible"));
-  document.querySelectorAll("a, button, .glass-card, .project-card, .team-card, .team-filter, .team-scroll-dots .tdot, .btn").forEach(el => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("expanded"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("expanded"));
-  });
-}
+    const canvas = document.getElementById('ambientCanvas');
+    const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let W, H, particles;
+    const mouse = { x: -9999, y: -9999 };
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      spawn();
+    }
+
+    function spawn() {
+      const count = W < 720 ? 52 : 110;
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.24,
+        vy: (Math.random() - 0.5) * 0.24,
+        r: Math.random() * 1.6 + 0.5,
+        copper: Math.random() > 0.55,
+        pulse: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      const now = performance.now() / 1000;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 160) {
+          p.vx -= dx * 0.00004;
+          p.vy -= dy * 0.00004;
+        }
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.994;
+        p.vy *= 0.994;
+        if (p.x < -10 || p.x > W + 10) p.vx *= -0.8;
+        if (p.y < -10 || p.y > H + 10) p.vy *= -0.8;
+
+        const glow = 0.5 + Math.sin(now * 0.8 + p.pulse) * 0.25;
+        const base = p.copper ? 'rgba(196,134,63,' : 'rgba(94,197,189,';
+        const alpha = (0.5 + glow * 0.35);
+
+        ctx.beginPath();
+        ctx.fillStyle = base + alpha + ')';
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (p.copper) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(196,134,63,' + (0.04 * glow) + ')';
+          ctx.fill();
+        }
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const gap = Math.hypot(p.x - q.x, p.y - q.y);
+          if (gap < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(232,223,206,' + ((1 - gap / 100) * 0.08).toFixed(4) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+      }
+      if (!prefersReducedMotion) requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    resize();
+    draw();
+
+    // Scroll reveals
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal:not(.is-visible), .reveal-l:not(.is-visible), .reveal-r:not(.is-visible), .reveal-scale:not(.is-visible)')
+      .forEach((el) => obs.observe(el));
+
+    // Nav background on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.background = window.scrollY > 60 ? 'rgba(12, 11, 9, 0.82)' : 'rgba(12, 11, 9, 0.64)';
+    }, { passive: true });
+
+    // Form toast
+    const form = document.getElementById('contactForm');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      toast.classList.add('show');
+      form.reset();
+      setTimeout(() => toast.classList.remove('show'), 3600);
+    });
+
+    // Orbit activation on hover or touch (persists in motion once started)
+    const nodeRing = document.querySelector('.node-ring');
+    if (nodeRing) {
+      const startOrbit = () => {
+        nodeRing.classList.add('orbiting');
+      };
+      nodeRing.addEventListener('mouseenter', startOrbit, { once: true });
+      nodeRing.addEventListener('touchstart', startOrbit, { once: true, passive: true });
+    }
+
+    // Typewriter and Backspace Effect
+    class Typewriter {
+      constructor(el, delayBackspace = 30, delayType = 65, delayPause = 250) {
+        this.el = el;
+        this.delayBackspace = delayBackspace;
+        this.delayType = delayType;
+        this.delayPause = delayPause;
+        this.timer = null;
+        this.currentTarget = el.innerText;
+        this.el.classList.add('typing'); // keep blinking cursor active
+      }
+      async transitionTo(targetText, originalText) {
+        if (this.currentTarget === targetText) return;
+        this.currentTarget = targetText;
+        this.stop();
+        await this.erase();
+        await this.pause(this.delayPause);
+        
+        // Dynamically shift color before typing
+        if (targetText === 'SYNDRIX') {
+          this.el.classList.add('state-syndrix');
+        } else {
+          this.el.classList.remove('state-syndrix');
+        }
+        
+        await this.type(targetText);
+      }
+      stop() {
+        clearTimeout(this.timer);
+      }
+      erase() {
+        return new Promise((resolve) => {
+          const step = () => {
+            const current = this.el.innerText;
+            if (current.length > 0) {
+              this.el.innerText = current.slice(0, -1);
+              this.timer = setTimeout(step, this.delayBackspace);
+            } else {
+              resolve();
+            }
+          };
+          step();
+        });
+      }
+      type(text) {
+        return new Promise((resolve) => {
+          let index = 0;
+          const step = () => {
+            if (index < text.length) {
+              this.el.innerText += text[index];
+              index++;
+              this.timer = setTimeout(step, this.delayType);
+            } else {
+              resolve();
+            }
+          };
+          step();
+        });
+      }
+      pause(ms) {
+        return new Promise((resolve) => {
+          this.timer = setTimeout(resolve, ms);
+        });
+      }
+    }
+
+    const scrambleTarget = document.querySelector('.scramble-target');
+    if (scrambleTarget) {
+      const originalText = scrambleTarget.innerText;
+      const targetText = scrambleTarget.getAttribute('data-value');
+      const typewriter = new Typewriter(scrambleTarget);
+      
+      const startLoop = async () => {
+        // Wait 3.5 seconds initial delay on page load before starting
+        await typewriter.pause(3500);
+        while (true) {
+          // Transition to SYNDRIX
+          await typewriter.transitionTo(targetText, originalText);
+          // Wait at SYNDRIX state for 3 seconds
+          await typewriter.pause(3000);
+          // Transition to Intelligence
+          await typewriter.transitionTo(originalText, originalText);
+          // Wait at Intelligence state for 3.5 seconds
+          await typewriter.pause(3500);
+        }
+      };
+      startLoop();
+    }
+
+    // Liquid Glass Navigation sliding pill & mouse shine
+    const navElement = document.getElementById('navbar');
+    const navLinks = document.querySelector('.nav-links');
+    const indicator = document.querySelector('.nav-indicator');
+    const links = document.querySelectorAll('.nav-links a');
+    let activeLink = null;
+    let isInitial = true;
+
+    // Mouse glow follower coordinates
+    if (navElement) {
+      navElement.addEventListener('mousemove', (e) => {
+        const rect = navElement.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        navElement.style.setProperty('--mouse-x', `${x}px`);
+        navElement.style.setProperty('--mouse-y', `${y}px`);
+      });
+    }
+
+    function updateIndicator(link) {
+      if (!link || !indicator) {
+        if (indicator) {
+          indicator.style.opacity = '0';
+          indicator.style.transform = 'scale(0.9)';
+        }
+        return;
+      }
+
+      const parentWidth = navLinks.offsetWidth;
+      const targetLeft = link.offsetLeft;
+      const targetRight = parentWidth - (targetLeft + link.offsetWidth);
+
+      if (isInitial || indicator.style.opacity === '0') {
+        // Instant update without delay/stretch when first showing up
+        indicator.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        indicator.style.left = `${targetLeft}px`;
+        indicator.style.right = `${targetRight}px`;
+        indicator.style.opacity = '1';
+        indicator.style.transform = 'scale(1)';
+        isInitial = false;
+        // force reflow
+        indicator.offsetHeight;
+        return;
+      }
+
+      // Read current left position to detect direction
+      const currentLeft = parseFloat(indicator.style.left) || 0;
+      const movingRight = targetLeft > currentLeft;
+
+      // Asymmetric spring-like delays to create the liquid stretching effect
+      if (movingRight) {
+        // Moving right: right edge stretches first, left edge follows
+        indicator.style.transition = `
+          left 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
+          right 0.32s cubic-bezier(0.25, 1, 0.5, 1),
+          opacity 0.25s ease,
+          transform 0.25s ease
+        `;
+      } else {
+        // Moving left: left edge stretches first, right edge follows
+        indicator.style.transition = `
+          left 0.32s cubic-bezier(0.25, 1, 0.5, 1),
+          right 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
+          opacity 0.25s ease,
+          transform 0.25s ease
+        `;
+      }
+
+      indicator.style.left = `${targetLeft}px`;
+      indicator.style.right = `${targetRight}px`;
+      indicator.style.opacity = '1';
+      indicator.style.transform = 'scale(1)';
+    }
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        updateIndicator(link);
+      });
+      link.addEventListener('click', () => {
+        activeLink = link;
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        updateIndicator(link);
+      });
+    });
+
+    if (navLinks) {
+      navLinks.addEventListener('mouseleave', () => {
+        updateIndicator(activeLink);
+      });
+    }
+
+    // Set active link based on current section viewport
+    const sections = document.querySelectorAll('section[id]');
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          const href = `#${id}`;
+          const matched = Array.from(links).find(l => l.getAttribute('href') === href);
+          
+          links.forEach(l => l.classList.remove('active'));
+          if (matched) {
+            matched.classList.add('active');
+            activeLink = matched;
+            updateIndicator(matched);
+          } else {
+            activeLink = null;
+            updateIndicator(null);
+          }
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '-10% 0px -40% 0px' });
+
+    sections.forEach(s => navObs.observe(s));
+
+    // Handle window resize to keep position in sync
+    window.addEventListener('resize', () => {
+      if (activeLink && indicator) {
+        indicator.style.transition = 'none';
+        const parentWidth = navLinks.offsetWidth;
+        const targetLeft = activeLink.offsetLeft;
+        const targetRight = parentWidth - (targetLeft + activeLink.offsetWidth);
+        indicator.style.left = `${targetLeft}px`;
+        indicator.style.right = `${targetRight}px`;
+      }
+    });
 });
+
+// ===== SYNDRIX LOGIC =====
 
 /* ─── SCROLL PROGRESS BAR ─── */
 const progressBar = document.getElementById("scrollProgress");
+
+
 
 /* ─── NAV SCROLL STATE ─── */
 const nav = document.getElementById("nav");
@@ -44,6 +373,8 @@ function onScroll() {
 
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
+
+
 
 /* ─── ANIMATED COUNTERS ─── */
 const counterObserver = new IntersectionObserver(
@@ -73,64 +404,7 @@ function animateCounter(el) {
   }, 25);
 }
 
-/* ─── NAV TOGGLE ─── */
-const navLinks = document.querySelectorAll('.nav-links a');
-const navToggle = document.querySelector(".nav-toggle");
-const navLinksContainer = document.querySelector(".nav-links");
 
-/* ─── SLIDING NAV INDICATOR ─── */
-const navIndicator = document.createElement("div");
-navIndicator.className = "nav-indicator";
-document.querySelector(".nav-links")?.appendChild(navIndicator);
-
-let lastActive = null;
-let navClickLock = false;
-let cachedSections = null;
-
-function getActiveSectionId() {
-  if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
-  const sections = cachedSections;
-  let closestId = null;
-  let closestDist = Infinity;
-  sections.forEach((s) => {
-    const rect = s.getBoundingClientRect();
-    const mid = rect.top + rect.height / 2;
-    const viewMid = window.innerHeight / 2;
-    const dist = Math.abs(mid - viewMid);
-    if (dist < closestDist) {
-      closestDist = dist;
-      closestId = s.id;
-    }
-  });
-  return closestId;
-}
-
-function moveIndicator(el, instant) {
-  if (!el || !navIndicator) return;
-  navIndicator.style.transform = `translateX(${el.offsetLeft}px)`;
-  navIndicator.style.width = `${el.offsetWidth}px`;
-}
-
-function setActiveSection(id, instant) {
-  const next = document.querySelector(`.nav-links a[href="#${id}"]`);
-  let left = 0, width = 0;
-  if (next) { left = next.offsetLeft; width = next.offsetWidth; }
-
-  navLinks.forEach((l) => {
-    l.classList.toggle("active", l.getAttribute("href") === "#" + id);
-  });
-
-  if (next && next !== lastActive) {
-    lastActive = next;
-    navIndicator.style.transform = `translateX(${left}px)`;
-    navIndicator.style.width = `${width}px`;
-  } else if (!next) {
-    lastActive = null;
-    navIndicator.style.transform = `translateX(0px)`;
-    navIndicator.style.width = `0px`;
-  }
-  updateRail(id);
-}
 
 /* ─── SECTION RAIL ─── */
 const railCursor = document.querySelector('.rail-cursor');
@@ -154,6 +428,8 @@ function updateRail(id) {
     span.classList.toggle('active', span.dataset.section === id);
   });
 }
+
+
 
 /* ─── ACTIVE SECTION TRACKING (scrollend + debounced fallback) ─── */
 // With scroll-snap, the scroll always lands on a settled section.
@@ -180,14 +456,20 @@ if ("onscrollend" in window) {
   }, { passive: true });
 }
 
+
+
 /* ─── INITIAL SYNC ─── */
 window.addEventListener("load", () => requestAnimationFrame(syncActiveSection));
+
+
 
 /* ─── MARQUEE PAUSE ─── */
 document.querySelectorAll(".marquee-row").forEach(row => {
   row.addEventListener("mouseenter", () => row.classList.add("paused"));
   row.addEventListener("mouseleave", () => row.classList.remove("paused"));
 });
+
+
 
 /* ─── INITIALS AVATARS ─── */
 document.querySelectorAll(".team-card").forEach(card => {
@@ -219,6 +501,8 @@ document.querySelectorAll(".team-card").forEach(card => {
   }
 });
 
+
+
 /* ─── RAIL LABEL CLICK ─── */
 railLabels.forEach((span) => {
   span.addEventListener("click", () => {
@@ -228,6 +512,8 @@ railLabels.forEach((span) => {
     target.scrollIntoView({ behavior: "smooth" });
   });
 });
+
+
 
 /* ─── RE-SYNC ON RESIZE ─── */
 let resizeTimer;
@@ -279,6 +565,8 @@ navToggle.addEventListener("click", () => {
   navLinksContainer.classList.toggle("open");
   navToggle.classList.toggle("active");
 });
+
+
 
 /* ─── TEAM FILTERS ─── */
 const filterBtns = document.querySelectorAll(".team-filter");
@@ -336,6 +624,8 @@ filterBtns.forEach((btn) => {
 rebuildTeamDots();
 syncTeamDots();
 
+
+
 /* ─── THEME SPLASH (View Transition API) ─── */
 const themeToggle = document.getElementById("themeToggle");
 let themeToggleInProgress = false;
@@ -366,6 +656,8 @@ themeToggle.addEventListener("click", (e) => {
     apply();
   }
 });
+
+
 
 /* ─── LOADER (tracks real load progress) ─── */
 const loader = document.getElementById("loader");
@@ -420,6 +712,8 @@ function tick() {
   requestAnimationFrame(tick);
 }
 
+
+
 /* ─── SCROLL REVEAL ─── */
 
 window.setLoadTarget = setLoadTarget;
@@ -451,6 +745,8 @@ function startTick() {
   tickStarted = true;
   requestAnimationFrame(tick);
 }
+
+
 
 /* ─── PROJECT MODAL ─── */
 const projectData = {
@@ -545,6 +841,8 @@ function openModal(projectId) {
 function onKeyDown(e) {
   if (e.key === "Escape" && activeModal) closeModal();
 }
+
+
 
 /* ─── SCROLL-DRIVEN SECTION REVEALS ─── */
 const revealObserver = new IntersectionObserver(
