@@ -783,6 +783,10 @@ let cx = -9999, cy = -9999;
 let currentX = -9999, currentY = -9999;
 
 window.addEventListener('mousemove', (e) => {
+  if (currentX === -9999) {
+    currentX = e.clientX;
+    currentY = e.clientY;
+  }
   cx = e.clientX;
   cy = e.clientY;
   cursorGlow.style.opacity = '1';
@@ -793,9 +797,11 @@ window.addEventListener('mouseleave', () => {
 });
 
 function animateCursor() {
-  currentX += (cx - currentX) * 0.12;
-  currentY += (cy - currentY) * 0.12;
-  cursorGlow.style.transform = `translate(${currentX - 150}px, ${currentY - 150}px)`;
+  if (currentX !== -9999) {
+    currentX += (cx - currentX) * 0.25;
+    currentY += (cy - currentY) * 0.25;
+    cursorGlow.style.transform = `translate(${currentX - 150}px, ${currentY - 150}px)`;
+  }
   requestAnimationFrame(animateCursor);
 }
 animateCursor();
