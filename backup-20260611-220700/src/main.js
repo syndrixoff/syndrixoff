@@ -1,201 +1,33 @@
 import "./style.css";
 
-// ===== SYNDRIX LOGIC =====
+/* ─── DISABLE RIGHT CLICK ─── */
+document.addEventListener("contextmenu", e => e.preventDefault());
 
-/* ─── NAV TOGGLE ─── */
-const navLinks = document.querySelectorAll('.nav-links a');
-const navToggle = document.querySelector(".nav-toggle");
-const navLinksContainer = document.querySelector(".nav-links");
-
-/* ─── SLIDING NAV INDICATOR (Liquid Glass) ─── */
-const indicator = document.querySelector('.nav-indicator');
-let activeLink = null;
-let isInitial = true;
-let navClickLock = false;
-let cachedSections = null;
-
-function getActiveSectionId() {
-  if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
-  const sections = cachedSections;
-  let closestId = null;
-  let closestDist = Infinity;
-  sections.forEach((s) => {
-    const rect = s.getBoundingClientRect();
-    const mid = rect.top + rect.height / 2;
-    const viewMid = window.innerHeight / 2;
-    const dist = Math.abs(mid - viewMid);
-    if (dist < closestDist) {
-      closestDist = dist;
-      closestId = s.id;
-    }
-  });
-  return closestId;
-}
-
-function updateIndicator(link) {
-  if (!link || !indicator) {
-    if (indicator) {
-      indicator.style.opacity = '0';
-      indicator.style.transform = 'scale(0.9)';
-    }
-    return;
+/* ─── CUSTOM CURSOR ─── */
+requestAnimationFrame(() => {
+const cursor = document.getElementById("customCursor");
+if (cursor && !("ontouchstart" in window)) {
+  let cx = 0, cy = 0;
+  document.addEventListener("mousemove", e => { cx = e.clientX; cy = e.clientY; });
+  function tickCursor() {
+    cursor.style.left = cx + "px";
+    cursor.style.top = cy + "px";
+    requestAnimationFrame(tickCursor);
   }
-
-  const parentWidth = navLinksContainer.offsetWidth;
-  const targetLeft = link.offsetLeft;
-  const targetRight = parentWidth - (targetLeft + link.offsetWidth);
-
-  if (isInitial || indicator.style.opacity === '0') {
-    indicator.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-    indicator.style.left = `${targetLeft}px`;
-    indicator.style.right = `${targetRight}px`;
-    indicator.style.opacity = '1';
-    indicator.style.transform = 'scale(1)';
-    isInitial = false;
-    indicator.offsetHeight;
-    return;
-  }
-
-  const currentLeft = parseFloat(indicator.style.left) || 0;
-  const movingRight = targetLeft > currentLeft;
-
-  if (movingRight) {
-    indicator.style.transition = `
-      left 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
-      right 0.32s cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0.25s ease,
-      transform 0.25s ease
-    `;
-  } else {
-    indicator.style.transition = `
-      left 0.32s cubic-bezier(0.25, 1, 0.5, 1),
-      right 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
-      opacity 0.25s ease,
-      transform 0.25s ease
-    `;
-  }
-
-  indicator.style.left = `${targetLeft}px`;
-  indicator.style.right = `${targetRight}px`;
-  indicator.style.opacity = '1';
-  indicator.style.transform = 'scale(1)';
-}
-
-function setActiveSection(id, instant) {
-  const next = document.querySelector(`.nav-links a[href="#${id}"]`);
-  if (next) {
-    navLinks.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + id));
-    activeLink = next;
-    updateIndicator(next);
-  } else {
-    activeLink = null;
-    updateIndicator(null);
-  }
-  updateRail(id);
-}
-
-// Nav link events
-navLinks.forEach(link => {
-  link.addEventListener('mouseenter', () => { updateIndicator(link); });
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute("href");
-    const target = href?.startsWith("#") ? document.querySelector(href) : null;
-    if (!target) return;
-    e.preventDefault();
-    navClickLock = true;
-    activeLink = link;
-    navLinks.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    updateIndicator(link);
-
-    const start = window.scrollY;
-    const end = target.getBoundingClientRect().top + start - 80;
-    const duration = Math.min(Math.abs(end - start) * 0.12 + 80, 200);
-    const startTime = performance.now();
-    const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    requestAnimationFrame(function scroll(now) {
-      const p = Math.min((now - startTime) / duration, 1);
-      window.scrollTo(0, start + (end - start) * ease(p));
-      if (p < 1) {
-        requestAnimationFrame(scroll);
-      } else {
-        navClickLock = false;
-        const id = getActiveSectionId();
-        if (id) setActiveSection(id);
-      }
-    });
-
-    navLinksContainer.classList.remove("open");
-    navToggle.classList.remove("active");
-  });
-});
-
-if (navLinksContainer) {
-  navLinksContainer.addEventListener('mouseleave', () => { updateIndicator(activeLink); });
-}
-
-// Handle resize to keep indicator in sync
-window.addEventListener('resize', () => {
-  if (activeLink && indicator) {
-    indicator.style.transition = 'none';
-    const parentWidth = navLinksContainer.offsetWidth;
-    const targetLeft = activeLink.offsetLeft;
-    const targetRight = parentWidth - (targetLeft + activeLink.offsetWidth);
-    indicator.style.left = `${targetLeft}px`;
-    indicator.style.right = `${targetRight}px`;
-  }
-});
-
-navToggle.addEventListener("click", () => {
-  navLinksContainer.classList.toggle("open");
-  navToggle.classList.toggle("active");
-});
-
-/* ─── SECTION RAIL ─── */
-const railCursor = document.querySelector('.rail-cursor');
-const railLabels = document.querySelectorAll('.rail-labels span');
-const sectionIds = ['hero', 'about', 'capabilities', 'tools', 'projects', 'team', 'contact'];
-
-function updateRail(id) {
-  const idx = sectionIds.indexOf(id);
-  if (idx < 0 || !railCursor) return;
-  const track = railCursor.closest('.rail-track');
-  if (!track) return;
-  const sectionCount = sectionIds.length;
-  const trackHeight = track.offsetHeight || 216;
-  const step = trackHeight / (sectionCount - 1);
-  railCursor.style.transform = `translateY(${idx * step}px)`;
-  railLabels.forEach((span) => {
-    span.classList.toggle('active', span.dataset.section === id);
+  requestAnimationFrame(tickCursor);
+  document.addEventListener("mouseenter", () => cursor.classList.add("visible"));
+  document.addEventListener("mouseleave", () => cursor.classList.remove("visible"));
+  document.querySelectorAll("a, button, .glass-card, .project-card, .team-card, .team-filter, .team-scroll-dots .tdot, .btn").forEach(el => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("expanded"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("expanded"));
   });
 }
-
-/* ─── ACTIVE SECTION TRACKING ─── */
-let scrollTimer;
-
-function syncActiveSection() {
-  if (!navClickLock) {
-    const id = getActiveSectionId();
-    if (id) setActiveSection(id);
-  }
-}
-
-window.addEventListener("scroll", () => {
-  clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(syncActiveSection, 32);
-}, { passive: true });
-
-if ("onscrollend" in window) {
-  window.addEventListener("scrollend", () => {
-    clearTimeout(scrollTimer);
-    syncActiveSection();
-  }, { passive: true });
-}
-
-window.addEventListener("load", () => requestAnimationFrame(syncActiveSection));
+});
 
 /* ─── SCROLL PROGRESS BAR ─── */
 const progressBar = document.getElementById("scrollProgress");
+
+/* ─── NAV SCROLL STATE ─── */
 const nav = document.getElementById("nav");
 
 function updateProgress() {
@@ -240,6 +72,116 @@ function animateCounter(el) {
     el.textContent = current + suffix;
   }, 25);
 }
+
+/* ─── NAV TOGGLE ─── */
+const navLinks = document.querySelectorAll('.nav-links a');
+const navToggle = document.querySelector(".nav-toggle");
+const navLinksContainer = document.querySelector(".nav-links");
+
+/* ─── SLIDING NAV INDICATOR ─── */
+const navIndicator = document.createElement("div");
+navIndicator.className = "nav-indicator";
+document.querySelector(".nav-links")?.appendChild(navIndicator);
+
+let lastActive = null;
+let navClickLock = false;
+let cachedSections = null;
+
+function getActiveSectionId() {
+  if (!cachedSections) cachedSections = document.querySelectorAll("section[id]");
+  const sections = cachedSections;
+  let closestId = null;
+  let closestDist = Infinity;
+  sections.forEach((s) => {
+    const rect = s.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    const viewMid = window.innerHeight / 2;
+    const dist = Math.abs(mid - viewMid);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closestId = s.id;
+    }
+  });
+  return closestId;
+}
+
+function moveIndicator(el, instant) {
+  if (!el || !navIndicator) return;
+  navIndicator.style.transform = `translateX(${el.offsetLeft}px)`;
+  navIndicator.style.width = `${el.offsetWidth}px`;
+}
+
+function setActiveSection(id, instant) {
+  const next = document.querySelector(`.nav-links a[href="#${id}"]`);
+  let left = 0, width = 0;
+  if (next) { left = next.offsetLeft; width = next.offsetWidth; }
+
+  navLinks.forEach((l) => {
+    l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+  });
+
+  if (next && next !== lastActive) {
+    lastActive = next;
+    navIndicator.style.transform = `translateX(${left}px)`;
+    navIndicator.style.width = `${width}px`;
+  } else if (!next) {
+    lastActive = null;
+    navIndicator.style.transform = `translateX(0px)`;
+    navIndicator.style.width = `0px`;
+  }
+  updateRail(id);
+}
+
+/* ─── SECTION RAIL ─── */
+const railCursor = document.querySelector('.rail-cursor');
+const railLabels = document.querySelectorAll('.rail-labels span');
+
+const sectionIds = ['hero', 'about', 'capabilities', 'tools', 'projects', 'team', 'contact'];
+
+function updateRail(id) {
+  const idx = sectionIds.indexOf(id);
+  if (idx < 0 || !railCursor) return;
+
+  const track = railCursor.closest('.rail-track');
+  if (!track) return;
+
+  const sectionCount = sectionIds.length;
+  const trackHeight = track.offsetHeight || 216;
+  const step = trackHeight / (sectionCount - 1);
+  railCursor.style.transform = `translateY(${idx * step}px)`;
+
+  railLabels.forEach((span) => {
+    span.classList.toggle('active', span.dataset.section === id);
+  });
+}
+
+/* ─── ACTIVE SECTION TRACKING (scrollend + debounced fallback) ─── */
+// With scroll-snap, the scroll always lands on a settled section.
+// scrollend fires when scroll + snap fully settles.
+// A longer debounce fallback handles browsers without scrollend support.
+let scrollTimer;
+
+function syncActiveSection() {
+  if (!navClickLock) {
+    const id = getActiveSectionId();
+    if (id) setActiveSection(id);
+  }
+}
+
+window.addEventListener("scroll", () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(syncActiveSection, 32);
+}, { passive: true });
+
+if ("onscrollend" in window) {
+  window.addEventListener("scrollend", () => {
+    clearTimeout(scrollTimer);
+    syncActiveSection();
+  }, { passive: true });
+}
+
+/* ─── INITIAL SYNC ─── */
+window.addEventListener("load", () => requestAnimationFrame(syncActiveSection));
 
 /* ─── MARQUEE PAUSE ─── */
 document.querySelectorAll(".marquee-row").forEach(row => {
@@ -299,6 +241,45 @@ window.addEventListener("resize", () => {
   }, 200);
 }, { passive: true });
 
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    const target = href?.startsWith("#") ? document.querySelector(href) : null;
+    if (!target) return;
+    e.preventDefault();
+
+    // Lock observer during smooth-scroll to prevent mid-flight hijack
+    navClickLock = true;
+    moveIndicator(link);
+
+    const start = window.scrollY;
+    const end = target.getBoundingClientRect().top + start - 80;
+    const duration = Math.min(Math.abs(end - start) * 0.12 + 80, 200);
+    const startTime = performance.now();
+    const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    requestAnimationFrame(function scroll(now) {
+      const p = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, start + (end - start) * ease(p));
+      if (p < 1) {
+        requestAnimationFrame(scroll);
+      } else {
+        // Scroll complete — unlock and sync to final section
+        navClickLock = false;
+        const id = getActiveSectionId();
+        if (id) setActiveSection(id);
+      }
+    });
+
+    navLinksContainer.classList.remove("open");
+    navToggle.classList.remove("active");
+  });
+});
+
+navToggle.addEventListener("click", () => {
+  navLinksContainer.classList.toggle("open");
+  navToggle.classList.toggle("active");
+});
+
 /* ─── TEAM FILTERS ─── */
 const filterBtns = document.querySelectorAll(".team-filter");
 const teamCards = document.querySelectorAll(".team-card");
@@ -309,6 +290,7 @@ function rebuildTeamDots() {
   const containerW = teamGrid.clientWidth;
   if (!containerW) { teamDots.innerHTML = ""; return; }
   const pages = Math.max(1, Math.ceil(teamGrid.scrollWidth / containerW));
+
   teamDots.innerHTML = "";
   for (let i = 0; i < pages; i++) {
     const dot = document.createElement("button");
@@ -361,18 +343,23 @@ let themeToggleInProgress = false;
 themeToggle.addEventListener("click", (e) => {
   if (themeToggleInProgress) return;
   themeToggleInProgress = true;
+
   const rect = themeToggle.getBoundingClientRect();
   const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
   const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+
   const current = document.documentElement.getAttribute("data-theme");
   const next = current === "dark" ? "light" : "dark";
+
   const t = document.documentElement;
   t.style.setProperty("--splash-x", `${x}%`);
   t.style.setProperty("--splash-y", `${y}%`);
+
   const apply = () => {
     t.setAttribute("data-theme", next);
     themeToggleInProgress = false;
   };
+
   if (document.startViewTransition) {
     document.startViewTransition(apply);
   } else {
@@ -400,16 +387,19 @@ function finishLoader() {
   loaderColored.style.clipPath = "inset(0% 0 0 0)";
   page.classList.add("page-visible");
   loader.classList.add("loader-hidden");
+  // Sync nav after loader completes
   requestAnimationFrame(() => {
     const id = getActiveSectionId();
     if (id) setActiveSection(id, true);
   });
+  // Choreographed entry animations
   requestAnimationFrame(() => {
     nav?.classList.add("animate-nav");
     document.querySelector(".section-rail")?.classList.add("animate-rail");
     document.querySelector(".hero-scroll-hint")?.classList.add("animate-scroll-hint");
     setTimeout(() => {
       document.querySelector(".hero-static-text")?.classList.add("animate-hero-text");
+      // Flag intro as complete after the last animation finishes
       setTimeout(() => document.body.classList.add("hero-intro-complete"), 900);
     }, 80);
   });
@@ -429,6 +419,8 @@ function tick() {
   }
   requestAnimationFrame(tick);
 }
+
+/* ─── SCROLL REVEAL ─── */
 
 window.setLoadTarget = setLoadTarget;
 
@@ -459,47 +451,6 @@ function startTick() {
   tickStarted = true;
   requestAnimationFrame(tick);
 }
-
-/* ─── SCROLL-DRIVEN SECTION REVEALS ─── */
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      const children = entry.target.querySelectorAll(".reveal");
-      if (entry.isIntersecting) {
-        children.forEach((child, i) => {
-          child.style.setProperty("--stagger-delay", `${i * 60}ms`);
-          child.classList.add("revealed");
-        });
-      } else {
-        const { top, bottom } = entry.boundingClientRect;
-        if (top > entry.rootBounds.bottom) {
-          children.forEach((child) => child.classList.remove("revealed"));
-        }
-      }
-    });
-  },
-  { threshold: 0.1, rootMargin: "-10% 0px -20% 0px" }
-);
-
-document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
-  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p").forEach((el) => {
-    el.classList.add("reveal");
-  });
-  revealObserver.observe(section);
-});
-
-document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
-  const rect = section.getBoundingClientRect();
-  const effectiveTop = window.innerHeight * 0.1;
-  const effectiveBottom = window.innerHeight * 0.8;
-  if (rect.top < effectiveBottom && rect.bottom > effectiveTop) {
-    const children = section.querySelectorAll(".reveal");
-    children.forEach((child, i) => {
-      child.style.setProperty("--stagger-delay", `${i * 60}ms`);
-      child.classList.add("revealed");
-    });
-  }
-});
 
 /* ─── PROJECT MODAL ─── */
 const projectData = {
@@ -539,8 +490,10 @@ function openModal(projectId) {
   const data = projectData[projectId];
   if (!data) return;
   if (activeModal) closeModal();
+
   const overlay = document.createElement("div");
   overlay.className = "modal-overlay";
+
   overlay.innerHTML = `
     <div class="modal-content">
       <div class="modal-header">
@@ -555,29 +508,88 @@ function openModal(projectId) {
       <div class="modal-body">
         <h4>Project Overview</h4>
         <p class="modal-text">${data.overview}</p>
+
         <div class="modal-section-divider"></div>
+
         <h4>Architecture</h4>
         ${data.architecture.map(p => `<p class="modal-text">${p}</p>`).join("")}
+
         <div class="modal-section-divider"></div>
+
         <h4>Key Specs</h4>
         <div class="modal-specs-grid">
-          ${data.tech.map(t => `<div class="modal-spec-item">${t}</div>`).join("")}
+          ${data.tech.map(t => `
+            <div class="modal-spec-item">${t}</div>
+          `).join("")}
         </div>
       </div>
     </div>
   `;
+
   const root = document.getElementById("modal-root");
   root.appendChild(overlay);
-  overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
   overlay.querySelector(".modal-close").addEventListener("click", closeModal);
+
   document.addEventListener("keydown", onKeyDown);
+
   activeModal = overlay;
+
   requestAnimationFrame(() => overlay.classList.add("open"));
 }
 
 function onKeyDown(e) {
   if (e.key === "Escape" && activeModal) closeModal();
 }
+
+/* ─── SCROLL-DRIVEN SECTION REVEALS ─── */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const children = entry.target.querySelectorAll(".reveal");
+      if (entry.isIntersecting) {
+        children.forEach((child, i) => {
+          child.style.setProperty("--stagger-delay", `${i * 60}ms`);
+          child.classList.add("revealed");
+        });
+      } else {
+        /* Directional hysteresis: only strip revealed if section
+           exits through the bottom (user scrolling up past it).
+           Exiting through top (scrolling down past it) preserves state. */
+        const { top, bottom } = entry.boundingClientRect;
+        if (top > entry.rootBounds.bottom) {
+          children.forEach((child) => child.classList.remove("revealed"));
+        }
+      }
+    });
+  },
+  { threshold: 0.1, rootMargin: "-10% 0px -20% 0px" }
+);
+
+document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
+  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p").forEach((el) => {
+    el.classList.add("reveal");
+  });
+  revealObserver.observe(section);
+});
+
+// Sync-reveal sections already in view (matches observer's rootMargin: -10% 0px -20% 0px)
+document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
+  const rect = section.getBoundingClientRect();
+  const effectiveTop = window.innerHeight * 0.1;
+  const effectiveBottom = window.innerHeight * 0.8;
+  if (rect.top < effectiveBottom && rect.bottom > effectiveTop) {
+    const children = section.querySelectorAll(".reveal");
+    children.forEach((child, i) => {
+      child.style.setProperty("--stagger-delay", `${i * 60}ms`);
+      child.classList.add("revealed");
+    });
+  }
+});
 
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', () => openModal(card.dataset.project));
@@ -587,6 +599,7 @@ document.querySelectorAll('.project-card').forEach(card => {
 function initTerminal() {
   const out = document.getElementById('termOutput');
   if (!out) return;
+
   function runSequence(loop) {
     out.innerHTML = "";
     const sequence = [
@@ -612,13 +625,13 @@ function initTerminal() {
         } else if (s.type === 'cursor') {
           const div = document.createElement('div');
           div.className = 'line fade-in';
-          div.innerHTML = `<span class="prompt">\u203a</span><span class="blink"></span>`;
+          div.innerHTML = `<span class="prompt">›</span><span class="blink"></span>`;
           out.appendChild(div);
         } else {
           const div = document.createElement('div');
           div.className = 'line fade-in';
           if (s.type === 'cmd') {
-            div.innerHTML = `<span class="prompt">\u203a</span><span class="cmd">${s.text}</span>`;
+            div.innerHTML = `<span class="prompt">›</span><span class="cmd">${s.text}</span>`;
           } else {
             div.innerHTML = `<span class="${s.type}">${s.text}</span>`;
           }
@@ -632,186 +645,3 @@ function initTerminal() {
   }
   runSequence(true);
 }
-
-// ===== SYNDRA ADDITIONS =====
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Canvas particles
-  const canvas = document.getElementById('ambientCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W, H, particles;
-  const mouse = { x: -9999, y: -9999 };
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width = Math.floor(W * dpr);
-    canvas.height = Math.floor(H * dpr);
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    spawn();
-  }
-
-  function spawn() {
-    const count = W < 720 ? 52 : 110;
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.24,
-      vy: (Math.random() - 0.5) * 0.24,
-      r: Math.random() * 1.6 + 0.5,
-      copper: Math.random() > 0.55,
-      pulse: Math.random() * Math.PI * 2
-    }));
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    const now = performance.now() / 1000;
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      const dx = mouse.x - p.x;
-      const dy = mouse.y - p.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 160) {
-        p.vx -= dx * 0.00004;
-        p.vy -= dy * 0.00004;
-      }
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vx *= 0.994;
-      p.vy *= 0.994;
-      if (p.x < -10 || p.x > W + 10) p.vx *= -0.8;
-      if (p.y < -10 || p.y > H + 10) p.vy *= -0.8;
-      const glow = 0.5 + Math.sin(now * 0.8 + p.pulse) * 0.25;
-      const base = p.copper ? 'rgba(196,134,63,' : 'rgba(94,197,189,';
-      const alpha = (0.5 + glow * 0.35);
-      ctx.beginPath();
-      ctx.fillStyle = base + alpha + ')';
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-      if (p.copper) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(196,134,63,' + (0.04 * glow) + ')';
-        ctx.fill();
-      }
-      for (let j = i + 1; j < particles.length; j++) {
-        const q = particles[j];
-        const gap = Math.hypot(p.x - q.x, p.y - q.y);
-        if (gap < 100) {
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(232,223,206,' + ((1 - gap / 100) * 0.08).toFixed(4) + ')';
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.stroke();
-        }
-      }
-    }
-    if (!prefersReducedMotion) requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-  resize();
-  draw();
-
-  // Form toast
-  const form = document.getElementById('contactForm');
-  const toast = document.getElementById('toast');
-  if (form && toast) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      toast.classList.add('show');
-      form.reset();
-      setTimeout(() => toast.classList.remove('show'), 3600);
-    });
-  }
-
-  // Orbit hover
-  const nodeRing = document.querySelector('.node-ring');
-  if (nodeRing) {
-    const startOrbit = () => { nodeRing.classList.add('orbiting'); };
-    nodeRing.addEventListener('mouseenter', startOrbit, { once: true });
-    nodeRing.addEventListener('touchstart', startOrbit, { once: true, passive: true });
-  }
-});
-
-// Typewriter (runs on DOMContentLoaded)
-document.addEventListener("DOMContentLoaded", () => {
-  class Typewriter {
-    constructor(el, delayBackspace = 30, delayType = 65, delayPause = 250) {
-      this.el = el;
-      this.delayBackspace = delayBackspace;
-      this.delayType = delayType;
-      this.delayPause = delayPause;
-      this.timer = null;
-      this.currentTarget = el.innerText;
-      this.el.classList.add('typing');
-    }
-    async transitionTo(targetText, originalText) {
-      if (this.currentTarget === targetText) return;
-      this.currentTarget = targetText;
-      this.stop();
-      await this.erase();
-      await this.pause(this.delayPause);
-      if (targetText === 'SYNDRIX') {
-        this.el.classList.add('state-syndrix');
-      } else {
-        this.el.classList.remove('state-syndrix');
-      }
-      await this.type(targetText);
-    }
-    stop() { clearTimeout(this.timer); }
-    erase() {
-      return new Promise((resolve) => {
-        const step = () => {
-          const current = this.el.innerText;
-          if (current.length > 0) {
-            this.el.innerText = current.slice(0, -1);
-            this.timer = setTimeout(step, this.delayBackspace);
-          } else { resolve(); }
-        };
-        step();
-      });
-    }
-    type(text) {
-      return new Promise((resolve) => {
-        let index = 0;
-        const step = () => {
-          if (index < text.length) {
-            this.el.innerText += text[index];
-            index++;
-            this.timer = setTimeout(step, this.delayType);
-          } else { resolve(); }
-        };
-        step();
-      });
-    }
-    pause(ms) {
-      return new Promise((resolve) => { this.timer = setTimeout(resolve, ms); });
-    }
-  }
-
-  const scrambleTarget = document.querySelector('.scramble-target');
-  if (scrambleTarget) {
-    const originalText = scrambleTarget.innerText;
-    const targetText = scrambleTarget.getAttribute('data-value');
-    const typewriter = new Typewriter(scrambleTarget);
-    const startLoop = async () => {
-      await typewriter.pause(3500);
-      while (true) {
-        await typewriter.transitionTo(targetText, originalText);
-        await typewriter.pause(3000);
-        await typewriter.transitionTo(originalText, originalText);
-        await typewriter.pause(3500);
-      }
-    };
-    startLoop();
-  }
-});

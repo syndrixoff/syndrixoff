@@ -1,5 +1,5 @@
 /* ─── SYNDRIX — Engineered with Intelligence ─── */
-:root,[data-theme="dark"]{--bg:#0c0b09;--bg-soft:#12100e;--panel:rgba(18,16,14,0.78);--panel-solid:#12100e;--panel-lift:#1c1915;--ink:#e8dfce;--ink-pure:#f5efdf;--muted:#8a8270;--faint:rgba(232,223,206,0.28);--line:rgba(196,134,63,0.12);--line-strong:rgba(196,134,63,0.34);--copper:#c4863f;--cyan:#5ec5bd;--ember:#d94f3a;--green:#95b85a;--radius:26px;--radius-sm:16px;--radius-pill:9999px;--ease:cubic-bezier(0.16,1,0.3,1);--ease-out:cubic-bezier(0,0,0.2,1);--font:"Inter",system-ui,sans-serif;--mono:"Space Grotesk","JetBrains Mono",monospace;}
+:root,[data-theme="dark"]{--bg:#0c0b09;--bg-soft:#12100e;--panel:rgba(18,16,14,0.78);--panel-solid:#12100e;--panel-lift:#1c1915;--ink:#e8dfce;--ink-pure:#f5efdf;--muted:#8a8270;--faint:rgba(232,223,206,0.28);--line:rgba(196,134,63,0.12);--line-strong:rgba(196,134,63,0.34);--copper:#c4863f;--cyan:#5ec5bd;--ember:#d94f3a;--green:#95b85a;--radius:26px;--radius-sm:16px;--radius-pill:9999px;--ease:cubic-bezier(0.16,1,0.3,1);--ease-out:cubic-bezier(0,0,0.2,1);--font:"Geist",system-ui,-apple-system,sans-serif;--mono:"Geist Mono","JetBrains Mono",ui-monospace,monospace;}
 
 [data-theme="light"] {
   --bg: #f5f0eb; --bg-soft: #ede8e0; --panel: rgba(245,240,235,0.85);
@@ -66,7 +66,7 @@
       min-height: 100vh;
       background: linear-gradient(180deg, #0c0b09 0%, #12100e 50%, #0c0b09 100%);
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, sans-serif;
+      font-family: "Geist", system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -240,7 +240,7 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 1rem; /* Enlarged brand font */
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -336,7 +336,7 @@
     .kicker {
       margin: 0 0 0.8rem;
       color: var(--copper);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.16em;
@@ -345,7 +345,7 @@
 
     h2 {
       margin: 0;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: clamp(2.2rem, 5vw, 5rem);
       line-height: 0.92;
       letter-spacing: -0.06em;
@@ -382,7 +382,7 @@
       gap: 0.65rem;
       margin: 0 0 1.6rem;
       color: var(--cyan);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.14em;
@@ -397,7 +397,7 @@
 
     h1 {
       margin: 0;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: clamp(3.4rem, 8vw, 8rem);
       font-weight: 700;
       line-height: 0.82;
@@ -495,7 +495,7 @@
     .stat-cell strong {
       display: block;
       color: var(--ink-pure);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: clamp(1.3rem, 2.6vw, 1.9rem);
       letter-spacing: -0.05em;
       line-height: 1;
@@ -504,7 +504,7 @@
       display: block;
       margin-top: 0.3rem;
       color: var(--faint);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -627,7 +627,7 @@
     }
 
     .node .label {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -707,7 +707,7 @@
     }
     .mission-card h3 {
       margin: 0 0 0.8rem;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 1.35rem;
       letter-spacing: -0.03em;
     }
@@ -757,7 +757,7 @@
     .value-icon svg { width: 22px; height: 22px; }
     .value-card h4 {
       margin: 0 0 0.5rem;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 1rem;
       color: var(--ink-pure);
       letter-spacing: -0.02em;
@@ -801,7 +801,7 @@
       margin: 0;
       position: relative;
       z-index: 2;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: clamp(1.15rem, 2.2vw, 1.6rem);
       font-weight: 600;
       color: var(--ink-pure);
@@ -815,7 +815,7 @@
       position: relative;
       z-index: 2;
       color: var(--copper);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.16em;
@@ -852,7 +852,7 @@
         inset 0 1px 0 0 rgba(232, 223, 206, 0.15);
     }
     .service-card .num {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 5rem;
       font-weight: 700;
       line-height: 0.7;
@@ -865,7 +865,7 @@
     }
     .service-card h3 {
       margin: 0 0 0.7rem;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: clamp(1.2rem, 1.8vw, 1.6rem);
       line-height: 1;
       letter-spacing: -0.04em;
@@ -894,7 +894,7 @@
       border-radius: 999px;
       padding: 0.35rem 0.65rem;
       color: var(--faint);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.62rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -955,7 +955,7 @@
       background: var(--bg-soft);
       display: grid;
       place-items: center;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.7rem;
       font-weight: 600;
       color: var(--copper);
@@ -966,7 +966,7 @@
 
     .step-item h3 {
       margin: 0 0 0.5rem;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 1.35rem;
       letter-spacing: -0.03em;
       line-height: 1.1;
@@ -1016,7 +1016,7 @@
     .terminal pre {
       margin: 0;
       color: #c9c0ae;
-      font-family: "Space Grotesk", monospace;
+      font-family: "Geist Mono", monospace;
       font-size: clamp(0.7rem, 1.1vw, 0.85rem);
       line-height: 1.8;
       white-space: pre-wrap;
@@ -1060,14 +1060,14 @@
       color: #0c0b09;
       background: var(--copper);
       font-weight: 900;
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.85rem;
       flex-shrink: 0;
     }
     .deliverable:nth-child(2) .icon { background: var(--cyan); }
     .deliverable:nth-child(3) .icon { background: var(--green); }
     .deliverable:nth-child(4) .icon { background: var(--ink-pure); }
-    .deliverable h3 { margin: 0 0 0.3rem; font-family: "Space Grotesk", sans-serif; font-size: 1.15rem; }
+    .deliverable h3 { margin: 0 0 0.3rem; font-family: "Geist", system-ui, sans-serif; font-size: 1.15rem; }
     .deliverable p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
 
     /* ─── CTA/Contact ─── */
@@ -1153,7 +1153,7 @@
     .form-note {
       margin: 0.5rem 0 0;
       color: var(--faint);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.06em;
     }
@@ -1169,7 +1169,7 @@
       align-items: center;
       gap: 1rem;
       color: var(--faint);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1198,7 +1198,7 @@
       line-height: 1.7;
     }
     .closing-statement .tagline {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Geist", system-ui, sans-serif;
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--copper);

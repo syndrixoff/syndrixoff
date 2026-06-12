@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SYNDRIX — Engineered with Intelligence</title>
-  <meta name="description" content="SYNDRIX is an engineering-driven company specializing in custom electronic systems, embedded technologies, product development, PCB design, and intelligent hardware solutions.">
-    <link rel="preload" href="lib/geist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syndrix — Design & Innovation Studio</title>
+  <meta name="description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
+  <meta name="keywords" content="design studio, digital agency, branding, UI/UX, product design, creative studio" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Syndrix" />
+  <link rel="canonical" href="https://syndrix.io/" />
+  <meta property="og:title" content="Syndrix — Design & Innovation Studio" />
+  <meta property="og:description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
+  <meta property="og:url" content="https://syndrix.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://syndrix.io/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Syndrix — Design & Innovation Studio" />
+  <meta name="twitter:description" content="Syndrix is a design and innovation studio crafting digital experiences, brands, and products that push creative boundaries." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preload" href="lib/geist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="lib/geist-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="lib/geist-mono/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="lib/geist-400.css" media="print" onload="this.media='all'" />
@@ -20,26 +33,28 @@
     <link rel="stylesheet" href="lib/geist-700.css" />
     <link rel="stylesheet" href="lib/geist-mono.css" />
   </noscript>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0b09'/%3E%3Cpath d='M14 42 32 12l18 30H14Z' fill='none' stroke='%23c4863f' stroke-width='4'/%3E%3Cpath d='M22 42h28L32 52 14 42h8Z' fill='%235ec5bd'/%3E%3C/svg%3E">
   <style>
     #page { opacity: 0; }
-#page { opacity: 0; }
     #loader { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; background: #000; }
     .loader-center { display: flex; flex-direction: column; align-items: center; gap: 20px; }
     .loader-svg { display: block; width: min(45vmin, 360px); aspect-ratio: 674/672; }
     .loader-pct { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; text-align: center; }
   </style>
-
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Syndrix",
+    "url": "https://syndrix.io/",
+    "description": "Design & innovation studio crafting digital experiences, brands, and products that push creative boundaries.",
+    "foundingDate": "2025",
+    "sameAs": [
+      "https://x.com/syndrix"
+    ]
+  }
+  </script>
 </head>
 <body class="grain">
-
-<div class="ambient-glows" aria-hidden="true">
-    <div class="glow-orb glow-1"></div>
-    <div class="glow-orb glow-2"></div>
-    <div class="glow-orb glow-3"></div>
-  </div>
-
-<canvas id="ambientCanvas" aria-hidden="true"></canvas>
 
 <div id="loader" role="progressbar" aria-label="Loading">
   <div class="loader-center">
@@ -73,24 +88,53 @@
 <div id="page">
   <div id="scrollProgress" class="scroll-progress"></div>
 
-  <nav class="nav" id="navbar" aria-label="Primary">
-    <a href="#main" class="brand" id="wordmark" aria-label="SYNDRIX home">SYNDRIX</a>
-    <div class="nav-links" role="list">
-      <div class="nav-indicator"></div>
-      <a href="#hero" role="listitem">Hero</a>
-      <a href="#about" role="listitem">About</a>
-      <a href="#services" role="listitem">Services</a>
-      <a href="#process" role="listitem">Process</a>
-      <a href="#workbench" role="listitem">Workbench</a>
-      <a href="#team" role="listitem">Team</a>
-      <a href="#contact" role="listitem">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <nav class="nav" id="nav">
+    <div class="nav-bg-glow" id="navBgGlow"></div>
+    <div class="nav-track">
+      <a href="/" class="nav-logo" id="wordmark" aria-label="Syndrix home">
+        <svg class="wordmark-svg" viewBox="-2 -2 328.45 101.5" xmlns="http://www.w3.org/2000/svg">
+          <g id="svgGroup" stroke-linecap="round" fill-rule="nonzero" fill="currentColor" stroke="none">
+            <g class="wm-letter" data-letter="S">
+              <path d="M25.650 76.575L25.650 76.575Q19.275 76.575 14.587 74.250Q9.900 71.925 7.200 67.800Q4.500 63.675 4.050 58.200L4.050 58.200L12.375 57.675Q12.900 61.425 14.550 64.012Q16.200 66.600 19.012 67.912Q21.825 69.225 25.800 69.225L25.800 69.225Q29.250 69.225 31.688 68.362Q34.125 67.500 35.400 65.775Q36.675 64.050 36.675 61.575L36.675 61.575Q36.675 59.325 35.587 57.562Q34.500 55.800 31.462 54.337Q28.425 52.875 22.575 51.450L22.575 51.450Q16.200 49.875 12.375 48.000Q8.550 46.125 6.862 43.312Q5.175 40.500 5.175 36.375L5.175 36.375Q5.175 31.800 7.387 28.312Q9.600 24.825 13.725 22.875Q17.850 20.925 23.625 20.925L23.625 20.925Q29.700 20.925 34.012 23.175Q38.325 25.425 40.837 29.325Q43.350 33.225 43.950 38.250L43.950 38.250L35.625 38.700Q35.250 35.625 33.750 33.262Q32.250 30.900 29.700 29.587Q27.150 28.275 23.475 28.275L23.475 28.275Q18.825 28.275 16.162 30.412Q13.500 32.550 13.500 36.075L13.500 36.075Q13.500 38.325 14.587 39.862Q15.675 41.400 18.488 42.525Q21.300 43.650 26.475 44.925L26.475 44.925Q33.375 46.500 37.462 48.787Q41.550 51.075 43.275 54.150Q45 57.225 45 61.125L45 61.125Q45 65.850 42.563 69.337Q40.125 72.825 35.775 74.700Q31.425 76.575 25.650 76.575Z" />
+            </g>
+            <g class="wm-letter" data-letter="Y">
+              <path d="M73.725 75.375L65.625 75.375L65.625 54.000L46.950 22.125L56.250 22.125L69.675 45.900L83.175 22.125L92.475 22.125L73.725 54.000L73.725 75.375Z" />
+            </g>
+            <g class="wm-letter" data-letter="N">
+              <path d="M106.500 75.375L98.400 75.375L98.400 22.125L108.675 22.125L133.275 65.550L133.275 22.125L141.375 22.125L141.375 75.375L130.725 75.375L106.500 32.925L106.500 75.375Z" />
+            </g>
+            <g class="wm-letter" data-letter="D">
+              <path d="M171.975 75.375L154.425 75.375L154.425 22.125L171.525 22.125Q184.050 22.125 190.800 29.062Q197.550 36.000 197.550 48.825L197.550 48.825Q197.550 61.575 190.912 68.475Q184.275 75.375 171.975 75.375L171.975 75.375ZM162.525 29.550L162.525 67.950L171.525 67.950Q180.375 67.950 184.762 63.187Q189.150 58.425 189.150 48.825L189.150 48.825Q189.150 39.075 184.762 34.312Q180.375 29.550 171.525 29.550L171.525 29.550L162.525 29.550Z" />
+            </g>
+            <g class="wm-letter" data-letter="R">
+              <path d="M215.775 75.375L207.675 75.375L207.675 22.125L228.900 22.125Q234.600 22.125 238.725 24.075Q242.850 26.025 245.100 29.625Q247.350 33.225 247.350 38.175L247.350 38.175Q247.350 41.775 245.737 44.625Q244.125 47.475 241.462 49.162Q238.800 50.850 235.800 51.075L235.800 51.075L235.425 50.400Q240.450 50.400 243.225 52.687Q246 54.975 246.450 59.850L246.450 59.850L247.875 75.375L239.700 75.375L238.425 60.900Q238.200 57.675 236.250 56.137Q234.300 54.600 229.875 54.600L229.875 54.600L215.775 54.600L215.775 75.375ZM215.775 29.550L215.775 47.175L229.050 47.175Q233.625 47.175 236.287 44.887Q238.950 42.600 238.950 38.400L238.950 38.400Q238.950 34.125 236.250 31.837Q233.550 29.550 228.375 29.550L228.375 29.550L215.775 29.550Z" />
+            </g>
+            <g class="wm-letter" data-letter="I">
+              <path d="M268.275 75.375L260.175 75.375L260.175 22.125L268.275 22.125L268.275 75.375Z" />
+            </g>
+            <g class="wm-letter" data-letter="X">
+              <path d="M285.975 75.375L276.525 75.375L294.225 48.675L276.675 22.125L286.200 22.125L299.325 42.375L312.225 22.125L321.675 22.125L304.125 48.525L321.900 75.375L312.375 75.375L299.175 54.825L285.975 75.375Z" />
+            </g>
+          </g>
+        </svg>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#tools">Toolchain</a>
+        <a href="#projects">Projects</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
           <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         </button>
-      <a class="nav-cta" href="#contact">Start a Project</a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -98,339 +142,222 @@
     <div class="rail-track">
       <div class="rail-cursor"></div>
     </div>
+    <div class="rail-labels">
+      <span data-section="hero">Hero</span>
+      <span data-section="about">About</span>
+      <span data-section="capabilities">Caps</span>
+      <span data-section="tools">Tools</span>
+      <span data-section="projects">Work</span>
+      <span data-section="team">Team</span>
+      <span data-section="contact">Contact</span>
+    </div>
+  </div>
 
   <main>
-<main id="main">
-    <!-- ─── Hero ─── -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-text">
 
-          <h1 id="hero-title" class="reveal is-visible delay-1">
-            <span class="line-1">Engineered</span>
-            <span class="line-2">With</span>
-            <span class="line-3"><span class="scramble-target" data-value="SYNDRIX">Intelligence</span></span>
-          </h1>
-          <p class="hero-copy reveal is-visible delay-2">
-            SYNDRIX is an engineering-driven company specializing in custom electronic systems, embedded technologies, product development, PCB design, and intelligent hardware solutions. We bridge the gap between innovative ideas and reliable real-world products through precision engineering and intelligent problem-solving.
-          </p>
-          <div class="hero-actions reveal is-visible delay-3">
-            <a href="#contact" class="btn btn-primary">Request a consultation</a>
-            <a href="#services" class="btn btn-secondary">Explore our services</a>
-          </div>
-          <div class="hero-stats reveal is-visible delay-3" aria-label="SYNDRIX snapshot">
-            <div class="stat-cell"><strong>04</strong><span>Core disciplines</span></div>
-            <div class="stat-cell"><strong>0→1</strong><span>Concept to deployment</span></div>
-            <div class="stat-cell"><strong>Free</strong><span>Initial consultation</span></div>
-          </div>
+    <!-- HERO — canvas crumble typography overlay -->
+    <section id="hero" class="section hero-section">
+      <div class="hero-container">
+        <div class="hero-static-text" aria-label="IDEA DESIGN DEPLOY">
+          <span class="hero-word">IDEA</span>
+          <span class="hero-word">DESIGN</span>
+          <span class="hero-word">DEPLOY</span>
         </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+      </div>
+    </section>
 
-        <div class="hero-visual reveal is-visible delay-2" aria-hidden="true">
-          <div class="glow-blob glow-blob-1"></div>
-          <div class="glow-blob glow-blob-2"></div>
-          <div class="node-ring">
-            <div class="ring-orbit"></div>
-            <div class="ring-orbit"></div>
-            <!-- Node 1: Design (top, 0°) -->
-            <div class="orbit-arm orbit-arm-1">
-              <div class="node node-1">
-                <span class="label"><strong>Design</strong>Circuit & PCB</span>
-              </div>
-            </div>
-            <!-- Node 2: Develop (bottom-right, 120°) -->
-            <div class="orbit-arm orbit-arm-2">
-              <div class="node node-2">
-                <span class="label"><strong>Develop</strong>Embedded & IoT</span>
-              </div>
-            </div>
-            <!-- Node 3: Validate (bottom-left, 240°) -->
-            <div class="orbit-arm orbit-arm-3">
-              <div class="node node-3">
-                <span class="label"><strong>Validate</strong>Test & Ship</span>
-              </div>
-            </div>
+    <!-- ABOUT (dark) -->
+    <section id="about" class="section about-section">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+
+      <div class="section-label">// ABOUT</div>
+      <h2 class="section-title">We are a collective of <em>engineers</em>.</h2>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Tell us what you need. Electronics, software, firmware, systems&thinsp;&ndash;&thinsp;we take your requirements and ship working products, no matter the stack.</p>
+          <p>Every project is owned by a small pod that designs, prototypes, tests, and delivers. No handoffs. No red tape. Just what you asked for, built by engineers who see it through.</p>
+        </div>
+        <div class="telemetry-cards">
+          <div class="tele-card">
+            <span class="tele-card-label">Disciplines</span>
+            <span class="tele-card-value" data-target="3">0</span>
+          </div>
+          <div class="tele-card">
+            <span class="tele-card-label">Projects Delivered</span>
+            <span class="tele-card-value" data-target="0">0</span>
+          </div>
+          <div class="tele-card">
+            <span class="tele-card-label">Commitment</span>
+            <span class="tele-card-value" data-target="100">0</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── About: Mission, Vision & Core Values ─── -->
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="section-head reveal">
-        <div>
-          <p class="kicker">Brand Foundation</p>
-          <h2 id="about-title">Intelligence meets engineering.</h2>
-        </div>
-        <p>We engineer intelligent electronic systems tailored to real-world requirements. From concept to deployment, every solution is designed with precision and purpose.</p>
-      </div>
+    <!-- CAPABILITIES (light — Apple tile) -->
+    <section id="capabilities" class="section caps-section light-tile">
+      <div class="section-label">// CAPABILITIES</div>
+      <h2 class="section-title">Full Spectrum <em>Engineering</em></h2>
 
-      <!-- Mission & Vision -->
-      <div class="mission-grid">
-        <div class="mission-card reveal delay-1">
-          <h3>Mission</h3>
-          <p>To transform ideas into reliable electronic systems through intelligent engineering and precision execution.</p>
-        </div>
-        <div class="mission-card reveal delay-2">
-          <h3>Vision</h3>
-          <p>To become a trusted engineering partner for innovators, startups, research organizations, and industries seeking advanced electronic solutions.</p>
-        </div>
-      </div>
-
-      <!-- Core Values -->
-      <div class="values-grid">
-        <div class="value-card reveal delay-1">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
-              <circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.93-7.07-2.83 2.83m-8.48 8.48-2.83 2.83m0-14.14 2.83 2.83m8.48 8.48 2.83 2.83"/>
-            </svg>
+      <div class="caps-grid">
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
           </div>
-          <h4>Precision</h4>
-          <p>Every design decision is based on accuracy, engineering rigor, and technical excellence.</p>
+          <h3>Embedded Systems</h3>
+          <p>Firmware, RTOS, PCB design, sensor integration, and low-power wireless.</p>
+          <div class="tags"><span>ARM</span><span>RISC-V</span><span>ESP32</span></div>
         </div>
-        <div class="value-card reveal delay-2">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#5ec5bd">
-              <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z"/>
-            </svg>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           </div>
-          <h4>Intelligence</h4>
-          <p>We solve complex challenges through thoughtful engineering and innovation.</p>
+          <h3>Full-Stack Software</h3>
+          <p>Web apps, APIs, real-time systems, and cloud-native architectures.</p>
+          <div class="tags"><span>React</span><span>Node</span><span>Go</span></div>
         </div>
-        <div class="value-card reveal delay-3">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
-              <path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
-            </svg>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           </div>
-          <h4>Reliability</h4>
-          <p>Products and systems are designed to perform consistently in real-world environments.</p>
+          <h3>IoT &amp; Connectivity</h3>
+          <p>End-to-end IoT solutions: BLE, Wi-Fi, LoRaWAN, MQTT, custom protocols.</p>
+            <div class="tags"><span>MQTT</span><span>LoRa</span><span>BLE</span></div>
         </div>
-        <div class="value-card reveal delay-4">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#5ec5bd">
-              <path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
-            </svg>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
           </div>
-          <h4>Innovation</h4>
-          <p>We continuously explore new technologies and smarter approaches.</p>
+          <h3>FPGA &amp; RTL Design</h3>
+          <p>Verilog, SystemVerilog, and timing-closure verified designs for Xilinx/Intel FPGA platforms.</p>
+          <div class="tags"><span>Verilog</span><span>Vivado</span><span>Verilator</span></div>
         </div>
-        <div class="value-card reveal delay-5">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
-              <path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/>
-            </svg>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           </div>
-          <h4>Partnership</h4>
-          <p>We work closely with clients throughout the development journey.</p>
+          <h3>AI Inference Hardware</h3>
+          <p>Edge-optimized accelerator architectures for real-time neural network inference.</p>
+            <div class="tags"><span>TensorRT</span><span>NVIDIA</span><span>Edge AI</span></div>
         </div>
-      </div>
-
-      <!-- Brand Promise -->
-      <div class="promise-banner reveal">
-        <div class="bg-grid"></div>
-        <blockquote>"We engineer custom electronic solutions that combine innovation, reliability, and technical excellence."</blockquote>
-        <p class="promise-label">— Brand Promise</p>
-      </div>
-    </section>
-
-    <!-- ─── Service Architecture ─── -->
-    <section class="section" id="services" aria-labelledby="services-title">
-      <div class="section-head reveal">
-        <div>
-          <p class="kicker">Service Architecture</p>
-          <h2 id="services-title">Four disciplines, one engineering partner.</h2>
-        </div>
-        <p>SYNDRIX aligns circuit design, embedded development, validation, and production support into a single unified engineering workflow — from first schematic to final deployment.</p>
-      </div>
-
-      <div class="services-grid">
-        <!-- Service 1: Design (from doc) -->
-        <article class="service-card service-card-1 reveal delay-1">
-          <div class="pattern"></div>
-          <span class="num">01</span>
-          <div style="position:relative;z-index:2">
-            <p class="kicker">Design</p>
-            <h3>Circuit Design, PCB Design, Hardware Architecture.</h3>
-            <p>Schematic capture, multi-layer PCB layout, hardware architecture, power distribution, and signal integrity — engineered for reliability and manufacturability.</p>
-            <div class="tag-list">
-              <span class="tag">Circuit Design</span>
-              <span class="tag">PCB Design</span>
-              <span class="tag">Hardware Architecture</span>
-            </div>
+        <div class="glass-card">
+          <div class="glass-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
           </div>
-        </article>
-
-        <!-- Service 2: Development (from doc) -->
-        <article class="service-card service-card-2 reveal delay-2">
-          <div class="pattern"></div>
-          <span class="num">02</span>
-          <div style="position:relative;z-index:2">
-            <p class="kicker">Development</p>
-            <h3>Embedded Systems, Firmware Development, IoT Solutions.</h3>
-            <p>Embedded firmware, real-time operating systems, IoT connectivity, sensor integration, and communication protocols that perform consistently in real-world environments.</p>
-            <div class="tag-list">
-              <span class="tag">Embedded Systems</span>
-              <span class="tag">Firmware Development</span>
-              <span class="tag">IoT Solutions</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Service 3: Validation (from doc) -->
-        <article class="service-card service-card-3 reveal delay-3">
-          <div class="pattern"></div>
-          <span class="num">03</span>
-          <div style="position:relative;z-index:2">
-            <p class="kicker">Validation</p>
-            <h3>Testing, Debugging, Performance Verification.</h3>
-            <p>Rigorous functional testing, systematic debugging, signal analysis, EMC compliance, and performance verification to ensure every system meets specification.</p>
-            <div class="tag-list">
-              <span class="tag">Testing</span>
-              <span class="tag">Debugging</span>
-              <span class="tag">Performance Verification</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Service 4: Production (from doc) -->
-        <article class="service-card service-card-4 reveal delay-4">
-          <div class="pattern"></div>
-          <span class="num">04</span>
-          <div style="position:relative;z-index:2">
-            <p class="kicker">Production</p>
-            <h3>Prototyping, Manufacturing Support, Product Optimization.</h3>
-            <p>Rapid prototyping, BOM generation, manufacturing documentation, Gerber files, production support, and product optimization for seamless scale-up.</p>
-            <div class="tag-list">
-              <span class="tag">Prototyping</span>
-              <span class="tag">Manufacturing Support</span>
-              <span class="tag">Product Optimization</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ─── Process ─── -->
-    <section class="section" id="process" aria-labelledby="process-title">
-      <div class="section-head reveal">
-        <div>
-          <p class="kicker">How we engineer</p>
-          <h2 id="process-title">From concept to deployment. Precision at every step.</h2>
-        </div>
-        <p>A rigorous engineering process for innovators, startups, research organizations, and industries seeking advanced electronic solutions on a predictable timeline.</p>
-      </div>
-
-      <div class="process-track">
-        <article class="step-item reveal-l delay-1">
-          <div class="step-marker">1</div>
-          <h3>Scope</h3>
-          <p>Define requirements, technical constraints, performance targets, component selection, and deployment environment.</p>
-        </article>
-        <article class="step-item reveal-l delay-2">
-          <div class="step-marker">2</div>
-          <h3>Design</h3>
-          <p>Produce schematics, PCB layouts, firmware architecture, and initial hardware prototypes for validation.</p>
-        </article>
-        <article class="step-item reveal-l delay-3">
-          <div class="step-marker">3</div>
-          <h3>Validate</h3>
-          <p>Rigorous testing, debugging, performance verification, EMC compliance, and edge-case analysis.</p>
-        </article>
-        <article class="step-item reveal-l delay-4">
-          <div class="step-marker">4</div>
-          <h3>Deploy</h3>
-          <p>Deliver production-ready designs, manufacturing files, firmware binaries, and comprehensive documentation.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ─── Workbench ─── -->
-    <section class="section" id="workbench" aria-labelledby="workbench-title">
-      <div class="section-head reveal">
-        <div>
-          <p class="kicker">The Workbench</p>
-          <h2 id="workbench-title">Precision tools for intelligent engineering.</h2>
-        </div>
-        <p>From concept to deployment, every solution is designed with precision and purpose. We choose the most reliable tool for each surface — circuit, firmware, or production.</p>
-      </div>
-
-      <div class="workbench">
-        <div class="terminal reveal-scale delay-1" aria-label="SYNDRIX project manifest example">
-          <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-          <pre><span class="d">// syndrix.project.manifest</span>
-<span class="c2">client</span>: <span class="c1">"startup / research org / industry"</span>
-<span class="c2">industry</span>: <span class="c1">"Custom Electronics & Hardware"</span>
-<span class="c2">outputs</span>: [
-  <span class="c1">"circuit_design"</span>,
-  <span class="c1">"pcb_layout"</span>,
-  <span class="c1">"embedded_firmware"</span>,
-  <span class="c1">"iot_solution"</span>,
-  <span class="c1">"production_prototype"</span>
-]
-<span class="c2">values</span>: {
-  precision: <span class="c1">true</span>,
-  intelligence: <span class="c1">true</span>,
-  reliability: <span class="c1">true</span>,
-  innovation: <span class="c1">true</span>,
-  partnership: <span class="c1">true</span>
-}
-
-<span class="d">// status: concept → deployed</span></pre>
-        </div>
-
-        <div class="deliverables">
-          <article class="deliverable reveal-r delay-1">
-            <div class="icon">D</div>
-            <div>
-              <h3>Circuit & PCB Design packages</h3>
-              <p>Schematic capture, multi-layer PCB layout, hardware architecture, component selection, BOM generation, and Gerber files ready for manufacturing.</p>
-            </div>
-          </article>
-          <article class="deliverable reveal-r delay-2">
-            <div class="icon">E</div>
-            <div>
-              <h3>Embedded Systems & Firmware Development</h3>
-              <p>Microcontroller firmware, RTOS integration, sensor drivers, communication protocols, and IoT connectivity built for real-world performance.</p>
-            </div>
-          </article>
-          <article class="deliverable reveal-r delay-3">
-            <div class="icon">V</div>
-            <div>
-              <h3>Testing & Performance Verification</h3>
-              <p>Functional testing, signal analysis, debugging, EMC compliance, and performance verification to ensure every system meets specification.</p>
-            </div>
-          </article>
-          <article class="deliverable reveal-r delay-4">
-            <div class="icon">P</div>
-            <div>
-              <h3>Prototyping & Manufacturing Support</h3>
-              <p>Rapid prototyping, manufacturing documentation, product optimization, and production support for seamless transition from lab to factory.</p>
-            </div>
-          </article>
+          <h3>Product Design</h3>
+          <p>Industrial design, mechanical enclosures, UX, and interface design for physical products.</p>
+          <div class="tags"><span>CAD</span><span>Figma</span><span>DFM</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ─── CTA / Contact ─── -->
-    <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="cta-panel reveal-scale">
-        <div class="bg-grid"></div>
-        <div style="position:relative;z-index:2">
-          <p class="kicker">Free consultation</p>
-          <h2 id="contact-title">Bring a concept. Leave with an engineering direction.</h2>
-          <p>Tell SYNDRIX what you need engineered — custom electronics, embedded system, PCB design, IoT solution, or a complete product development package. The initial consultation is free so you can evaluate the fit before committing.</p>
-          <form class="contact-form" id="contactForm">
-            <label class="skip-link" for="projectInput">Describe your project</label>
-            <div class="form-row">
-              <input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring…" autocomplete="off" required>
-              <button class="btn btn-primary" type="submit">Start my project</button>
-            </div>
-            <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
-          </form>
+    <!-- TOOLS → CAPABILITY MATRIX (dark) -->
+    <section id="tools" class="section tools-section">
+      <div class="section-label">// TOOLCHAIN •</div>
+      <h2 class="section-title">Built with <em>Industry Standards</em></h2>
+      <p class="section-subtitle">An integrated toolchain spanning digital design, embedded systems, software platforms, and AI-driven engineering automation.</p>
+
+      <div class="tools-grid">
+        <div class="tool-domain" data-domain="hw">
+          <div class="domain-label label-hw">HARDWARE</div>
+          <div class="domain-sub">Digital &amp; Analog Design</div>
+          <div class="tools-listing">
+            <span>Verilog</span><span class="tdot"> · </span><span>VHDL</span><span class="tdot"> · </span><span>SystemVerilog</span><span class="tdot"> · </span><span>Verilator</span><span class="tdot"> · </span><span>ModelSim</span><br>
+            <span>Cadence Genus</span><span class="tdot"> · </span><span>Synopsys DC</span><span class="tdot"> · </span><span>PrimeTime</span><br>
+            <span>Quartus Prime</span><span class="tdot"> · </span><span>Vivado</span><span class="tdot"> · </span><span>Lattice Diamond</span><br>
+            <span>KiCad</span><span class="tdot"> · </span><span>Altium Designer</span><span class="tdot"> · </span><span>EasyEDA</span><br>
+            <span>LTspice</span><span class="tdot"> · </span><span>MATLAB</span><span class="tdot"> · </span><span>Simulink</span>
+          </div>
+        </div>
+
+        <div class="tool-domain" data-domain="fw">
+          <div class="domain-label label-fw">FIRMWARE</div>
+          <div class="domain-sub">Embedded Systems</div>
+          <div class="tools-listing">
+            <span>FreeRTOS</span><span class="tdot"> · </span><span>Zephyr</span><span class="tdot"> · </span><span>RTEMS</span><br>
+            <span>STM32</span><span class="tdot"> · </span><span>ESP32</span><span class="tdot"> · </span><span>ARM Cortex</span><span class="tdot"> · </span><span>PlatformIO</span><br>
+            <span>SPI</span><span class="tdot"> · </span><span>I2C</span><span class="tdot"> · </span><span>CAN</span><span class="tdot"> · </span><span>UART</span><span class="tdot"> · </span><span>Modbus</span><br>
+            <span>Keil µVision</span><span class="tdot"> · </span><span>ARM GCC</span><span class="tdot"> · </span><span>IAR Embedded</span>
+          </div>
+        </div>
+
+        <div class="tool-domain" data-domain="sw">
+          <div class="domain-label label-sw">SOFTWARE</div>
+          <div class="domain-sub">Platforms &amp; Infrastructure</div>
+          <div class="tools-listing">
+            <span>Next.js</span><span class="tdot"> · </span><span>React</span><span class="tdot"> · </span><span>TypeScript</span><span class="tdot"> · </span><span>Node.js</span><br>
+            <span>PostgreSQL</span><span class="tdot"> · </span><span>Supabase</span><span class="tdot"> · </span><span>REST</span><span class="tdot"> · </span><span>GraphQL</span><br>
+            <span>Docker</span><span class="tdot"> · </span><span>Linux</span><span class="tdot"> · </span><span>CI/CD</span>
+          </div>
+        </div>
+
+        <div class="tool-domain" data-domain="ai">
+          <div class="domain-label label-ai">AI &amp; AUTOMATION</div>
+          <div class="domain-sub">Intelligent Engineering</div>
+          <div class="tools-listing">
+            <span>OpenCV</span><span class="tdot"> · </span><span>YOLO</span><span class="tdot"> · </span><span>TensorRT</span><span class="tdot"> · </span><span>NVIDIA</span><br>
+            <span>LangChain</span><span class="tdot"> · </span><span>LlamaIndex</span><span class="tdot"> · </span><span>NIM</span><span class="tdot"> · </span><span>Qwen</span><br>
+            <span>Python</span><span class="tdot"> · </span><span>TensorFlow</span><span class="tdot"> · </span><span>PyTorch</span><span class="tdot"> · </span><span>scikit-learn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-pipeline">
+        <span class="pipe-step">SPEC</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">RTL</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">SYNTHESIS</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">P&amp;R</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-step">TAPEOUT</span>
+      </div>
+
+      <div class="tool-marquee-section">
+        <div class="marquee-row" id="marqueeRow1">
+          <div class="marquee-track">KiCad · Altium · Cadence Virtuoso · Vivado · Quartus · ModelSim · LTSpice · MATLAB · Synopsys DC · PrimeTime · KiCad · Altium · Cadence Virtuoso · Vivado · Quartus · ModelSim · LTSpice · MATLAB · Synopsys DC · PrimeTime</div>
+        </div>
+        <div class="marquee-row opposite" id="marqueeRow2">
+          <div class="marquee-track">Verilog · SystemVerilog · FreeRTOS · Zephyr · TensorRT · PyTorch · YOLO · LangChain · OpenCV · Docker · Verilog · SystemVerilog · FreeRTOS · Zephyr · TensorRT · PyTorch · YOLO · LangChain · OpenCV · Docker</div>
         </div>
       </div>
     </section>
 
+    <!-- PROJECTS (dark) -->
+    <section id="projects" class="section projects-section">
+      <div class="section-label">// PROJECTS</div>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+
+      <div class="projects-grid">
+        <article class="project-card" data-project="atlas">
+          <div class="project-visual pv-atlas"></div>
+          <div class="project-body">
+            <span class="project-tag">Autonomous Systems</span>
+            <h3>Project ATLAS</h3>
+            <p>Hierarchical drone swarm combining real-time flight control with onboard AI reasoning under strict compute constraints.</p>
+            <div class="tags"><span>PX4 Autopilot</span><span>MAVLink</span><span>YOLOv26</span><span>Qwen3.5</span><span>NVIDIA Isaac Sim</span></div>
+          </div>
+        </article>
+        <article class="project-card" data-project="aetherforge">
+          <div class="project-visual pv-aetherforge"></div>
+          <div class="project-body">
+            <span class="project-tag">AI + EDA</span>
+            <h3>AetherForge</h3>
+            <p>AI-native copilot generating synthesizable HDL from natural language with automated verification against EDA toolchains.</p>
+            <div class="tags"><span>Rust</span><span>SystemVerilog</span><span>Verilator</span><span>GHDL</span><span>React</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TEAM -->
     <section id="team" class="section team-section">
       <div class="section-label">// CREW MANIFEST</div>
       <h2 class="section-title">The <em>Collective</em></h2>
@@ -676,6 +603,7 @@
       </div>
     </section>
 
+    <!-- CONTACT (dark) -->
     <section id="contact" class="section contact-section">
       <div class="section-label centered">// CONTACT</div>
 
@@ -704,11 +632,22 @@
       </div>
 
     </section>
+
   </main>
 
-  <p class="closing-statement">Built with curiosity. Powered by craft. <strong>Engineered with Intelligence.</strong></p>
-  <footer class="page-footer"><small>&copy; 2025 SYNDRIX. All rights reserved.</small></footer>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-legal">
+        &copy; 2026 Syndrix Collective&thinsp;&ndash;&thinsp;Built by engineers.
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal-root"></div>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <script type="module" src="/src/main.js"></script>
 </div>
-<script type="module" src="src/main.js"></script>
+
 </body>
 </html>
