@@ -156,7 +156,7 @@ if (navToggle && navLinksContainer) {
 /* ─── SECTION RAIL ─── */
 const railCursor = document.querySelector('.rail-cursor');
 const railLabels = document.querySelectorAll('.rail-labels span');
-const sectionIds = ['hero', 'about', 'capabilities', 'tools', 'projects', 'team', 'contact'];
+const sectionIds = ['hero', 'about', 'services', 'process', 'workbench', 'team', 'contact'];
 
 function updateRail(id) {
   const idx = sectionIds.indexOf(id);

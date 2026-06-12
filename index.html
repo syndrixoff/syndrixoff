@@ -21,14 +21,12 @@
     <link rel="stylesheet" href="lib/geist-mono.css" />
   </noscript>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0b09'/%3E%3Cpath d='M14 42 32 12l18 30H14Z' fill='none' stroke='%23c4863f' stroke-width='4'/%3E%3Cpath d='M22 42h28L32 52 14 42h8Z' fill='%235ec5bd'/%3E%3C/svg%3E">
-  <style>
-    #page { opacity: 0; }
+<style>
 #page { opacity: 0; }
-    #loader { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; background: #000; }
-    .loader-center { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-    .loader-svg { display: block; width: min(45vmin, 360px); aspect-ratio: 674/672; }
-    .loader-pct { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; text-align: center; }
-  </style>
+.loader-center { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.loader-svg { display: block; width: min(45vmin, 360px); aspect-ratio: 674/672; }
+.loader-pct { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; text-align: center; }
+</style>
 
 </head>
 <body class="grain">
@@ -97,12 +95,21 @@
   <div class="section-rail" aria-hidden="true">
     <div class="rail-track">
       <div class="rail-cursor"></div>
+      <div class="rail-labels">
+        <span data-section="hero">Hero</span>
+        <span data-section="about">About</span>
+        <span data-section="services">Services</span>
+        <span data-section="process">Process</span>
+        <span data-section="workbench">Workbench</span>
+        <span data-section="team">Team</span>
+        <span data-section="contact">Contact</span>
+      </div>
     </div>
+  </div>
 
-  <main>
-<main id="main">
+  <main id="main">
     <!-- ─── Hero ─── -->
-    <section class="hero" aria-labelledby="hero-title">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-grid">
         <div class="hero-text">
 
@@ -676,8 +683,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section contact-section">
-      <div class="section-label centered">// CONTACT</div>
+    <section id="contact-us" class="section contact-section">class="section-label centered">// CONTACT</div>
 
       <div class="contact-card">
       <div class="contact-content">
@@ -710,5 +716,11 @@
   <footer class="page-footer"><small>&copy; 2025 SYNDRIX. All rights reserved.</small></footer>
 </div>
 <script type="module" src="src/main.js"></script>
+  <!-- Toast notification -->
+  <div id="toast" class="toast">Message sent! We'll be in touch shortly.</div>
+
+  <!-- Modal root -->
+  <div id="modal-root"></div>
+
 </body>
 </html>
