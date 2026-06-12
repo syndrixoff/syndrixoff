@@ -443,7 +443,7 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
-  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p, .reveal-l, .reveal-r, .reveal-scale").forEach((el) => {
+  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .team-filters, .team-scroll-dots, .about-text > p").forEach((el) => {
     if (!el.classList.contains("reveal")) el.classList.add("reveal");
   });
   revealObserver.observe(section);
@@ -781,16 +781,11 @@ document.addEventListener("DOMContentLoaded", () => {
 const cursorGlow = document.getElementById('cursorGlow');
 let cx = -9999, cy = -9999;
 let currentX = -9999, currentY = -9999;
-let cursorRunning = false;
 
 window.addEventListener('mousemove', (e) => {
   cx = e.clientX;
   cy = e.clientY;
   cursorGlow.style.opacity = '1';
-  if (!cursorRunning) {
-    cursorRunning = true;
-    animateCursor();
-  }
 });
 
 window.addEventListener('mouseleave', () => {
@@ -798,13 +793,9 @@ window.addEventListener('mouseleave', () => {
 });
 
 function animateCursor() {
-  currentX += (cx - currentX) * 0.08;
-  currentY += (cy - currentY) * 0.08;
-  cursorGlow.style.transform = `translate(${currentX - 100}px, ${currentY - 100}px)`;
-
-  if (Math.abs(currentX - cx) > 0.5 || Math.abs(currentY - cy) > 0.5) {
-    requestAnimationFrame(animateCursor);
-  } else {
-    cursorRunning = false;
-  }
+  currentX += (cx - currentX) * 0.12;
+  currentY += (cy - currentY) * 0.12;
+  cursorGlow.style.transform = `translate(${currentX - 150}px, ${currentY - 150}px)`;
+  requestAnimationFrame(animateCursor);
 }
+animateCursor();
