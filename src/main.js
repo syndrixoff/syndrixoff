@@ -116,7 +116,6 @@ if (navToggle && navLinksContainer) {
 
 /* ─── SECTION RAIL ─── */
 const railCursor = document.querySelector('.rail-cursor');
-const railLabels = document.querySelectorAll('.rail-labels span');
 const sectionIds = ['hero', 'about', 'services', 'process', 'workbench', 'team', 'contact'];
 
 function updateRail(id) {
@@ -128,9 +127,6 @@ function updateRail(id) {
   const trackHeight = track.offsetHeight || 216;
   const step = trackHeight / (sectionCount - 1);
   railCursor.style.transform = `translateY(${idx * step}px)`;
-  railLabels.forEach((span) => {
-    span.classList.toggle('active', span.dataset.section === id);
-  });
 }
 
 /* ─── ACTIVE SECTION TRACKING ─── */
