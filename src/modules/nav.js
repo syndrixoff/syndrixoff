@@ -115,8 +115,6 @@ function onNavClick(e) {
   if (navToggle) navToggle.classList.remove("active");
 }
 
-let scrollTimer;
-
 function syncActiveSection() {
   if (!navClickLock) {
     const id = getActiveSectionId();
@@ -125,14 +123,19 @@ function syncActiveSection() {
 }
 
 function initScrollTracking() {
+  let ticking = false;
   window.addEventListener("scroll", () => {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(syncActiveSection, 32);
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        syncActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 
   if ("onscrollend" in window) {
     window.addEventListener("scrollend", () => {
-      clearTimeout(scrollTimer);
       syncActiveSection();
     }, { passive: true });
   }

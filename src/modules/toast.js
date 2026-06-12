@@ -12,11 +12,4 @@ export function initToast() {
     form.reset();
     setTimeout(() => toast.classList.remove('show'), 3600);
   });
-
-  const nodeRing = document.querySelector('.node-ring');
-  if (nodeRing) {
-    const startOrbit = () => { nodeRing.classList.add('orbiting'); };
-    nodeRing.addEventListener('mouseenter', startOrbit, { once: true });
-    nodeRing.addEventListener('touchstart', startOrbit, { once: true, passive: true });
-  }
 }

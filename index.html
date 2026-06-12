@@ -67,7 +67,6 @@
       </svg>
       <div class="loader-pct" id="loaderPct">0%</div>
           </div>
-          <p class="orbit-hint" id="orbitHint">Hover to initialize</p>
         </div>
 </div>
 
@@ -658,14 +657,32 @@
         <div class="bg-grid"></div>
         <div style="position:relative;z-index:2">
           <p class="kicker">Free consultation</p>
-          <h2 id="contact-title">Bring a concept. Leave with an engineering direction.</h2>
-          <p>Tell SYNDRIX what you need engineered — custom electronics, embedded system, PCB design, IoT solution, or a complete product development package. The initial consultation is free so you can evaluate the fit before committing.</p>
-          <form class="contact-form" id="contactForm">
-            <label class="skip-link" for="projectInput">Describe your project</label>
-            <div class="form-row">
-              <input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring…" autocomplete="off" required>
-              <button class="btn btn-primary" type="submit">Start my project</button>
+          <h2 id="contact-title" class="contact-heading">Bring a concept.<br>Leave with an engineering<br>direction.</h2>
+          <p>Tell SYNDRIX what you need engineered — custom electronics, embedded system, PCB design, IoT solution, or a complete product development package. The initial consultation is free so you can evaluate the fit before committing. Or reach us directly at <a href="mailto:syndrixoff@gmail.com" style="color:var(--copper);text-decoration:underline;">syndrixoff@gmail.com</a></p>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="nameInput">Name</label>
+                <input id="nameInput" name="name" type="text" placeholder="Name" autocomplete="name" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="emailInput">Email</label>
+                <input id="emailInput" name="email" type="email" placeholder="Email" autocomplete="email" required>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="companyInput">Company</label>
+                <input id="companyInput" name="company" type="text" placeholder="Company" autocomplete="organization">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="budgetInput">Budget (e.g., ₹50K - ₹2L)</label>
+                <input id="budgetInput" name="budget" type="text" placeholder="₹50K - ₹2L" autocomplete="off">
+              </div>
             </div>
+            <div class="form-field form-field-full">
+              <label class="form-label" for="projectInput">Describe your project</label>
+              <input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring…" autocomplete="off" required>
+            </div>
+            <button class="btn btn-primary btn-full" type="submit">Start my project</button>
             <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
           </form>
         </div>
@@ -703,12 +720,12 @@
   </main>
 
   <footer class="page-footer">
-    <small>&copy; 2025 SYNDRIX &mdash; All rights reserved.</small>
+    <small>&copy; 2026 SYNDRIX &mdash; All rights reserved.</small>
   </footer>
 </div>
 <script type="module" src="src/main.js"></script>
   <!-- Toast notification -->
-  <div id="toast" class="toast">Message sent! We'll be in touch shortly.</div>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Modal root -->
   <div id="modal-root"></div>

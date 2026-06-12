@@ -22,6 +22,25 @@ export function initModal() {
   };
 
   let activeModal = null;
+  let previouslyFocused = null;
+
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])';
+
+  function trapFocus(overlay) {
+    const els = Array.from(overlay.querySelectorAll(FOCUSABLE));
+    if (!els.length) return;
+    const first = els[0], last = els[els.length - 1];
+    overlay.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    const closeBtn = overlay.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
 
   function closeModal() {
     if (!activeModal) return;
@@ -30,20 +49,25 @@ export function initModal() {
     overlay.classList.remove("open");
     overlay.addEventListener("transitionend", () => overlay.remove(), { once: true });
     activeModal = null;
+    if (previouslyFocused) { previouslyFocused.focus(); previouslyFocused = null; }
   }
 
   function openModal(projectId) {
     const data = projectData[projectId];
     if (!data) return;
     if (activeModal) closeModal();
+    previouslyFocused = document.activeElement;
+
     const overlay = document.createElement("div");
     overlay.className = "modal-overlay";
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
     overlay.innerHTML = `
       <div class="modal-content">
         <div class="modal-header">
           <div>
             <span class="modal-tag">${data.tag}</span>
-            <h2>${data.title}</h2>
+            <h2 id="modal-title">${data.title}</h2>
           </div>
           <button class="modal-close" aria-label="Close modal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -69,7 +93,10 @@ export function initModal() {
     overlay.querySelector(".modal-close").addEventListener("click", closeModal);
     document.addEventListener("keydown", onKeyDown);
     activeModal = overlay;
-    requestAnimationFrame(() => overlay.classList.add("open"));
+    requestAnimationFrame(() => {
+      overlay.classList.add("open");
+      trapFocus(overlay);
+    });
   }
 
   function onKeyDown(e) {
@@ -78,5 +105,6 @@ export function initModal() {
 
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', () => openModal(card.dataset.project));
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card.dataset.project); } });
   });
 }
