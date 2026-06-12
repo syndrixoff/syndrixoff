@@ -2069,7 +2069,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 8px 0;
+  padding: 8px 8px 8px 12px;
 }
 
 .rail-labels span {
@@ -2081,7 +2081,7 @@ body::before {
   color: var(--muted);
   white-space: nowrap;
   transition: opacity 0.3s ease-out;
-  opacity: 0;
+  opacity: 0.6;
   pointer-events: auto;
   cursor: pointer;
 }
