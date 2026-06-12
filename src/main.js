@@ -41,7 +41,7 @@ function updateIndicator(link) {
     return;
   }
 
-  const parentWidth = navLinksContainer.offsetWidth;
+  const parentWidth = navLinksContainer?.offsetWidth || 0;
   const targetLeft = link.offsetLeft;
   const targetRight = parentWidth - (targetLeft + link.offsetWidth);
 
@@ -125,8 +125,8 @@ navLinks.forEach(link => {
       }
     });
 
-    navLinksContainer.classList.remove("open");
-    navToggle.classList.remove("active");
+    if (navLinksContainer) navLinksContainer.classList.remove("open");
+    if (navToggle) navToggle.classList.remove("active");
   });
 });
 
@@ -146,10 +146,12 @@ window.addEventListener('resize', () => {
   }
 });
 
-navToggle.addEventListener("click", () => {
-  navLinksContainer.classList.toggle("open");
-  navToggle.classList.toggle("active");
-});
+if (navToggle && navLinksContainer) {
+  navToggle.addEventListener("click", () => {
+    navLinksContainer.classList.toggle("open");
+    navToggle.classList.toggle("active");
+  });
+}
 
 /* ─── SECTION RAIL ─── */
 const railCursor = document.querySelector('.rail-cursor');
