@@ -411,7 +411,7 @@ function startTick() {
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      const children = entry.target.querySelectorAll(".reveal");
+      const children = entry.target.querySelectorAll(".reveal, .reveal-l, .reveal-r, .reveal-scale");
       if (entry.isIntersecting) {
         children.forEach((child, i) => {
           child.style.setProperty("--stagger-delay", `${i * 60}ms`);
@@ -440,7 +440,7 @@ document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
   const effectiveTop = window.innerHeight * 0.1;
   const effectiveBottom = window.innerHeight * 0.8;
   if (rect.top < effectiveBottom && rect.bottom > effectiveTop) {
-    const children = section.querySelectorAll(".reveal");
+    const children = section.querySelectorAll(".reveal, .reveal-l, .reveal-r, .reveal-scale");
     children.forEach((child, i) => {
       child.style.setProperty("--stagger-delay", `${i * 60}ms`);
       child.classList.add("revealed");
