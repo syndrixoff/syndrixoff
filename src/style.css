@@ -314,8 +314,8 @@
     .section {
       width: min(1100px, calc(100% - 2.4rem));
       margin: 0 auto;
-      padding: clamp(5rem, 10vw, 9rem) 0;
-      scroll-margin-top: 7rem;
+      padding: clamp(7rem, 12vw, 10rem) 0;
+      scroll-margin-top: 120px;
     }
 
     .section-head {
@@ -1532,18 +1532,6 @@
   padding: 0 calc((100vw - min(100%, var(--max-w))) / 2);
 }
 
-.team-scroll-wrap::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  background: linear-gradient(to right, transparent, var(--bg));
-  pointer-events: none;
-  z-index: 2;
-}
-
 .team-grid {
   display: flex;
   gap: 20px;
@@ -1554,8 +1542,8 @@
   scrollbar-width: none;
   padding: 28px 32px 20px;
   scroll-padding-left: 32px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 32px calc(100% - 60px), transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0px, black 32px calc(100% - 60px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 32px);
+  mask-image: linear-gradient(to right, transparent 0px, black 32px);
 }
 .team-grid::-webkit-scrollbar { display: none; }
 
