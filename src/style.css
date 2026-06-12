@@ -72,6 +72,7 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       line-height: 1.6;
+      transition: background-color 0.6s, color 0.6s;
     }
 
     /* ─── Dynamic Ambient Background Glows ─── */
@@ -1796,70 +1797,40 @@ overflow-x: clip;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: rgba(255, 255, 255, 0.06);
-  border: none;
+  border: 1px solid rgba(232, 223, 206, 0.1);
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.2s;
+  color: var(--muted);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
-
 .theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(232, 223, 206, 0.2);
+  color: var(--ink);
+  transform: scale(1.05);
 }
-[data-theme="light"] {
-  --bg: #F8FAFC;
-  --bg-soft: #f0eef2;
-  --bg-card: rgba(255, 255, 255, 0.65);
-  --bg-card-solid: #f5f3f7;
-  --canvas-light: #f5f3f7;
-  --canvas-white: #faf8fc;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(0, 0, 0, 0.12);
-  --hud: rgba(0, 0, 0, 0.05);
-  --accent: #1D4ED8;
-  --accent-hover: #2563EB;
-  --accent-soft: rgba(29, 78, 216, 0.08);
-  --accent-glow: rgba(29, 78, 216, 0.2);
-  --accent-light: #1D4ED8;
-  --electric-cyan: #00D4FF;
-  --fg: #1d1d1f;
-  --fg-muted: #6e6e73;
-  --fg-dim: #636368;
-  --fg-ink: #1d1d1f;
-  --accent-text: #1D4ED8;
-  --section-alt: color-mix(in srgb, var(--bg) 98%, var(--accent));
-  --card-border: rgba(255, 255, 255, 0.15);
-  --btn-ghost-border: rgba(0, 0, 0, 0.1);
-  --grain-opacity: 0.005;
-  --glass-blur: 20px;
-  --glass-saturate: 130%;
-  --glass-edge: rgba(255, 255, 255, 0.35);
-  --glass-edge-light: rgba(255, 255, 255, 0.5);
-  --neu-bg: #eef0f4;
-  --neu-shadow-light: #ffffff;
-  --neu-shadow-dark: rgba(0, 0, 0, 0.05);
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
 }
+.theme-toggle .theme-icon-light { display: none; }
+.theme-toggle .theme-icon-dark { display: block; }
+[data-theme="light"] .theme-toggle { background: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0, 0, 0.08); color: var(--muted); }
+[data-theme="light"] .theme-toggle:hover { background: rgba(0, 0, 0, 0.06); border-color: rgba(0, 0, 0, 0.12); color: var(--ink); }
+[data-theme="light"] .theme-toggle .theme-icon-light { display: block; }
+[data-theme="light"] .theme-toggle .theme-icon-dark { display: none; }
+
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-snap-type: y proximity;
-  overflow-x: hidden;
-  scrollbar-width: none;
-}
 
-body {
-  font-family: var(--font);
-  color: var(--fg);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  transition: background-color 0.6s, color 0.6s;
-  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
-}
+
+
 
 /* ─── CUSTOM PAGE SCROLLBAR ─── */
 .page-scrollbar {
@@ -1923,12 +1894,9 @@ p {
   pointer-events: none;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 90% 75% at 40% 20%, color-mix(in srgb, #8B5CF6 22%, transparent), transparent 65%),
-    radial-gradient(ellipse 80% 65% at 70% 20%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 60%),
-    radial-gradient(ellipse 70% 75% at 60% 75%, color-mix(in srgb, #F59E0B 14%, transparent), transparent 55%),
-    radial-gradient(ellipse 70% 70% at 25% 70%, color-mix(in srgb, #F97316 12%, transparent), transparent 55%),
-    radial-gradient(ellipse 75% 55% at 50% 45%, color-mix(in srgb, #A78BFA 13%, transparent), transparent 55%),
-    radial-gradient(ellipse 90% 80% at 30% 55%, color-mix(in srgb, #6366F1 10%, transparent), transparent 65%);
+    radial-gradient(ellipse 90% 75% at 40% 20%, color-mix(in srgb, var(--copper) 18%, transparent), transparent 65%),
+    radial-gradient(ellipse 80% 65% at 70% 20%, color-mix(in srgb, var(--cyan) 15%, transparent), transparent 60%),
+    radial-gradient(ellipse 70% 75% at 60% 75%, color-mix(in srgb, var(--copper) 12%, transparent), transparent 55%);
   background-attachment: fixed;
   background-blend-mode: overlay;
   filter: blur(80px) saturate(1.6);
@@ -1943,11 +1911,8 @@ p {
 [data-theme="light"] #page::before {
   opacity: 0.5;
   background:
-    radial-gradient(ellipse 90% 75% at 35% 25%, color-mix(in srgb, #8B5CF6 14%, transparent), transparent 65%),
-    radial-gradient(ellipse 80% 65% at 75% 30%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%),
-    radial-gradient(ellipse 70% 75% at 65% 65%, color-mix(in srgb, #F59E0B 8%, transparent), transparent 55%),
-    radial-gradient(ellipse 70% 70% at 20% 75%, color-mix(in srgb, #F97316 7%, transparent), transparent 55%),
-    radial-gradient(ellipse 75% 55% at 55% 40%, color-mix(in srgb, #A78BFA 7%, transparent), transparent 55%);
+    radial-gradient(ellipse 90% 75% at 40% 20%, color-mix(in srgb, var(--copper) 12%, transparent), transparent 65%),
+    radial-gradient(ellipse 80% 65% at 70% 20%, color-mix(in srgb, var(--cyan) 10%, transparent), transparent 60%);
   filter: blur(80px) saturate(2);
 }
 
@@ -2309,18 +2274,7 @@ body::before {
 }
 
 /* ─── THEME TOGGLE ─── */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.06);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.2s;
-}
+
 
 .theme-toggle:hover {
   background: rgba(255, 255, 255, 0.12);
