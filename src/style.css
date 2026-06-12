@@ -307,6 +307,12 @@
     /* ─── Main ─── */
     main { position: relative; z-index: 1; }
 
+    #page { padding-right: 0; }
+
+    @media (min-width: 901px) {
+      #page { padding-right: 90px; }
+    }
+
     .section {
       width: min(1100px, calc(100% - 2.4rem));
       margin: 0 auto;
@@ -2027,17 +2033,18 @@ body::-webkit-scrollbar { display: none; }
 /* ─── SECTION RAIL (scroll-snap indicator) ─── */
 .section-rail {
   position: fixed;
-  right: 32px;
+  right: 0;
   top: 50%;
   translate: 0 -50%;
   z-index: 50;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   gap: 0;
   pointer-events: none;
   opacity: 0.7;
   transition: opacity 0.4s;
+  padding-right: 8px;
 }
 .section-rail:hover { opacity: 1; }
 
@@ -2087,7 +2094,7 @@ body::-webkit-scrollbar { display: none; }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 0;
 }
 
 .rail-labels span {
