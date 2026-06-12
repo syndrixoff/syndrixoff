@@ -2121,21 +2121,28 @@ body::-webkit-scrollbar { display: none; }
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
-  transition: opacity 0.3s ease-out, color 0.3s ease-out;
-  opacity: 0.5;
-  pointer-events: auto;
+  transition: opacity 0.35s ease-out, color 0.35s ease-out, transform 0.35s ease-out;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
   cursor: pointer;
   text-align: left;
   background: none;
 }
 
-.rail-labels span:hover {
+.section-rail:hover .rail-labels span {
+  opacity: 0.8;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.section-rail:hover .rail-labels span:hover {
   color: var(--ink);
   opacity: 1;
 }
 
 .rail-labels span.active {
-  color: var(--ink);
+  color: var(--copper);
   opacity: 1;
 }
 
