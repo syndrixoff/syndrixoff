@@ -310,7 +310,7 @@
     #page { padding-right: 0; }
 
     @media (min-width: 901px) {
-      #page { padding-right: 90px; }
+      #page { padding-right: 170px; }
     }
 
     .section {
@@ -1539,15 +1539,16 @@
 
 .team-grid {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 28px 24px 36px;
-  scroll-padding-left: 24px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 24px calc(100% - 60px), transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0px, black 24px calc(100% - 60px), transparent 100%);
+  padding: 28px 32px 36px;
+  scroll-padding-left: 32px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 32px calc(100% - 60px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0px, black 32px calc(100% - 60px), transparent 100%);
 }
 .team-grid::-webkit-scrollbar { display: none; }
 
@@ -2033,18 +2034,17 @@ body::-webkit-scrollbar { display: none; }
 /* ─── SECTION RAIL (scroll-snap indicator) ─── */
 .section-rail {
   position: fixed;
-  right: 0;
+  right: 30px;
   top: 50%;
   translate: 0 -50%;
   z-index: 50;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
-  gap: 0;
+  width: 140px;
   pointer-events: none;
   opacity: 0.7;
   transition: opacity 0.4s;
-  padding-right: 8px;
 }
 .section-rail:hover { opacity: 1; }
 
@@ -2094,7 +2094,7 @@ body::-webkit-scrollbar { display: none; }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 10px 0 0;
+  padding: 0 14px 0 0;
 }
 
 .rail-labels span {

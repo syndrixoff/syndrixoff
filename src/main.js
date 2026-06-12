@@ -385,7 +385,6 @@ themeToggle.addEventListener("click", (e) => {
 /* ─── LOADER (tracks real load progress) ─── */
 const loader = document.getElementById("loader");
 const pctEl = document.getElementById("loaderPct");
-const loaderColored = document.getElementById("loaderColored");
 const page = document.getElementById("page");
 
 let currentProgress = 0;
@@ -399,7 +398,6 @@ function setLoadTarget(p) {
 function finishLoader() {
   currentProgress = 1;
   pctEl.textContent = "100%";
-  loaderColored.style.clipPath = "inset(0% 0 0 0)";
   page.classList.add("page-visible");
   loader.classList.add("loader-hidden");
   requestAnimationFrame(() => {
@@ -424,7 +422,6 @@ function tick() {
     if (currentProgress > targetProgress) currentProgress = targetProgress;
   }
   pctEl.textContent = Math.round(currentProgress * 100) + "%";
-  loaderColored.style.clipPath = `inset(${(1 - currentProgress) * 100}% 0 0 0)`;
   if (currentProgress >= 0.999) {
     finishLoader();
     return;
