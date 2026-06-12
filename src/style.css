@@ -365,7 +365,7 @@
       min-height: 100svh;
       display: grid;
       align-items: center;
-      padding: 5rem max(1.2rem, 5vw) 3rem;
+      padding: 4rem max(1.2rem, 5vw) 3rem;
       position: relative;
       overflow: hidden;
     }
@@ -1359,7 +1359,7 @@
         gap: 3rem;
       }
       .hero {
-        padding: 4.5rem 1rem 2.5rem;
+        padding: 3.5rem 1rem 2.5rem;
       }
       .hero-visual {
         min-height: 350px;
@@ -1389,7 +1389,7 @@
       .brand { font-size: 0.85rem; letter-spacing: 0.06em; }
       .nav-cta { font-size: 0.72rem; padding: 0.55rem 0.9rem; }
 
-      .hero { padding: 5.5rem 1rem 2rem; }
+      .hero { padding: 4rem 1rem 2rem; }
       h1 { font-size: clamp(2.8rem, 15vw, 4.2rem); }
       .hero-visual { min-height: 280px; }
       .node-ring { width: 240px; height: 240px; }
@@ -1412,7 +1412,7 @@
     }
 
     @media (max-width: 420px) {
-      .hero { padding: 5rem 0.8rem 1.5rem; }
+      .hero { padding: 3.5rem 0.8rem 1.5rem; }
       .hero-visual { min-height: 240px; }
       .node-ring { width: 200px; height: 200px; }
       .node { width: 68px; height: 68px; top: -34px; left: -34px; transform: translateY(-66px); }
@@ -1421,6 +1421,8 @@
     }
   
 /* OUR ADDITIONS */
+
+
 
 /* Loader states */
 #page.page-visible { opacity: 1 !important; }
@@ -1437,6 +1439,43 @@
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity 0.5s ease !important;
+}
+
+/* ─── TEAM FILTERS ─── */
+.team-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.team-filter {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(232,223,206,0.08);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.team-filter:hover,
+.team-filter.active {
+  border-color: var(--copper);
+  color: var(--ink);
+  background: rgba(255,255,255,0.06);
+}
+[data-theme="light"] .team-filter {
+  background: rgba(0,0,0,0.02);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--muted);
+}
+[data-theme="light"] .team-filter:hover,
+[data-theme="light"] .team-filter.active {
+  border-color: var(--copper);
+  color: var(--ink);
+  background: rgba(0,0,0,0.03);
 }
 
 /* ─── TEAM ─── */
