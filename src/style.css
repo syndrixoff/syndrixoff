@@ -557,19 +557,15 @@
       left: 50%;
       width: 0;
       height: 0;
-      /* Paused by default — orbit only on hover */
-      animation: planet-orbit 18s linear infinite;
-      animation-play-state: paused;
+      animation: planet-orbit 60s linear infinite;
     }
-    /* Negative delay offsets starting position on the orbit (120° = 1/3 of duration) */
+    .node-ring.orbiting .orbit-arm {
+      animation-duration: 18s;
+    }
+    /* Negative delay offsets starting position on the orbit (120° = 1/3 of duration at 18s) */
     .orbit-arm-1 { animation-delay: 0s; }
     .orbit-arm-2 { animation-delay: -6s; }
     .orbit-arm-3 { animation-delay: -12s; }
-
-    /* On hover/activation → start orbiting */
-    .node-ring.orbiting .orbit-arm {
-      animation-play-state: running;
-    }
 
     .node {
       position: absolute;
@@ -604,22 +600,19 @@
 
     /* Counter-rotate labels to keep text upright — matching delays */
     .orbit-arm-1 .label {
-      animation: counter-orbit 18s linear infinite;
-      animation-play-state: paused;
+      animation: counter-orbit 60s linear infinite;
       animation-delay: 0s;
     }
     .orbit-arm-2 .label {
-      animation: counter-orbit 18s linear infinite;
-      animation-play-state: paused;
+      animation: counter-orbit 60s linear infinite;
       animation-delay: -6s;
     }
     .orbit-arm-3 .label {
-      animation: counter-orbit 18s linear infinite;
-      animation-play-state: paused;
+      animation: counter-orbit 60s linear infinite;
       animation-delay: -12s;
     }
     .node-ring.orbiting .orbit-arm .label {
-      animation-play-state: running;
+      animation-duration: 18s;
     }
 
     .node .label {
@@ -650,6 +643,24 @@
       background: var(--copper);
       border-radius: 50%;
       box-shadow: 0 0 20px rgba(196, 134, 63, 0.3);
+    }
+
+    .orbit-hint {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      translate: -50% 0;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    .node-ring.orbiting + .orbit-hint {
+      opacity: 0;
     }
 
     .glow-blob {
@@ -1625,6 +1636,64 @@
   background: var(--copper);
   box-shadow: 0 0 6px var(--accent-glow);
   transform: scale(1.6);
+}
+
+/* ─── TEAM SCROLL CHEVRONS ─── */
+.team-scroll-btn {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+  z-index: 5;
+  pointer-events: auto;
+  opacity: 0;
+}
+.team-scroll-wrap:hover .team-scroll-btn {
+  opacity: 0.85;
+}
+.team-scroll-btn:hover {
+  color: var(--copper);
+  border-color: var(--line-strong);
+  transform: translate(0, -50%) scale(1.08);
+}
+.team-scroll-btn:active {
+  transform: translate(0, -50%) scale(0.95);
+}
+.team-scroll-btn svg {
+  width: 18px;
+  height: 18px;
+}
+.team-scroll-prev {
+  left: calc((100vw - min(100%, var(--max-w))) / 2 + 8px);
+}
+.team-scroll-next {
+  right: calc((100vw - min(100%, var(--max-w))) / 2 + 8px);
+}
+.team-scroll-btn.hidden { opacity: 0 !important; pointer-events: none; }
+
+[data-theme="light"] .team-scroll-btn {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(0,0,0,0.1);
+}
+[data-theme="light"] .team-scroll-btn:hover {
+  color: var(--copper);
+  border-color: var(--copper);
+}
+
+@media (max-width: 900px) {
+  .team-scroll-btn { display: none; }
 }
 
 .team-card-visual {

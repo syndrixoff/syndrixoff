@@ -47,6 +47,8 @@ function initFilters() {
   const teamCards = document.querySelectorAll(".team-card");
   const teamGrid = document.getElementById("teamGrid");
   const teamDots = document.getElementById("teamScrollDots");
+  const prevBtn = document.getElementById("teamScrollPrev");
+  const nextBtn = document.getElementById("teamScrollNext");
 
   function rebuildTeamDots() {
     const containerW = teamGrid.clientWidth;
@@ -65,6 +67,17 @@ function initFilters() {
     }
   }
 
+  function syncChevrons() {
+    const maxScroll = teamGrid.scrollWidth - teamGrid.clientWidth;
+    if (maxScroll <= 1) {
+      prevBtn?.classList.add("hidden");
+      nextBtn?.classList.add("hidden");
+      return;
+    }
+    prevBtn?.classList.toggle("hidden", teamGrid.scrollLeft < 8);
+    nextBtn?.classList.toggle("hidden", teamGrid.scrollLeft > maxScroll - 8);
+  }
+
   function syncTeamDots() {
     const dots = teamDots.querySelectorAll(".tdot");
     if (!dots.length) return;
@@ -75,7 +88,19 @@ function initFilters() {
     dots.forEach((d, i) => d.classList.toggle("active", i === active));
   }
 
-  teamGrid?.addEventListener("scroll", syncTeamDots, { passive: true });
+  function scrollByPage(dir) {
+    const w = teamGrid.clientWidth;
+    const target = teamGrid.scrollLeft + w * dir;
+    teamGrid.scrollTo({ left: target, behavior: "smooth" });
+  }
+
+  prevBtn?.addEventListener("click", () => scrollByPage(-1));
+  nextBtn?.addEventListener("click", () => scrollByPage(1));
+
+  teamGrid?.addEventListener("scroll", () => {
+    syncTeamDots();
+    syncChevrons();
+  }, { passive: true });
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -91,9 +116,11 @@ function initFilters() {
       });
       rebuildTeamDots();
       syncTeamDots();
+      syncChevrons();
     });
   });
 
   rebuildTeamDots();
   syncTeamDots();
+  syncChevrons();
 }
