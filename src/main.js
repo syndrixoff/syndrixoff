@@ -453,6 +453,7 @@ document.fonts.ready.then(() => {
 window.addEventListener("load", () => {
   milestones.win = true;
   if (!milestones.dom || !milestones.fonts) setLoadTarget(0.36);
+  checkComplete();
 });
 
 let tickStarted = false;
