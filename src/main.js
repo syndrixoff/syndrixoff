@@ -236,16 +236,6 @@ document.querySelectorAll(".team-card").forEach(card => {
   }
 });
 
-/* ─── RAIL LABEL CLICK ─── */
-railLabels.forEach((span) => {
-  span.addEventListener("click", () => {
-    const id = span.dataset.section;
-    const target = document.getElementById(id);
-    if (!target) return;
-    target.scrollIntoView({ behavior: "smooth" });
-  });
-});
-
 /* ─── RE-SYNC ON RESIZE ─── */
 let resizeTimer;
 window.addEventListener("resize", () => {
