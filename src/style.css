@@ -472,6 +472,8 @@
     .btn:hover { transform: translateY(-2px); }
     .btn-primary:hover { box-shadow: 0 10px 28px rgba(196, 134, 63, 0.2); }
     .btn-secondary:hover { border-color: var(--line-strong); background: rgba(196, 134, 63, 0.07); }
+    .btn:active { transform: scale(0.96); }
+    .btn-primary:active { box-shadow: inset 0 2px 6px rgba(0,0,0,0.2); }
 
     .hero-stats {
       display: grid;
@@ -712,6 +714,7 @@
         0 18px 48px -8px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 0 rgba(232, 223, 206, 0.15);
     }
+    .mission-card:active { transform: scale(0.98); }
     .mission-card h3 {
       margin: 0 0 0.8rem;
       font-family: "Geist", system-ui, sans-serif;
@@ -751,6 +754,7 @@
         0 14px 36px -6px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 0 rgba(232, 223, 206, 0.12);
     }
+    .value-card:active { transform: scale(0.97); }
     .value-icon {
       width: 44px;
       height: 44px;
@@ -858,6 +862,7 @@
         0 20px 48px -10px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 0 rgba(232, 223, 206, 0.15);
     }
+    .service-card:active { transform: scale(0.98); }
     .service-card .num {
       font-family: "Geist", system-ui, sans-serif;
       font-size: 5rem;
@@ -1058,6 +1063,7 @@
         0 14px 36px -8px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 0 rgba(232, 223, 206, 0.12);
     }
+    .deliverable:active { transform: scale(0.98); }
     .deliverable .icon {
       width: 40px;
       height: 40px;
@@ -1575,6 +1581,7 @@
     0 12px 40px rgba(0,0,0,0.22),
     0 0 24px var(--accent-glow);
 }
+.team-card:active { transform: scale(0.98); }
 
 [data-theme="light"] .team-card {
   background: rgba(255, 255, 255, 0.4);
@@ -2576,4 +2583,23 @@ body::-webkit-scrollbar { display: none; }
 @keyframes cursorBlink {
   50% { opacity: 0; }
 }
+
+/* ─── TOUCH PRESSED STATES ─── */
+.nav-cta:active,
+.nav-links a:active,
+.brand:active { transform: scale(0.96); }
+
+.team-filter:active,
+.theme-toggle:active,
+.modal-close:active { transform: scale(0.94); }
+
+.glass-card:active,
+.project-card:active,
+.team-card-visual img:active { transform: scale(0.98); }
+
+.team-social a:active,
+.footer-links a:active,
+.social-links a:active { transform: scale(0.92); }
+
+.team-scroll-dots .tdot:active::after { transform: scale(1.4); background: var(--copper); }
 
