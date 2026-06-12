@@ -485,8 +485,8 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
-  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p").forEach((el) => {
-    el.classList.add("reveal");
+  section.querySelectorAll(".section-label, .section-title, .section-subtitle, .tool-domain, .tools-pipeline, .glass-card, .tele-card, .project-card, .team-card, .contact-card, .about-text > p, .reveal-l, .reveal-r, .reveal-scale").forEach((el) => {
+    if (!el.classList.contains("reveal")) el.classList.add("reveal");
   });
   revealObserver.observe(section);
 });

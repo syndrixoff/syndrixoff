@@ -1170,7 +1170,6 @@
     }
     .footer-links a:hover { color: var(--ink); }
 
-    /* ─── Closing Statement ─── */
     .closing-statement {
       text-align: center;
       padding: 3rem 0 0;
@@ -1190,6 +1189,55 @@
       letter-spacing: 0.06em;
     }
 
+    .page-footer {
+      text-align: center;
+      color: var(--faint);
+      font-family: "Geist", system-ui, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FOOTER (glass card) ─── */
+    .footer {
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+      padding: 0;
+    }
+
+    .footer-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+      border-radius: var(--radius-lg);
+      box-shadow:
+        0 1px 0 0 var(--glass-edge) inset,
+        0 8px 32px rgba(0,0,0,0.10);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .footer-legal {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    [data-theme="light"] .footer-inner {
+      background: rgba(255, 255, 255, 0.4);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 1px 0 0 var(--glass-edge-light) inset,
+        0 8px 32px rgba(0,0,0,0.05);
+    }
+
     /* ─── Reveal ─── */
     .reveal {
       opacity: 0;
@@ -1206,7 +1254,7 @@
       transform: translateX(-30px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
-    .reveal-l.is-visible {
+    .reveal-l.is-visible, .reveal-l.revealed {
       opacity: 1;
       transform: translateX(0);
     }
@@ -1216,7 +1264,7 @@
       transform: translateX(30px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
-    .reveal-r.is-visible {
+    .reveal-r.is-visible, .reveal-r.revealed {
       opacity: 1;
       transform: translateX(0);
     }
@@ -1226,7 +1274,7 @@
       transform: scale(0.92);
       transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
     }
-    .reveal-scale.is-visible {
+    .reveal-scale.is-visible, .reveal-scale.revealed {
       opacity: 1;
       transform: scale(1);
     }
