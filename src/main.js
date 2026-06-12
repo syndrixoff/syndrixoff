@@ -33,52 +33,16 @@ function getActiveSectionId() {
 }
 
 function updateIndicator(link) {
-  if (!link || !indicator) {
-    if (indicator) {
-      indicator.style.opacity = '0';
-      indicator.style.transform = 'scale(0.9)';
-    }
+  if (!indicator) return;
+
+  if (!link) {
+    indicator.style.transform = 'translateX(0px)';
+    indicator.style.width = '0px';
     return;
   }
 
-  const parentWidth = navLinksContainer?.offsetWidth || 0;
-  const targetLeft = link.offsetLeft;
-  const targetRight = parentWidth - (targetLeft + link.offsetWidth);
-
-  if (isInitial || indicator.style.opacity === '0') {
-    indicator.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-    indicator.style.left = `${targetLeft}px`;
-    indicator.style.right = `${targetRight}px`;
-    indicator.style.opacity = '1';
-    indicator.style.transform = 'scale(1)';
-    isInitial = false;
-    indicator.offsetHeight;
-    return;
-  }
-
-  const currentLeft = parseFloat(indicator.style.left) || 0;
-  const movingRight = targetLeft > currentLeft;
-
-  if (movingRight) {
-    indicator.style.transition = `
-      left 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
-      right 0.32s cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0.25s ease,
-      transform 0.25s ease
-    `;
-  } else {
-    indicator.style.transition = `
-      left 0.32s cubic-bezier(0.25, 1, 0.5, 1),
-      right 0.38s cubic-bezier(0.25, 1, 0.5, 1) 0.05s,
-      opacity 0.25s ease,
-      transform 0.25s ease
-    `;
-  }
-
-  indicator.style.left = `${targetLeft}px`;
-  indicator.style.right = `${targetRight}px`;
-  indicator.style.opacity = '1';
-  indicator.style.transform = 'scale(1)';
+  indicator.style.transform = `translateX(${link.offsetLeft}px)`;
+  indicator.style.width = `${link.offsetWidth}px`;
 }
 
 function setActiveSection(id, instant) {
@@ -138,11 +102,8 @@ if (navLinksContainer) {
 window.addEventListener('resize', () => {
   if (activeLink && indicator) {
     indicator.style.transition = 'none';
-    const parentWidth = navLinksContainer.offsetWidth;
-    const targetLeft = activeLink.offsetLeft;
-    const targetRight = parentWidth - (targetLeft + activeLink.offsetWidth);
-    indicator.style.left = `${targetLeft}px`;
-    indicator.style.right = `${targetRight}px`;
+    indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+    indicator.style.width = `${activeLink.offsetWidth}px`;
   }
 });
 
