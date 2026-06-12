@@ -2003,6 +2003,20 @@ p {
   filter: blur(80px) saturate(2);
 }
 
+/* ─── CURSOR GLOW ─── */
+#cursorGlow {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,134,63,0.08), transparent 70%);
+  pointer-events: none;
+  z-index: 90;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
 /* ─── AMBIENT NAV GLOW ─── */
 body::before {
   content: '';

@@ -815,3 +815,35 @@ document.addEventListener("DOMContentLoaded", () => {
     startLoop();
   }
 });
+
+/* ─── CURSOR GLOW ─── */
+const cursorGlow = document.getElementById('cursorGlow');
+let cx = -9999, cy = -9999;
+let currentX = -9999, currentY = -9999;
+let cursorRunning = false;
+
+window.addEventListener('mousemove', (e) => {
+  cx = e.clientX;
+  cy = e.clientY;
+  cursorGlow.style.opacity = '1';
+  if (!cursorRunning) {
+    cursorRunning = true;
+    animateCursor();
+  }
+});
+
+window.addEventListener('mouseleave', () => {
+  cursorGlow.style.opacity = '0';
+});
+
+function animateCursor() {
+  currentX += (cx - currentX) * 0.08;
+  currentY += (cy - currentY) * 0.08;
+  cursorGlow.style.transform = `translate(${currentX - 100}px, ${currentY - 100}px)`;
+
+  if (Math.abs(currentX - cx) > 0.5 || Math.abs(currentY - cy) > 0.5) {
+    requestAnimationFrame(animateCursor);
+  } else {
+    cursorRunning = false;
+  }
+}
