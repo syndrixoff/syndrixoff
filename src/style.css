@@ -279,19 +279,28 @@
       /* Transition is updated dynamically in JS for the stretch effect */
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 2;
+    }
+
     .nav-cta {
       background: var(--copper);
       color: #0c0b09;
       border-radius: 999px;
-      padding: 0.72rem 1.3rem; /* Enlarged CTA padding */
+      padding: 0.55rem 1.1rem;
       font-weight: 900;
-      font-size: 0.85rem; /* Enlarged CTA font */
+      font-size: 0.8rem;
       letter-spacing: 0.02em;
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
       position: relative;
       z-index: 2;
+      line-height: 1.2;
     }
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(196, 134, 63, 0.22); }
 
@@ -2002,21 +2011,30 @@ body::before {
 }
 
 ::selection { background: color-mix(in srgb, var(--copper) 15%, transparent); color: var(--cyan); }
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
+
+/* Hide scrollbar everywhere */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar { display: none; }
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar { display: none; }
 
 /* ─── SECTION RAIL (scroll-snap indicator) ─── */
 .section-rail {
   position: fixed;
-  right: max(24px, calc((100vw - 1100px) / 2 - 80px));
+  right: 32px;
   top: 50%;
   translate: 0 -50%;
   z-index: 50;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   pointer-events: none;
   opacity: 0.7;
   transition: opacity 0.4s;
@@ -2048,7 +2066,7 @@ body::before {
 
 [data-theme="light"] .rail-cursor {
   background: var(--copper);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--cyan) 50%, var(--copper));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--electric-cyan) 50%, var(--copper));
 }
 
 .rail-cursor::after {
@@ -2068,8 +2086,8 @@ body::before {
 .rail-labels {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 8px 8px 8px 12px;
+  gap: 16px;
+  padding: 0 0 0 10px;
 }
 
 .rail-labels span {
@@ -2080,10 +2098,11 @@ body::before {
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
-  transition: opacity 0.3s ease-out;
-  opacity: 0.6;
+  transition: opacity 0.3s ease-out, color 0.3s ease-out;
+  opacity: 0.5;
   pointer-events: auto;
   cursor: pointer;
+  text-align: left;
 }
 
 .rail-labels span:hover {
