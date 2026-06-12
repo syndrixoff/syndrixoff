@@ -1191,14 +1191,14 @@
 
     .page-footer {
       text-align: center;
-      color: var(--faint);
-      font-family: "Geist", system-ui, sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
+      padding: 2rem 0 2.5rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    /* ─── FOOTER (glass card) ─── */
     .footer {
       max-width: 900px;
       margin: 0 auto 2.5rem;
@@ -2634,7 +2634,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-bottom: 1px solid rgba(232, 223, 206, 0.06);
   background: rgba(18, 16, 14, 0.4);
 }
@@ -2659,13 +2659,14 @@ body::before {
 
 .term-body {
   flex: 1;
-  padding: 16px;
+  padding: 12px 14px;
   overflow-y: auto;
   font-family: var(--mono);
-  font-size: 0.72rem;
-  line-height: 1.7;
+  font-size: 0.7rem;
+  line-height: 1.6;
   color: var(--muted);
-  min-height: 140px;
+  min-height: 80px;
+  max-height: 200px;
   scrollbar-width: none;
 }
 .term-body::-webkit-scrollbar { display: none; }
