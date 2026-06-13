@@ -6,8 +6,10 @@ const DISCORD_PUBLIC_KEY = Deno.env.get('DISCORD_PUBLIC_KEY')
 const DISCORD_BOT_TOKEN = Deno.env.get('DISCORD_BOT_TOKEN')
 const DISCORD_STAFF_CHANNEL_ID = Deno.env.get('DISCORD_STAFF_CHANNEL_ID')
 const DISCORD_GUILD_ID = Deno.env.get('DISCORD_GUILD_ID')
+const DISCORD_CATEGORY_ID = Deno.env.get('DISCORD_CATEGORY_ID')
 const OPENROUTER_API_KEY = Deno.env.get('OPENROUTER_API_KEY')
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
+const RESEND_FROM = Deno.env.get('RESEND_FROM') || 'SYNDRIX <onboarding@resend.dev>'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -47,14 +49,16 @@ async function handleApprove(projectId: string) {
   const channelName = project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 100)
 
   // Create Discord channel
+  const channelBody: Record<string, unknown> = {
+    name: channelName,
+    type: 0,
+    topic: `${project.client_name} — ${project.name}`,
+  }
+  if (DISCORD_CATEGORY_ID) channelBody.parent_id = DISCORD_CATEGORY_ID
   const channelRes = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, {
     method: 'POST',
     headers: { Authorization: `Bot ${DISCORD_BOT_TOKEN}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: channelName,
-      type: 0,
-      topic: `${project.client_name} — ${project.name}`,
-    }),
+    body: JSON.stringify(channelBody),
   })
   const channel = await channelRes.json()
   const channelId = channel.id as string
@@ -94,7 +98,7 @@ async function handleApprove(projectId: string) {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'SYNDRIX <hello@syndrixoff.com>',
+        from: RESEND_FROM,
         to: project.client_email,
         subject: `Re: ${project.name} — Next Steps`,
         text: welcomeText,
@@ -145,7 +149,7 @@ async function handleReject(projectId: string) {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'SYNDRIX <hello@syndrixoff.com>',
+        from: RESEND_FROM,
         to: project.client_email,
         subject: `Re: ${project.name}`,
         text: rejectText,
