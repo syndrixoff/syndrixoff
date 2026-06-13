@@ -47,6 +47,17 @@ t.innerHTML = `
   .btn-loading::before { content: ''; position: absolute; left: 1rem; top: 50%; translate: 0 -50%; width: 14px; height: 14px; border: 2px solid rgba(0,0,0,0.25); border-top-color: #0c0b09; border-radius: 50%; animation: spinLoader 0.6s linear infinite; }
   @keyframes spinLoader { to { rotate: 1turn; } }
   .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  .form-submit-row { display: flex; align-items: center; gap: 8px; }
+  .form-submit-row .btn-full { flex: 1; min-width: 0; }
+  #turnstileSlot { width: 300px; display: flex; justify-content: center; align-items: center; }
+  @media (max-width: 600px) { #turnstileSlot { width: 140px; } }
+  :host(.light) .popup-overlay { background: rgba(0,0,0,0.25); }
+  .popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .popup-overlay.open { opacity: 1; pointer-events: auto; }
+  .popup-box { background: var(--panel-solid); border: 1px solid var(--border); border-radius: calc(var(--radius) - 6px); padding: 1.2rem 1.5rem; max-width: 300px; width: 85%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+  .popup-box p { color: var(--ink); font-size: 0.8rem; line-height: 1.4; margin: 0 0 0.85rem; }
+  .popup-box button { background: var(--copper); color: #0c0b09; border: none; border-radius: 999px; padding: 0.45rem 1.2rem; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: transform 0.2s; }
+  .popup-box button:hover { transform: scale(1.04); }
   .reveal-scale.revealed { opacity: 1; transform: scale(1); }
   :host(.light) .cta-panel { background: radial-gradient(ellipse at 20% 15%, rgba(196,134,63,0.08), transparent 24rem), radial-gradient(ellipse at 80% 85%, rgba(94,197,189,0.06), transparent 22rem), rgba(255,255,255,0.75); border-color: rgba(0,0,0,0.08); box-shadow: 0 24px 60px -15px rgba(0,0,0,0.15), inset 0 1px 0 0 rgba(255,255,255,0.5); }
   :host(.light) .cta-panel .bg-grid { background-image: linear-gradient(90deg, rgba(196,134,63,0.04) 1px, transparent 1px), linear-gradient(rgba(94,197,189,0.03) 1px, transparent 1px); }
@@ -84,12 +95,21 @@ t.innerHTML = `
           <div class="form-field"><label class="form-label" for="budgetInput">Budget (e.g., \u20b950K - \u20b92L)</label><input id="budgetInput" name="budget" type="text" placeholder="\u20b950K - \u20b92L" autocomplete="off"></div>
         </div>
         <div class="form-field form-field-full"><label class="form-label" for="projectInput">Describe your project</label><input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring\u2026" autocomplete="off" required></div>
-        <button class="btn btn-primary btn-full" type="submit">Start my project</button>
+        <div class="form-submit-row">
+          <button class="btn btn-primary btn-full" type="submit">Start my project</button>
+          <div id="turnstileSlot"><slot name="turnstile"></slot></div>
+        </div>
         <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
       </form>
     </div>
   </div>
-</section>`;
+</section>
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <p id="popupMsg"></p>
+    <button id="popupBtn">OK</button>
+  </div>
+</div>`;
 
 class SyndraContact extends HTMLElement {
   connectedCallback() {
@@ -206,11 +226,22 @@ class SyndraContact extends HTMLElement {
       submitBtn.textContent = on ? 'Sending\u2026' : 'Start my project';
     }
 
+    const popup = root.getElementById('popup');
+    const popupMsg = root.getElementById('popupMsg');
+    const popupBtn = root.getElementById('popupBtn');
+    popupBtn.addEventListener('click', () => popup.classList.remove('open'));
+
+    function showPopup(msg) {
+      popupMsg.textContent = msg;
+      popup.classList.add('open');
+    }
+
     let turnstileToken = null;
     this._tsContainer = document.createElement('div');
+    this._tsContainer.setAttribute('slot', 'turnstile');
     this._tsContainer.id = 'ts-' + Math.random().toString(36).slice(2);
-    this._tsContainer.style.cssText = 'display:flex;justify-content:center;min-height:65px;margin:8px 0';
-    this.insertAdjacentElement('afterend', this._tsContainer);
+    this._tsContainer.style.cssText = 'display:flex;justify-content:center;align-items:center;width:100%';
+    this.appendChild(this._tsContainer);
 
     const initTurnstile = () => {
       if (!window.turnstile) { setTimeout(initTurnstile, 200); return; }
@@ -228,7 +259,7 @@ class SyndraContact extends HTMLElement {
       e.preventDefault();
       if (!validateForm()) return;
       if (!turnstileToken) {
-        alert('Verifying you are human\u2026 please wait a moment and try again.');
+        showPopup('Verifying you are human\u2026 please wait a moment and try again.');
         return;
       }
       setLoading(true);
@@ -253,9 +284,9 @@ class SyndraContact extends HTMLElement {
           throw new Error(data.error || 'Server error');
         }
         form.reset();
-        alert("Message sent! We'll be in touch shortly.");
+        showPopup("Message sent! We'll be in touch shortly.");
       } catch (err) {
-        alert(err.message || 'Something went wrong. Email us directly at syndrixoff@gmail.com.');
+        showPopup(err.message || 'Something went wrong. Email us directly at syndrixoff@gmail.com.');
       } finally {
         setLoading(false);
       }
