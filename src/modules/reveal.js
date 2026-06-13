@@ -25,4 +25,17 @@ export function initReveal() {
     });
     revealObserver.observe(section);
   });
+
+  document.querySelectorAll("section[id]:not(#hero)").forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    const effectiveTop = window.innerHeight * 0.1;
+    const effectiveBottom = window.innerHeight * 0.8;
+    if (rect.top < effectiveBottom && rect.bottom > effectiveTop) {
+      const children = section.querySelectorAll(".reveal, .reveal-l, .reveal-r, .reveal-scale");
+      children.forEach((child, i) => {
+        child.style.setProperty("--stagger-delay", `${i * 60}ms`);
+        child.classList.add("revealed");
+      });
+    }
+  });
 }
