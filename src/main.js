@@ -11,22 +11,24 @@ import { initToast } from './modules/toast.js';
 import { initCounters } from './modules/counters.js';
 import { initMagnetic } from './modules/magnetic.js';
 
-const ric = (fn, timeout) => requestIdleCallback(fn, { timeout });
+function later(fn) {
+  setTimeout(fn, 0);
+}
 
 initNav();
-ric(initReveal, 600);
-ric(initCounters, 1000);
-ric(initTeam, 800);
-ric(initTheme, 400);
-ric(initModal, 1000);
+later(initReveal);
+later(initCounters);
+later(initTeam);
+later(initTheme);
+later(initModal);
 
 document.addEventListener("DOMContentLoaded", () => {
-  ric(initCanvas, 200);
-  ric(initToast, 1000);
-  ric(initMagnetic, 600);
-  ric(initTerminal, 1000);
-  ric(initTypewriter, 300);
-  ric(initContactForm, 500);
+  later(initCanvas);
+  later(initToast);
+  later(initMagnetic);
+  later(initTerminal);
+  later(initTypewriter);
+  later(initContactForm);
 });
 
 function initContactForm() {
