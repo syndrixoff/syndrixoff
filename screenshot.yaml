@@ -1,0 +1,390 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - navigation "Primary" [ref=e3]:
+    - link "SYNDRIX home" [ref=e4] [cursor=pointer]:
+      - /url: "#main"
+      - text: SYNDRIX
+    - list [ref=e399]:
+      - listitem [ref=e400] [cursor=pointer]: About
+      - listitem [ref=e401] [cursor=pointer]: Services
+      - listitem [ref=e402] [cursor=pointer]: Process
+      - listitem [ref=e403] [cursor=pointer]: Workbench
+      - listitem [ref=e404] [cursor=pointer]: Team
+    - link "Start a Project" [ref=e5] [cursor=pointer]:
+      - /url: "#contact"
+  - main [ref=e6]:
+    - region "Engineered With INTELLIGE |" [ref=e405]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - heading "Engineered With INTELLIGE |" [level=1] [ref=e406]:
+            - generic [ref=e11]: Engineered
+            - generic [ref=e12]: With
+            - generic [ref=e14]: INTELLIGE |
+          - paragraph [ref=e15]: SYNDRIX is an engineering-driven company specializing in custom electronic systems, embedded technologies, product development, PCB design, and intelligent hardware solutions. We bridge the gap between innovative ideas and reliable real-world products through precision engineering and intelligent problem-solving.
+          - generic [ref=e16]:
+            - link "Request a consultation" [ref=e17] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Explore our services" [ref=e18] [cursor=pointer]:
+              - /url: "#services"
+          - generic "SYNDRIX snapshot" [ref=e19]:
+            - generic [ref=e20]:
+              - strong [ref=e21]: "04"
+              - generic [ref=e22]: Core disciplines
+            - generic [ref=e23]:
+              - strong [ref=e24]: 0→1
+              - generic [ref=e25]: Concept to deployment
+            - generic [ref=e26]:
+              - strong [ref=e27]: Free
+              - generic [ref=e28]: Initial consultation
+        - generic [ref=e30] [cursor=pointer]:
+          - generic [ref=e34]:
+            - strong [ref=e35]: Design
+            - text: Circuit & PCB
+          - generic [ref=e37]:
+            - strong [ref=e38]: Develop
+            - text: Embedded & IoT
+          - generic [ref=e40]:
+            - strong [ref=e41]: Validate
+            - text: Test & Ship
+    - region "Intelligence meets engineering." [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - paragraph [ref=e45]: Brand Foundation
+          - heading "Intelligence meets engineering." [level=2] [ref=e46]
+        - paragraph [ref=e47]: We engineer intelligent electronic systems tailored to real-world requirements. From concept to deployment, every solution is designed with precision and purpose.
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - heading "Mission" [level=3] [ref=e50]
+          - paragraph [ref=e51]: To transform ideas into reliable electronic systems through intelligent engineering and precision execution.
+        - generic [ref=e52]:
+          - heading "Vision" [level=3] [ref=e53]
+          - paragraph [ref=e54]: To become a trusted engineering partner for innovators, startups, research organizations, and industries seeking advanced electronic solutions.
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - img [ref=e58]
+          - heading "Precision" [level=4] [ref=e61]
+          - paragraph [ref=e62]: Every design decision is based on accuracy, engineering rigor, and technical excellence.
+        - generic [ref=e63]:
+          - img [ref=e65]
+          - heading "Intelligence" [level=4] [ref=e67]
+          - paragraph [ref=e68]: We solve complex challenges through thoughtful engineering and innovation.
+        - generic [ref=e69]:
+          - img [ref=e71]
+          - heading "Reliability" [level=4] [ref=e73]
+          - paragraph [ref=e74]: Products and systems are designed to perform consistently in real-world environments.
+        - generic [ref=e75]:
+          - img [ref=e77]
+          - heading "Innovation" [level=4] [ref=e79]
+          - paragraph [ref=e80]: We continuously explore new technologies and smarter approaches.
+        - generic [ref=e81]:
+          - img [ref=e83]
+          - heading "Partnership" [level=4] [ref=e85]
+          - paragraph [ref=e86]: We work closely with clients throughout the development journey.
+      - generic [ref=e87]:
+        - blockquote [ref=e88]: "\"We engineer custom electronic solutions that combine innovation, reliability, and technical excellence.\""
+        - paragraph [ref=e89]: — Brand Promise
+    - region "Four disciplines, one engineering partner." [ref=e90]:
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - paragraph [ref=e93]: Service Architecture
+          - heading "Four disciplines, one engineering partner." [level=2] [ref=e94]
+        - paragraph [ref=e95]: SYNDRIX aligns circuit design, embedded development, validation, and production support into a single unified engineering workflow — from first schematic to final deployment.
+      - generic [ref=e96]:
+        - article [ref=e97]:
+          - generic: "01"
+          - generic [ref=e98]:
+            - paragraph [ref=e99]: Design
+            - heading "Circuit Design, PCB Design, Hardware Architecture." [level=3] [ref=e100]
+            - paragraph [ref=e101]: Schematic capture, multi-layer PCB layout, hardware architecture, power distribution, and signal integrity — engineered for reliability and manufacturability.
+            - generic [ref=e102]:
+              - generic [ref=e103]: Circuit Design
+              - generic [ref=e104]: PCB Design
+              - generic [ref=e105]: Hardware Architecture
+        - article [ref=e106]:
+          - generic: "02"
+          - generic [ref=e107]:
+            - paragraph [ref=e108]: Development
+            - heading "Embedded Systems, Firmware Development, IoT Solutions." [level=3] [ref=e109]
+            - paragraph [ref=e110]: Embedded firmware, real-time operating systems, IoT connectivity, sensor integration, and communication protocols that perform consistently in real-world environments.
+            - generic [ref=e111]:
+              - generic [ref=e112]: Embedded Systems
+              - generic [ref=e113]: Firmware Development
+              - generic [ref=e114]: IoT Solutions
+        - article [ref=e115]:
+          - generic: "03"
+          - generic [ref=e116]:
+            - paragraph [ref=e117]: Validation
+            - heading "Testing, Debugging, Performance Verification." [level=3] [ref=e118]
+            - paragraph [ref=e119]: Rigorous functional testing, systematic debugging, signal analysis, EMC compliance, and performance verification to ensure every system meets specification.
+            - generic [ref=e120]:
+              - generic [ref=e121]: Testing
+              - generic [ref=e122]: Debugging
+              - generic [ref=e123]: Performance Verification
+        - article [ref=e124]:
+          - generic: "04"
+          - generic [ref=e125]:
+            - paragraph [ref=e126]: Production
+            - heading "Prototyping, Manufacturing Support, Product Optimization." [level=3] [ref=e127]
+            - paragraph [ref=e128]: Rapid prototyping, BOM generation, manufacturing documentation, Gerber files, production support, and product optimization for seamless scale-up.
+            - generic [ref=e129]:
+              - generic [ref=e130]: Prototyping
+              - generic [ref=e131]: Manufacturing Support
+              - generic [ref=e132]: Product Optimization
+    - region "From concept to deployment. Precision at every step." [ref=e133]:
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - paragraph [ref=e136]: How we engineer
+          - heading "From concept to deployment. Precision at every step." [level=2] [ref=e137]
+        - paragraph [ref=e138]: A rigorous engineering process for innovators, startups, research organizations, and industries seeking advanced electronic solutions on a predictable timeline.
+      - generic [ref=e139]:
+        - article [ref=e140]:
+          - generic [ref=e141]: "1"
+          - heading "Scope" [level=3] [ref=e142]
+          - paragraph [ref=e143]: Define requirements, technical constraints, performance targets, component selection, and deployment environment.
+        - article [ref=e144]:
+          - generic [ref=e145]: "2"
+          - heading "Design" [level=3] [ref=e146]
+          - paragraph [ref=e147]: Produce schematics, PCB layouts, firmware architecture, and initial hardware prototypes for validation.
+        - article [ref=e148]:
+          - generic [ref=e149]: "3"
+          - heading "Validate" [level=3] [ref=e150]
+          - paragraph [ref=e151]: Rigorous testing, debugging, performance verification, EMC compliance, and edge-case analysis.
+        - article [ref=e152]:
+          - generic [ref=e153]: "4"
+          - heading "Deploy" [level=3] [ref=e154]
+          - paragraph [ref=e155]: Deliver production-ready designs, manufacturing files, firmware binaries, and comprehensive documentation.
+    - region "Precision tools for intelligent engineering." [ref=e156]:
+      - generic [ref=e157]:
+        - generic [ref=e158]:
+          - paragraph [ref=e159]: The Workbench
+          - heading "Precision tools for intelligent engineering." [level=2] [ref=e160]
+        - paragraph [ref=e161]: From concept to deployment, every solution is designed with precision and purpose. We choose the most reliable tool for each surface — circuit, firmware, or production.
+      - generic [ref=e162]:
+        - generic "SYNDRIX project manifest example" [ref=e163]:
+          - generic [ref=e168]: "// syndrix.project.manifest client: \"startup / research org / industry\" industry: \"Custom Electronics & Hardware\" outputs: [ \"circuit_design\", \"pcb_layout\", \"embedded_firmware\", \"iot_solution\", \"production_prototype\" ] values: { precision: true, intelligence: true, reliability: true, innovation: true, partnership: true } // status: concept → deployed"
+        - generic [ref=e169]:
+          - article [ref=e170]:
+            - generic [ref=e171]: D
+            - generic [ref=e172]:
+              - heading "Circuit & PCB Design packages" [level=3] [ref=e173]
+              - paragraph [ref=e174]: Schematic capture, multi-layer PCB layout, hardware architecture, component selection, BOM generation, and Gerber files ready for manufacturing.
+          - article [ref=e175]:
+            - generic [ref=e176]: E
+            - generic [ref=e177]:
+              - heading "Embedded Systems & Firmware Development" [level=3] [ref=e178]
+              - paragraph [ref=e179]: Microcontroller firmware, RTOS integration, sensor drivers, communication protocols, and IoT connectivity built for real-world performance.
+          - article [ref=e180]:
+            - generic [ref=e181]: V
+            - generic [ref=e182]:
+              - heading "Testing & Performance Verification" [level=3] [ref=e183]
+              - paragraph [ref=e184]: Functional testing, signal analysis, debugging, EMC compliance, and performance verification to ensure every system meets specification.
+          - article [ref=e185]:
+            - generic [ref=e186]: P
+            - generic [ref=e187]:
+              - heading "Prototyping & Manufacturing Support" [level=3] [ref=e188]
+              - paragraph [ref=e189]: Rapid prototyping, manufacturing documentation, product optimization, and production support for seamless transition from lab to factory.
+      - generic [ref=e190]:
+        - generic [ref=e191]:
+          - paragraph [ref=e192]: Core Technologies
+          - heading "The Actual Tech Stack" [level=3] [ref=e193]
+          - paragraph [ref=e194]: Specific tools, architectures, and protocols we employ to build reliable, high-performance hardware.
+        - generic [ref=e195]:
+          - generic [ref=e196]:
+            - img [ref=e198]
+            - heading "ECAD" [level=4] [ref=e201]
+            - paragraph [ref=e202]: KiCad
+            - paragraph [ref=e203]: Professional multi-layer schematic design, precise PCB routing, and fabrication package generation.
+          - generic [ref=e204]:
+            - img [ref=e206]
+            - heading "Firmware" [level=4] [ref=e208]
+            - paragraph [ref=e209]: C / C++
+            - paragraph [ref=e210]: Low-level, hardware-optimized firmware development for high reliability and real-time execution.
+          - generic [ref=e211]:
+            - img [ref=e213]
+            - heading "MCUs & Architectures" [level=4] [ref=e217]
+            - paragraph [ref=e218]: ARM / STM32
+            - paragraph [ref=e219]: ARM Cortex-M core processing, STM32 microcontrollers, ESP32, and Nordic Semiconductor systems.
+          - generic [ref=e220]:
+            - img [ref=e222]
+            - heading "IoT & Connectivity" [level=4] [ref=e226]
+            - paragraph [ref=e227]: MQTT / BLE
+            - paragraph [ref=e228]: Wireless and remote connectivity via Bluetooth Low Energy (BLE), Cellular (LTE-M/NB-IoT), and MQTT protocol.
+    - region "Engineered by specialists. Owned by you." [ref=e229]:
+      - generic [ref=e230]:
+        - generic [ref=e231]:
+          - paragraph [ref=e232]: The Human Element & Operations
+          - heading "Engineered by specialists. Owned by you." [level=2] [ref=e233]
+        - paragraph [ref=e234]: A multi-disciplinary organization combining hardware design, embedded firmware, and modern software engineering. We operate our own prototyping lab, ensuring hardware is assembled under strict quality controls.
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - generic [ref=e238]: CEO
+            - heading "Mithunkumar J" [level=3] [ref=e239]
+            - paragraph [ref=e240]: Operations & Client Relations
+            - paragraph [ref=e241]: Directs operations, project management, client relations, and AI automation integration across product lines.
+          - generic [ref=e242]:
+            - generic [ref=e243]:
+              - heading "Embedded & Product" [level=4] [ref=e244]
+              - generic [ref=e245]: "Lead: Akhil S B"
+              - generic [ref=e246]: Lead Product Engineer
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - heading "Engineering Team" [level=5] [ref=e249]
+                - list [ref=e250]:
+                  - listitem [ref=e251]:
+                    - strong [ref=e252]: Akhil S B
+                    - generic [ref=e253]: Lead Product Engineer
+                  - listitem [ref=e254]:
+                    - strong [ref=e255]: T Harish
+                    - generic [ref=e256]: Validation & PCB Engineer
+                  - listitem [ref=e257]:
+                    - strong [ref=e258]: Haresh S
+                    - generic [ref=e259]: Firmware & PCB Engineer
+                  - listitem [ref=e260]:
+                    - strong [ref=e261]: Chaarukesh R R
+                    - generic [ref=e262]: Embedded & AI Engineer
+              - generic [ref=e263]:
+                - heading "Division Focus" [level=5] [ref=e264]
+                - generic [ref=e265]:
+                  - generic [ref=e266]: Firmware
+                  - generic [ref=e267]: Embedded Systems
+                  - generic [ref=e268]: PCB Design
+                  - generic [ref=e269]: IoT
+                  - generic [ref=e270]: Bring-up
+                  - generic [ref=e271]: Validation
+        - generic [ref=e272]:
+          - generic [ref=e273]:
+            - generic [ref=e274]: CTO
+            - heading "Haripriyan R" [level=3] [ref=e275]
+            - paragraph [ref=e276]: Technology & Strategy
+            - paragraph [ref=e277]: Leads technology strategy, firmware architecture, RTL/VLSI engineering direction, and R&D platforms.
+          - generic [ref=e278]:
+            - generic [ref=e279]:
+              - heading "Engineering Design & Automation" [level=4] [ref=e280]
+              - generic [ref=e281]: "Lead: Venkatesan G K"
+              - generic [ref=e282]: Lead Automation & Design Engineer
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - heading "Engineering Team" [level=5] [ref=e285]
+                - list [ref=e286]:
+                  - listitem [ref=e287]:
+                    - strong [ref=e288]: Mithunkumar J
+                    - generic [ref=e289]: CEO / Automation Engineer
+                  - listitem [ref=e290]:
+                    - strong [ref=e291]: Venkatesan G K
+                    - generic [ref=e292]: Lead Automation & Design
+                  - listitem [ref=e293]:
+                    - strong [ref=e294]: Arvindh Arjun S
+                    - generic [ref=e295]: RTL & PCB Design Engineer
+                  - listitem [ref=e296]:
+                    - strong [ref=e297]: Tharun Srinivasan
+                    - generic [ref=e298]: Hardware Design Engineer
+                  - listitem [ref=e299]:
+                    - strong [ref=e300]: Abhisek K R
+                    - generic [ref=e301]: Senior Hardware Engineer
+                  - listitem [ref=e302]:
+                    - strong [ref=e303]: Sai Deepak K
+                    - generic [ref=e304]: Embedded Product Engineer
+              - generic [ref=e305]:
+                - heading "Division Focus" [level=5] [ref=e306]
+                - generic [ref=e307]:
+                  - generic [ref=e308]: VLSI
+                  - generic [ref=e309]: RTL Design
+                  - generic [ref=e310]: FPGA
+                  - generic [ref=e311]: CAD & Sim
+                  - generic [ref=e312]: Circuits
+                  - generic [ref=e313]: Semiconductors
+                  - generic [ref=e314]: Automation
+        - generic [ref=e315]:
+          - generic [ref=e316]:
+            - generic [ref=e317]: CFO
+            - heading "Tharun" [level=3] [ref=e318]
+            - paragraph [ref=e319]: Finance & Procurement
+            - paragraph [ref=e320]: Oversees financial strategy, global component procurement, AI resource planning, and project scaling.
+          - generic [ref=e321]:
+            - generic [ref=e322]:
+              - heading "Software Engineering" [level=4] [ref=e323]
+              - generic [ref=e324]: "Lead: Haripriyan R"
+              - generic [ref=e325]: Lead Software Engineer
+            - generic [ref=e326]:
+              - generic [ref=e327]:
+                - heading "Engineering Team" [level=5] [ref=e328]
+                - list [ref=e329]:
+                  - listitem [ref=e330]:
+                    - strong [ref=e331]: Haripriyan R
+                    - generic [ref=e332]: CTO / Lead Software Engineer
+                  - listitem [ref=e333]:
+                    - strong [ref=e334]: Raghul Deepan
+                    - generic [ref=e335]: Senior Software Engineer
+                  - listitem [ref=e336]:
+                    - strong [ref=e337]: Samraj Joshua S
+                    - generic [ref=e338]: Full-Stack & AI Developer
+                  - listitem [ref=e339]:
+                    - strong [ref=e340]: Ayden Joshua M
+                    - generic [ref=e341]: Software Design Engineer
+              - generic [ref=e342]:
+                - heading "Division Focus" [level=5] [ref=e343]
+                - generic [ref=e344]:
+                  - generic [ref=e345]: Full-Stack
+                  - generic [ref=e346]: Web Apps
+                  - generic [ref=e347]: Backend Systems
+                  - generic [ref=e348]: APIs
+                  - generic [ref=e349]: DevOps
+                  - generic [ref=e350]: AI Integration
+      - generic [ref=e351]:
+        - generic [ref=e352]:
+          - img [ref=e354]
+          - heading "In-House Prototyping Lab" [level=3] [ref=e356]
+          - paragraph [ref=e357]: Based in India
+          - paragraph [ref=e358]: Our physical prototypes are assembled, debugged, and validated directly inside our dedicated in-house hardware laboratory. Equipped with high-precision testing gear, logic analyzers, and reflow stations, we maintain total quality control over PCB bring-up before shipping globally to your door.
+        - generic [ref=e359]:
+          - img [ref=e361]
+          - heading "Client-First IP Policy" [level=3] [ref=e363]
+          - paragraph [ref=e364]: 100% IP Ownership Guarantee
+          - paragraph [ref=e365]: All intellectual property, including schematic designs, PCB layouts, RTL models, firmware source code, and software components developed during our partnership, belongs exclusively and unconditionally to you. We execute strict NDAs and transfer all rights upon milestone delivery.
+    - region "Bring a concept. Leave with an engineering direction." [ref=e366]:
+      - generic [ref=e368]:
+        - paragraph [ref=e369]: Free consultation
+        - heading "Bring a concept. Leave with an engineering direction." [level=2] [ref=e370]
+        - paragraph [ref=e371]:
+          - text: Tell SYNDRIX what you need engineered — custom electronics, embedded system, PCB design, IoT solution, or a complete product development package. The initial consultation is free so you can evaluate the fit before committing. Or reach us directly at
+          - link "syndrixoff@gmail.com" [ref=e372] [cursor=pointer]:
+            - /url: mailto:syndrixoff@gmail.com
+        - generic [ref=e373]:
+          - generic [ref=e374]: Name
+          - generic [ref=e375]: Email Address
+          - generic [ref=e376]: Company
+          - generic [ref=e377]: Project Budget
+          - generic [ref=e378]: Describe your project
+          - generic [ref=e379]:
+            - textbox "Name" [ref=e380]
+            - textbox "Email Address" [ref=e381]:
+              - /placeholder: Email
+            - textbox "Company" [ref=e382]
+            - textbox "Project Budget" [ref=e383]:
+              - /placeholder: Budget (e.g., ₹50K - ₹2L)
+          - textbox "Describe your project" [ref=e384]:
+            - /placeholder: Custom sensor board + embedded firmware for environmental monitoring…
+          - button "Start my project" [ref=e385] [cursor=pointer]
+          - paragraph [ref=e386]: No commitment. No spam. Just a clear engineering direction.
+  - generic [ref=e387]:
+    - paragraph [ref=e388]: SYNDRIX stands at the intersection of intelligence and engineering, transforming concepts into dependable electronic solutions through precision, innovation, and technical excellence.
+    - text: Engineered with Intelligence.
+  - contentinfo [ref=e389]:
+    - generic [ref=e390]:
+      - text: SYNDRIX © 2026 |
+      - link "syndrixoff@gmail.com" [ref=e391] [cursor=pointer]:
+        - /url: mailto:syndrixoff@gmail.com
+    - generic [ref=e392]:
+      - link "About" [ref=e393] [cursor=pointer]:
+        - /url: "#about"
+      - link "Services" [ref=e394] [cursor=pointer]:
+        - /url: "#services"
+      - link "Process" [ref=e395] [cursor=pointer]:
+        - /url: "#process"
+      - link "Workbench" [ref=e396] [cursor=pointer]:
+        - /url: "#workbench"
+      - link "Team" [ref=e397] [cursor=pointer]:
+        - /url: "#team"
+  - status [ref=e398]: Project inquiry captured. SYNDRIX will follow up with a clear engineering direction.
