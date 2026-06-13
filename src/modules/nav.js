@@ -2,8 +2,6 @@ let indicator, navLinks, navLinksContainer, navToggle, navElement;
 let activeLink = null;
 let isInitial = true;
 let navClickLock = false;
-let cachedSections = null;
-let cachedRects = null;
 
 export function initNav() {
   navElement = document.getElementById('navbar');
@@ -15,8 +13,9 @@ export function initNav() {
   // Mouse glow follower
   if (navElement) {
     navElement.addEventListener('mousemove', (e) => {
-      navElement.style.setProperty('--mouse-x', `${e.offsetX}px`);
-      navElement.style.setProperty('--mouse-y', `${e.offsetY}px`);
+      const rect = navElement.getBoundingClientRect();
+      navElement.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      navElement.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     });
   }
 
@@ -43,32 +42,43 @@ export function initNav() {
     });
   }
 
-  initScrollTracking();
+  initIntersectionObserver();
   initProgressBar();
 }
 
+let intersectionObserver;
+let observedSections = [];
+let activeSectionId = 'about';
+
 export function getActiveSectionId() {
-  if (!cachedSections) cachedSections = document.querySelectorAll('section[id]');
-  const sections = cachedSections;
-  let closestId = null;
-  let closestDist = Infinity;
-  for (let i = 0; i < sections.length; i++) {
-    const rect = cachedRects[i];
-    const mid = rect.top + rect.height / 2;
-    const viewMid = window.innerHeight / 2;
-    const dist = Math.abs(mid - viewMid);
-    if (dist < closestDist) {
-      closestDist = dist;
-      closestId = sections[i].id;
-    }
-  }
-  if (closestId === 'hero') return 'about';
-  return closestId;
+  return activeSectionId;
 }
 
-function refreshCachedRects() {
-  if (!cachedSections) cachedSections = document.querySelectorAll('section[id]');
-  cachedRects = Array.from(cachedSections, s => s.getBoundingClientRect());
+function initIntersectionObserver() {
+  const sections = document.querySelectorAll('section[id]');
+  observedSections = Array.from(sections);
+
+  intersectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+    if (visible.length === 1) {
+      activeSectionId = visible[0].target.id;
+    } else if (visible.length > 1) {
+      const mid = window.innerHeight / 2;
+      let closest = visible[0];
+      let closestDist = Infinity;
+      visible.forEach(e => {
+        const dist = Math.abs(e.boundingClientRect.top + e.boundingClientRect.height / 2 - mid);
+        if (dist < closestDist) { closestDist = dist; closest = e; }
+      });
+      activeSectionId = closest.target.id;
+    }
+
+    if (activeSectionId === 'hero') activeSectionId = 'about';
+    if (!navClickLock) setActiveSection(activeSectionId);
+  }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+  observedSections.forEach(s => intersectionObserver.observe(s));
 }
 
 export function setActiveSection(id, instant) {
@@ -173,48 +183,6 @@ function onNavClick(e) {
 
   if (navLinksContainer) navLinksContainer.classList.remove('open');
   if (navToggle) navToggle.classList.remove('active');
-}
-
-function syncActiveSection() {
-  if (!navClickLock) {
-    const id = getActiveSectionId();
-    if (id) setActiveSection(id);
-  }
-}
-
-function initScrollTracking() {
-  refreshCachedRects();
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        syncActiveSection();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  if ('onscrollend' in window) {
-    window.addEventListener('scrollend', refreshCachedRects, { passive: true });
-  }
-
-  window.addEventListener('load', () => {
-    refreshCachedRects();
-    requestAnimationFrame(syncActiveSection);
-  });
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    refreshCachedRects();
-    resizeTimer = setTimeout(() => {
-      if (!navClickLock) {
-        const id = getActiveSectionId();
-        if (id) setActiveSection(id, true);
-      }
-    }, 200);
-  }, { passive: true });
 }
 
 let progressBar, nav;
