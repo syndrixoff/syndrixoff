@@ -1,3 +1,4 @@
+import './syndra-team-card.js'
 import { fetchTeamMembers } from '../supabase.js'
 
 const t = document.createElement('template');
