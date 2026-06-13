@@ -40,7 +40,7 @@ t.innerHTML = `
   .btn-full:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(196,134,63,0.3); }
   .btn-full:active { transform: scale(0.98); }
   .form-note { color: var(--faint); font-family: var(--font); font-size: clamp(0.6rem, 1.5vw, 0.7rem); letter-spacing: 0.04em; margin: 0; text-align: center; }
-  .cf-turnstile { display: flex; justify-content: center; margin: 0.4rem 0; }
+  #turnstileContainer { display: flex; justify-content: center; min-height: 65px; margin: 0.4rem 0; }
   .field-error { display: block; margin-top: 4px; font-size: 0.72rem; color: var(--ember); font-family: var(--mono); letter-spacing: 0.02em; animation: fieldErrorIn 0.2s ease; }
   @keyframes fieldErrorIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
   input[aria-invalid="true"] { border-color: var(--ember) !important; box-shadow: 0 0 0 1px rgba(217,79,58,0.2); }
@@ -85,7 +85,7 @@ t.innerHTML = `
           <div class="form-field"><label class="form-label" for="budgetInput">Budget (e.g., \u20b950K - \u20b92L)</label><input id="budgetInput" name="budget" type="text" placeholder="\u20b950K - \u20b92L" autocomplete="off"></div>
         </div>
         <div class="form-field form-field-full"><label class="form-label" for="projectInput">Describe your project</label><input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring\u2026" autocomplete="off" required></div>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAADkCEvi3rSXhU_4G" data-callback="onTurnstileSuccess"></div>
+        <div id="turnstileContainer"></div>
         <button class="btn btn-primary btn-full" type="submit">Start my project</button>
         <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
       </form>
@@ -204,18 +204,38 @@ class SyndraContact extends HTMLElement {
       submitBtn.classList.toggle('btn-loading', on);
       submitBtn.textContent = on ? 'Sending\u2026' : 'Start my project';
     }
+
+    let turnstileReady = false;
+    const turnstileContainer = root.getElementById('turnstileContainer');
+
+    function initTurnstile() {
+      if (!turnstileContainer || !window.turnstile) {
+        setTimeout(initTurnstile, 200);
+        return;
+      }
+      try {
+        turnstile.render(turnstileContainer, {
+          sitekey: '0x4AAAAAADkCEvi3rSXhU_4G',
+          callback: () => { turnstileReady = true; }
+        });
+      } catch {
+        setTimeout(initTurnstile, 500);
+      }
+    }
+    initTurnstile();
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!validateForm()) return;
+      const turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+      const turnstileToken = turnstileInput?.value;
+      if (!turnstileToken || !turnstileReady) {
+        alert('Verifying you are human\u2026 please wait a moment and try again.');
+        setLoading(false);
+        return;
+      }
       setLoading(true);
       try {
-        const turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
-        const turnstileToken = turnstileInput?.value;
-        if (!turnstileToken) {
-          alert('Please complete the security check.');
-          setLoading(false);
-          return;
-        }
         const res = await fetch('https://cxvskcqlpicgrfawdmii.supabase.co/functions/v1/submit-contact', {
           method: 'POST',
           headers: {
