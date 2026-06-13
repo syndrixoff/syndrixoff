@@ -80,45 +80,10 @@ class SyndraTeam extends HTMLElement {
     try {
       let members = await fetchTeamMembers();
 
-      const leadPriority = {
-        'leadership': 0,
-        'embedded-product-engineering': 1,
-        'engineering-design': 2,
-        'software-engineering': 3,
-        'default': 4
-      };
-
-      const LEADS = {
-        'akhil s b': 1,
-        'venkatesan g k': 2,
-        'haripriyan r': 3
-      };
-
       members.sort((a, b) => {
-        const catsA = (a.category || '').split(' ');
-        const catsB = (b.category || '').split(' ');
-        const isLeadA = catsA.includes('leadership') || !!LEADS[a.name.toLowerCase()];
-        const isLeadB = catsB.includes('leadership') || !!LEADS[b.name.toLowerCase()];
-        const isCLevel = catsA.includes('leadership');
-        const isCLevelB = catsB.includes('leadership');
-
-        const aLeadCat = catsA.find(c => leadPriority[c] !== undefined) || 'default';
-        const bLeadCat = catsB.find(c => leadPriority[c] !== undefined) || 'default';
-
-        if (isCLevel && !isCLevelB) return -1;
-        if (!isCLevel && isCLevelB) return 1;
-
-        if (a.sort_order && b.sort_order && isCLevel && isCLevelB) return a.sort_order - b.sort_order;
-
-        if (isLeadA && !isLeadB) return -1;
-        if (!isLeadA && isLeadB) return 1;
-
-        if (isLeadA && isLeadB) {
-          const pA = LEADS[a.name.toLowerCase()] || 99;
-          const pB = LEADS[b.name.toLowerCase()] || 99;
-          return pA - pB;
-        }
-
+        const aSort = a.sort_order ?? 999;
+        const bSort = b.sort_order ?? 999;
+        if (aSort !== bSort) return aSort - bSort;
         return a.name.localeCompare(b.name);
       });
 
