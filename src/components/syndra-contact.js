@@ -16,7 +16,7 @@ t.innerHTML = `
   .term-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--bg-soft); }
   .term-bar .dot { width: 8px; height: 8px; border-radius: 50%; }
   .term-bar .d1 { background: var(--copper); opacity: 0.7; } .term-bar .d2 { background: var(--cyan); opacity: 0.5; } .term-bar .d3 { background: var(--green); opacity: 0.4; }
-  .term-label { font-family: var(--mono); font-size: 0.55rem; color: var(--faint); letter-spacing: 0.1em; text-transform: uppercase; margin-left: auto; }
+  .term-label { font-family: var(--mono); font-size: 0.55rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-left: auto; }
   .term-body { flex: 1; padding: 12px 14px; overflow-y: auto; font-family: var(--mono); font-size: 0.7rem; line-height: 1.6; color: var(--muted); min-height: 80px; max-height: 200px; scrollbar-width: none; }
   .term-body::-webkit-scrollbar { display: none; }
   .term-body .line { display: block; text-align: left; opacity: 0; transform: translateY(4px); }

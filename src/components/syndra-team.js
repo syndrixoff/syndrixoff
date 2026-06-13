@@ -99,7 +99,7 @@ class SyndraTeam extends HTMLElement {
       members.forEach(member => {
         const card = document.createElement('syndra-team-card');
         card.setAttribute('name', member.name);
-        card.setAttribute('role', member.role);
+        card.setAttribute('jobrole', member.role);
         card.setAttribute('category', member.category);
         card.setAttribute('bio', member.bio || '');
         if (member.image) card.setAttribute('image', member.image);

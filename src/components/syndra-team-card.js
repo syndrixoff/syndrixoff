@@ -37,7 +37,7 @@ t.innerHTML = `
 </div>`;
 
 class SyndraTeamCard extends HTMLElement {
-  static get observedAttributes() { return ['name', 'role', 'image', 'bio', 'linkedin', 'github']; }
+  static get observedAttributes() { return ['name', 'jobrole', 'image', 'bio', 'linkedin', 'github']; }
 
   constructor() {
     super();
@@ -62,7 +62,7 @@ class SyndraTeamCard extends HTMLElement {
   render() {
     const shadow = this.shadowRoot;
     shadow.getElementById('nameEl').textContent = this.getAttribute('name') || '';
-    shadow.getElementById('roleEl').textContent = this.getAttribute('role') || '';
+    shadow.getElementById('roleEl').textContent = this.getAttribute('jobrole') || '';
     shadow.getElementById('bioEl').textContent = this.getAttribute('bio') || '';
 
     const imageUrl = this.getAttribute('image');
