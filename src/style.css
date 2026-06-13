@@ -2740,4 +2740,7 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] {
   50%  { box-shadow: 0 0 20px 4px var(--accent-glow), inset 0 0 0 1px var(--line-strong); }
   to   { box-shadow: 0 0 0 0 transparent, inset 0 0 0 1px var(--line-strong); }
 }
+@font-face{font-family:'Geist';font-style:normal;font-display:swap;font-weight:500;src:url(/lib/geist-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-display:swap;font-weight:600;src:url(/lib/geist-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Geist Mono';font-style:normal;font-display:swap;font-weight:400 600;src:url(/lib/geist-mono/geist-mono-latin.woff2) format('woff2')}
 
