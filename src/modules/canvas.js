@@ -11,6 +11,7 @@ export function initCanvas() {
   const packets = [];
   const MAX_PACKETS = 6;
   let packetSpawnTimer = 0;
+  let paused = false;
 
   const perf = {
     frameTimes: [],
@@ -43,7 +44,7 @@ export function initCanvas() {
       vy: (Math.random() - 0.5) * 0.24,
       r: Math.random() * 1.6 + 0.5,
       copper: Math.random() > 0.55,
-      pulse: Math.random() * Math.PI * 2
+      phase: Math.random() * Math.PI * 2
     }));
     packets.length = 0;
   }
@@ -88,8 +89,10 @@ export function initCanvas() {
     const candidates = [];
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const gap = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-        if (gap < 120 && gap > 20) candidates.push([i, j, gap]);
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < 14400 && distSq > 400) candidates.push([i, j]);
       }
     }
     if (!candidates.length) return;
@@ -97,8 +100,6 @@ export function initCanvas() {
     const a = particles[ai], b = particles[bi];
     packets.push({ ax: a, bx: b, t: 0, speed: 0.006 + Math.random() * 0.006, copper: a.copper || b.copper });
   }
-
-  let paused = false;
 
   function draw(now) {
     if (prefersReducedMotion) return;
@@ -111,18 +112,21 @@ export function initCanvas() {
     packetSpawnTimer += 1;
     if (packetSpawnTimer > 90) { packetSpawnTimer = 0; spawnPacket(); }
 
+    const copperFill = (a) => { ctx.fillStyle = a; };
+    const cyanFill = (a) => { ctx.fillStyle = a; };
+
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       const dx = mouse.x - p.x;
       const dy = mouse.y - p.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 160) { p.vx -= dx * 0.00004; p.vy -= dy * 0.00004; }
+      const distSq = dx * dx + dy * dy;
+      if (distSq < 25600) { p.vx -= dx * 0.00004; p.vy -= dy * 0.00004; }
       p.x += p.vx; p.y += p.vy;
       p.vx *= 0.994; p.vy *= 0.994;
       if (p.x < -10 || p.x > W + 10) p.vx *= -0.8;
       if (p.y < -10 || p.y > H + 10) p.vy *= -0.8;
-      const glow = 0.5 + Math.sin(t * 0.8 + p.pulse) * 0.25;
-      const alpha = (0.5 + glow * 0.35);
+      const glow = 0.5 + Math.sin(t * 0.8 + p.phase) * 0.25;
+      const alpha = 0.5 + glow * 0.35;
       if (p.copper) {
         ctx.beginPath();
         ctx.fillStyle = `rgba(196,134,63,${alpha})`;
@@ -130,7 +134,7 @@ export function initCanvas() {
         ctx.fill();
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(196,134,63,${(0.06 * glow).toFixed(4)})`;
+        ctx.fillStyle = `rgba(196,134,63,${0.06 * glow})`;
         ctx.fill();
       } else {
         ctx.beginPath();
@@ -144,15 +148,18 @@ export function initCanvas() {
       const p = particles[i];
       for (let j = i + 1; j < particles.length; j++) {
         const q = particles[j];
-        const gap = Math.hypot(p.x - q.x, p.y - q.y);
-        if (gap < 110) {
-          const fade = 1 - gap / 110;
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < 12100) {
+          const dist = Math.sqrt(distSq);
+          const fade = 1 - dist / 110;
           let r, g, b;
           if (p.copper && q.copper)      { r=196; g=134; b=63; }
           else if (!p.copper && !q.copper){ r=94;  g=197; b=189; }
           else                            { r=232; g=223; b=206; }
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(${r},${g},${b},${(fade * 0.14).toFixed(4)})`;
+          ctx.strokeStyle = `rgba(${r},${g},${b},${fade * 0.14})`;
           ctx.lineWidth = 0.6;
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
@@ -171,11 +178,11 @@ export function initCanvas() {
       const col = pk.copper ? '196,134,63' : '94,197,189';
       ctx.beginPath();
       ctx.arc(px, py, 4, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${col},${(0.12 * fadeT).toFixed(4)})`;
+      ctx.fillStyle = `rgba(${col},${0.12 * fadeT})`;
       ctx.fill();
       ctx.beginPath();
       ctx.arc(px, py, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${col},${(0.9 * fadeT).toFixed(4)})`;
+      ctx.fillStyle = `rgba(${col},${0.9 * fadeT})`;
       ctx.fill();
     }
 
@@ -185,5 +192,5 @@ export function initCanvas() {
   window.addEventListener('resize', resize);
   window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
   resize();
-  requestAnimationFrame(draw);
+  setTimeout(() => requestAnimationFrame(draw), 200);
 }
