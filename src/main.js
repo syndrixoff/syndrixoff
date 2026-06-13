@@ -1,6 +1,5 @@
 import "./style.css";
 import { initNav } from './modules/nav.js';
-import { initLoader } from './modules/loader.js';
 import { initCanvas } from './modules/canvas.js';
 import { initTerminal } from './modules/terminal.js';
 import { initTypewriter } from './modules/typewriter.js';
@@ -13,7 +12,6 @@ import { initCounters } from './modules/counters.js';
 import { initMagnetic } from './modules/magnetic.js';
 
 initNav();
-initLoader();
 initReveal();
 initCounters();
 initTeam();
