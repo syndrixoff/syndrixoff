@@ -99,7 +99,7 @@ t.innerHTML = `
           <button class="btn btn-primary btn-full" type="submit">Start my project</button>
           <div id="turnstileSlot"><slot name="turnstile"></slot></div>
         </div>
-        <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
+        <p class="form-note">No pressure. No spam. Just a clear engineering direction.</p>
       </form>
     </div>
   </div>

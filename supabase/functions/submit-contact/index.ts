@@ -3,32 +3,12 @@ import { createClient } from 'jsr:@supabase/supabase-js@2'
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const turnstileSecret = Deno.env.get('TURNSTILE_SECRET_KEY')
-const DISCORD_WEBHOOK = Deno.env.get('DISCORD_WEBHOOK_URL')
+const GUMLOOP_WEBHOOK_URL = Deno.env.get('GUMLOOP_WEBHOOK_URL')
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
-
-function sendDiscord(name: string, email: string, company: string | null, budget: string | null, project: string) {
-  const embed = {
-    title: '\u{1F4E8} New Lead',
-    color: 0xc4863f,
-    fields: [
-      { name: '\u{1F464} Name', value: name, inline: true },
-      { name: '\u{2709}\u{FE0F} Email', value: email, inline: true },
-      { name: '\u{1F3E2} Company', value: company || '—', inline: true },
-      { name: '\u{1F4B0} Budget', value: budget || '—', inline: true },
-      { name: '\u{1F4CB} Project', value: project, inline: false },
-    ],
-    timestamp: new Date().toISOString(),
-  }
-  fetch(DISCORD_WEBHOOK, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ embeds: [embed] }),
-  }).catch(() => {})
 }
 
 Deno.serve(async (req) => {
@@ -37,6 +17,12 @@ Deno.serve(async (req) => {
   try {
     if (!turnstileSecret) {
       return new Response(JSON.stringify({ error: 'Server misconfigured: missing Turnstile secret.' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      })
+    }
+
+    if (!GUMLOOP_WEBHOOK_URL) {
+      return new Response(JSON.stringify({ error: 'Server misconfigured: missing Gumloop webhook.' }), {
         status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       })
     }
@@ -63,16 +49,28 @@ Deno.serve(async (req) => {
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
-    const { error } = await supabase.from('contacts').insert({
+    const { data: contact, error: insertError } = await supabase.from('contacts').insert({
       name, email,
       company: company || null,
       budget: budget || null,
       project
-    })
+    }).select('id').single()
 
-    if (error) throw error
+    if (insertError) throw insertError
 
-    if (DISCORD_WEBHOOK) sendDiscord(name, email, company, budget, project)
+    fetch(GUMLOOP_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        company: company || null,
+        budget: budget || null,
+        project,
+        contact_id: contact.id,
+        source: 'website_form'
+      }),
+    }).catch(() => {})
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
