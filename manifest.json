@@ -1,0 +1,9 @@
+{
+  "name": "SYNDRIX",
+  "short_name": "SYNDRIX",
+  "start_url": "/syndrixoff/",
+  "display": "standalone",
+  "background_color": "#0c0b09",
+  "theme_color": "#0c0b09",
+  "orientation": "any"
+}

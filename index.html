@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
+  <title>SYNDRIX — Engineered with Intelligence</title>
+  <meta name="description" content="SYNDRIX is an engineering-driven company specializing in custom electronic systems, embedded technologies, product development, PCB design, and intelligent hardware solutions.">
+  <meta property="og:title" content="SYNDRIX — Engineered with Intelligence">
+  <meta property="og:description" content="Custom electronic systems, embedded technologies, PCB design, and intelligent hardware solutions — from concept to deployment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syndrixoff.github.io/syndrixoff/">
+  <meta property="og:image" content="https://syndrixoff.github.io/syndrixoff/img/og-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SYNDRIX — Engineered with Intelligence">
+  <meta name="twitter:description" content="Custom electronic systems, embedded technologies, PCB design, and intelligent hardware solutions — from concept to deployment.">
+  <meta name="twitter:image" content="https://syndrixoff.github.io/syndrixoff/img/og-preview.jpg">
+    <link rel="preload" href="lib/geist-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="lib/geist-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="lib/geist-mono/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="lib/geist-400.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="lib/geist-500.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="lib/geist-600.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="lib/geist-700.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="lib/geist-mono.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="lib/geist-400.css" />
+    <link rel="stylesheet" href="lib/geist-500.css" />
+    <link rel="stylesheet" href="lib/geist-600.css" />
+    <link rel="stylesheet" href="lib/geist-700.css" />
+    <link rel="stylesheet" href="lib/geist-mono.css" />
+  </noscript>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0b09'/%3E%3Cpath d='M14 42 32 12l18 30H14Z' fill='none' stroke='%23c4863f' stroke-width='4'/%3E%3Cpath d='M22 42h28L32 52 14 42h8Z' fill='%235ec5bd'/%3E%3C/svg%3E">
+<style>
+#page { opacity: 0; }
+.loader-center { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.loader-svg { display: block; width: min(20vmin, 140px); aspect-ratio: 1; animation: loaderPulse 2s ease-in-out infinite; }
+.loader-pct { font-family: 'Geist Mono'; font-size: 0.7rem; letter-spacing: 0.1em; color: #888; text-align: center; }
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(196,134,63,0.3)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 0 20px rgba(196,134,63,0.5)); }
+}
+</style>
+
+  <script type="module" crossorigin src="/syndrixoff/index.Ace87fIu.js"></script>
+  <link rel="stylesheet" crossorigin href="/syndrixoff/assets/index-CJdg6U73.css">
+</head>
+<body class="grain">
+
+
+<div class="ambient-glows" aria-hidden="true">
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+    <div class="glow-orb glow-3"></div>
+  </div>
+
+<canvas id="ambientCanvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <div id="loader" role="progressbar" aria-label="Loading">
+    <div class="loader-center">
+      <svg class="loader-svg" viewBox="0 0 64 64" fill="none">
+        <rect width="64" height="64" rx="14" fill="#0c0b09"/>
+        <path d="M14 42 32 12l18 30H14Z" stroke="#c4863f" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M22 42h28L32 52 14 42h8Z" fill="#5ec5bd"/>
+      </svg>
+      <div class="loader-pct" id="loaderPct">0%</div>
+          </div>
+        </div>
+</div>
+
+<div id="page">
+  <div id="scrollProgress" class="scroll-progress"></div>
+
+  <nav class="nav" id="navbar" aria-label="Primary">
+    <a href="#main" class="brand" id="wordmark" aria-label="SYNDRIX home">SYNDRIX</a>
+    <div class="nav-links" role="list">
+      <div class="nav-indicator"></div>
+      <a href="#about" role="listitem">About</a>
+      <a href="#services" role="listitem">Services</a>
+      <a href="#process" role="listitem">Process</a>
+      <a href="#workbench" role="listitem">Workbench</a>
+      <a href="#team" role="listitem">Team</a>
+      <a href="#operations" role="listitem">Operations</a>
+      <a href="#contact" role="listitem">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      <a class="nav-cta" href="#contact">Start a Project</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- ─── Hero ─── -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-text">
+
+          <h1 id="hero-title" class="reveal is-visible delay-1">
+            <span class="line-1">Engineered</span>
+            <span class="line-2">With</span>
+            <span class="line-3"><span class="scramble-target" data-value="SYNDRIX">Intelligence</span></span>
+          </h1>
+          <p class="hero-copy reveal is-visible delay-2">
+            SYNDRIX is an engineering-driven company specializing in custom electronic systems, embedded technologies, product development, PCB design, and intelligent hardware solutions. We bridge the gap between innovative ideas and reliable real-world products through precision engineering and intelligent problem-solving.
+          </p>
+          <div class="hero-actions reveal is-visible delay-3">
+            <a href="#contact" class="btn btn-primary">Request a consultation</a>
+            <a href="#services" class="btn btn-secondary">Explore our services</a>
+          </div>
+          <div class="hero-stats reveal is-visible delay-3" aria-label="SYNDRIX snapshot">
+            <div class="stat-cell"><strong>04</strong><span>Core disciplines</span></div>
+            <div class="stat-cell"><strong>0→1</strong><span>Concept to deployment</span></div>
+            <div class="stat-cell"><strong>Free</strong><span>Initial consultation</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal is-visible delay-2" aria-hidden="true">
+          <div class="glow-blob glow-blob-1"></div>
+          <div class="glow-blob glow-blob-2"></div>
+          <div class="node-ring">
+            <div class="ring-orbit"></div>
+            <div class="ring-orbit"></div>
+            <!-- Node 1: Design (top, 0°) -->
+            <div class="orbit-arm orbit-arm-1">
+              <div class="node node-1">
+                <span class="label"><strong>Design</strong>Circuit & PCB</span>
+              </div>
+            </div>
+            <!-- Node 2: Develop (bottom-right, 120°) -->
+            <div class="orbit-arm orbit-arm-2">
+              <div class="node node-2">
+                <span class="label"><strong>Develop</strong>Embedded & IoT</span>
+              </div>
+            </div>
+            <!-- Node 3: Validate (bottom-left, 240°) -->
+            <div class="orbit-arm orbit-arm-3">
+              <div class="node node-3">
+                <span class="label"><strong>Validate</strong>Test & Ship</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── About: Mission, Vision & Core Values ─── -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">Brand Foundation</p>
+          <h2 id="about-title">Intelligence meets engineering.</h2>
+        </div>
+        <p>We engineer intelligent electronic systems tailored to real-world requirements. From concept to deployment, every solution is designed with precision and purpose.</p>
+      </div>
+
+      <!-- Mission & Vision -->
+      <div class="mission-grid">
+        <div class="mission-card reveal delay-1">
+          <h3>Mission</h3>
+          <p>To transform ideas into reliable electronic systems through intelligent engineering and precision execution.</p>
+        </div>
+        <div class="mission-card reveal delay-2">
+          <h3>Vision</h3>
+          <p>To become a trusted engineering partner for innovators, startups, research organizations, and industries seeking advanced electronic solutions.</p>
+        </div>
+      </div>
+
+      <!-- Core Values -->
+      <div class="values-grid">
+        <div class="value-card reveal delay-1">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
+              <circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.93-7.07-2.83 2.83m-8.48 8.48-2.83 2.83m0-14.14 2.83 2.83m8.48 8.48 2.83 2.83"/>
+            </svg>
+          </div>
+          <h4>Precision</h4>
+          <p>Every design decision is based on accuracy, engineering rigor, and technical excellence.</p>
+        </div>
+        <div class="value-card reveal delay-2">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#5ec5bd">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z"/>
+            </svg>
+          </div>
+          <h4>Intelligence</h4>
+          <p>We solve complex challenges through thoughtful engineering and innovation.</p>
+        </div>
+        <div class="value-card reveal delay-3">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
+              <path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
+            </svg>
+          </div>
+          <h4>Reliability</h4>
+          <p>Products and systems are designed to perform consistently in real-world environments.</p>
+        </div>
+        <div class="value-card reveal delay-4">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#5ec5bd">
+              <path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
+            </svg>
+          </div>
+          <h4>Innovation</h4>
+          <p>We continuously explore new technologies and smarter approaches.</p>
+        </div>
+        <div class="value-card reveal delay-5">
+          <div class="value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#c4863f">
+              <path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/>
+            </svg>
+          </div>
+          <h4>Partnership</h4>
+          <p>We work closely with clients throughout the development journey.</p>
+        </div>
+      </div>
+
+      <!-- Brand Promise -->
+      <div class="promise-banner reveal">
+        <div class="bg-grid"></div>
+        <blockquote>"We engineer custom electronic solutions that combine innovation, reliability, and technical excellence."</blockquote>
+        <p class="promise-label">— Brand Promise</p>
+      </div>
+    </section>
+
+    <!-- ─── Service Architecture ─── -->
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">Service Architecture</p>
+          <h2 id="services-title">Four disciplines, one engineering partner.</h2>
+        </div>
+        <p>SYNDRIX aligns circuit design, embedded development, validation, and production support into a single unified engineering workflow — from first schematic to final deployment.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1: Design (from doc) -->
+        <article class="service-card service-card-1 reveal delay-1">
+          <div class="pattern"></div>
+          <span class="num">01</span>
+          <div style="position:relative;z-index:2">
+            <p class="kicker">Design</p>
+            <h3>Circuit Design, PCB Design, Hardware Architecture.</h3>
+            <p>Schematic capture, multi-layer PCB layout, hardware architecture, power distribution, and signal integrity — engineered for reliability and manufacturability.</p>
+            <div class="tag-list">
+              <span class="tag">Circuit Design</span>
+              <span class="tag">PCB Design</span>
+              <span class="tag">Hardware Architecture</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Service 2: Development (from doc) -->
+        <article class="service-card service-card-2 reveal delay-2">
+          <div class="pattern"></div>
+          <span class="num">02</span>
+          <div style="position:relative;z-index:2">
+            <p class="kicker">Development</p>
+            <h3>Embedded Systems, Firmware Development, IoT Solutions.</h3>
+            <p>Embedded firmware, real-time operating systems, IoT connectivity, sensor integration, and communication protocols that perform consistently in real-world environments.</p>
+            <div class="tag-list">
+              <span class="tag">Embedded Systems</span>
+              <span class="tag">Firmware Development</span>
+              <span class="tag">IoT Solutions</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Service 3: Validation (from doc) -->
+        <article class="service-card service-card-3 reveal delay-3">
+          <div class="pattern"></div>
+          <span class="num">03</span>
+          <div style="position:relative;z-index:2">
+            <p class="kicker">Validation</p>
+            <h3>Testing, Debugging, Performance Verification.</h3>
+            <p>Rigorous functional testing, systematic debugging, signal analysis, EMC compliance, and performance verification to ensure every system meets specification.</p>
+            <div class="tag-list">
+              <span class="tag">Testing</span>
+              <span class="tag">Debugging</span>
+              <span class="tag">Performance Verification</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Service 4: Production (from doc) -->
+        <article class="service-card service-card-4 reveal delay-4">
+          <div class="pattern"></div>
+          <span class="num">04</span>
+          <div style="position:relative;z-index:2">
+            <p class="kicker">Production</p>
+            <h3>Prototyping, Manufacturing Support, Product Optimization.</h3>
+            <p>Rapid prototyping, BOM generation, manufacturing documentation, Gerber files, production support, and product optimization for seamless scale-up.</p>
+            <div class="tag-list">
+              <span class="tag">Prototyping</span>
+              <span class="tag">Manufacturing Support</span>
+              <span class="tag">Product Optimization</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── Process ─── -->
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">How we engineer</p>
+          <h2 id="process-title">From concept to deployment. Precision at every step.</h2>
+        </div>
+        <p>A rigorous engineering process for innovators, startups, research organizations, and industries seeking advanced electronic solutions on a predictable timeline.</p>
+      </div>
+
+      <div class="process-track">
+        <article class="step-item reveal-l delay-1">
+          <div class="step-marker">1</div>
+          <h3>Scope</h3>
+          <p>Define requirements, technical constraints, performance targets, component selection, and deployment environment.</p>
+        </article>
+        <article class="step-item reveal-l delay-2">
+          <div class="step-marker">2</div>
+          <h3>Design</h3>
+          <p>Produce schematics, PCB layouts, firmware architecture, and initial hardware prototypes for validation.</p>
+        </article>
+        <article class="step-item reveal-l delay-3">
+          <div class="step-marker">3</div>
+          <h3>Validate</h3>
+          <p>Rigorous testing, debugging, performance verification, EMC compliance, and edge-case analysis.</p>
+        </article>
+        <article class="step-item reveal-l delay-4">
+          <div class="step-marker">4</div>
+          <h3>Deploy</h3>
+          <p>Deliver production-ready designs, manufacturing files, firmware binaries, and comprehensive documentation.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── Workbench ─── -->
+    <section class="section" id="workbench" aria-labelledby="workbench-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">The Workbench</p>
+          <h2 id="workbench-title">Precision tools for intelligent engineering.</h2>
+        </div>
+        <p>From concept to deployment, every solution is designed with precision and purpose. We choose the most reliable tool for each surface — circuit, firmware, or production.</p>
+      </div>
+
+      <div class="workbench">
+        <div class="terminal reveal-scale delay-1" aria-label="SYNDRIX project manifest example">
+          <div class="win-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <pre><span class="d">// syndrix.project.manifest</span>
+<span class="c2">client</span>: <span class="c1">"startup / research org / industry"</span>
+<span class="c2">industry</span>: <span class="c1">"Custom Electronics & Hardware"</span>
+<span class="c2">outputs</span>: [
+  <span class="c1">"circuit_design"</span>,
+  <span class="c1">"pcb_layout"</span>,
+  <span class="c1">"embedded_firmware"</span>,
+  <span class="c1">"iot_solution"</span>,
+  <span class="c1">"production_prototype"</span>
+]
+<span class="c2">values</span>: {
+  precision: <span class="c1">true</span>,
+  intelligence: <span class="c1">true</span>,
+  reliability: <span class="c1">true</span>,
+  innovation: <span class="c1">true</span>,
+  partnership: <span class="c1">true</span>
+}
+
+<span class="d">// status: concept → deployed</span></pre>
+        </div>
+
+        <div class="deliverables">
+          <article class="deliverable reveal-r delay-1">
+            <div class="icon">D</div>
+            <div>
+              <h3>Circuit & PCB Design packages</h3>
+              <p>Schematic capture, multi-layer PCB layout, hardware architecture, component selection, BOM generation, and Gerber files ready for manufacturing.</p>
+            </div>
+          </article>
+          <article class="deliverable reveal-r delay-2">
+            <div class="icon">E</div>
+            <div>
+              <h3>Embedded Systems & Firmware Development</h3>
+              <p>Microcontroller firmware, RTOS integration, sensor drivers, communication protocols, and IoT connectivity built for real-world performance.</p>
+            </div>
+          </article>
+          <article class="deliverable reveal-r delay-3">
+            <div class="icon">V</div>
+            <div>
+              <h3>Testing & Performance Verification</h3>
+              <p>Functional testing, signal analysis, debugging, EMC compliance, and performance verification to ensure every system meets specification.</p>
+            </div>
+          </article>
+          <article class="deliverable reveal-r delay-4">
+            <div class="icon">P</div>
+            <div>
+              <h3>Prototyping & Manufacturing Support</h3>
+              <p>Rapid prototyping, manufacturing documentation, product optimization, and production support for seamless transition from lab to factory.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Tech Stack sub-section -->
+      <div class="tech-stack-section reveal">
+        <div class="tech-stack-head">
+          <p class="kicker">Core Technologies</p>
+          <h3>The Actual Tech Stack</h3>
+          <p>Specific tools, architectures, and protocols we employ to build reliable, high-performance hardware.</p>
+        </div>
+        <div class="tech-stack-grid">
+          <div class="tech-card">
+            <div class="tech-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+                <rect x="3" y="3" width="18" height="18" rx="3" />
+                <path d="M3 9h18M9 21V9M15 9v12M3 15h18" />
+              </svg>
+            </div>
+            <h4>ECAD</h4>
+            <p class="tech-title">KiCad</p>
+            <p class="tech-list">Professional multi-layer schematic design, precise PCB routing, and fabrication package generation.</p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+                <path d="m8 8-4 4 4 4M16 8l4 4-4 4M10 19l4-14" />
+              </svg>
+            </div>
+            <h4>Firmware</h4>
+            <p class="tech-title">C / C++</p>
+            <p class="tech-list">Low-level, hardware-optimized firmware development for high reliability and real-time execution.</p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+                <rect x="5" y="5" width="14" height="14" rx="2" />
+                <path d="M9 9h6v6H9z" />
+                <path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4" />
+              </svg>
+            </div>
+            <h4>MCUs & Architectures</h4>
+            <p class="tech-title">ARM / STM32</p>
+            <p class="tech-list">ARM Cortex-M core processing, STM32 microcontrollers, ESP32, and Nordic Semiconductor systems.</p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                <path d="M12 12a3 3 0 1 0 3 3 3 3 0 0 0-3-3z" />
+                <path d="M17 7a7 7 0 1 0 0 10" />
+              </svg>
+            </div>
+            <h4>IoT & Connectivity</h4>
+            <p class="tech-title">MQTT / BLE</p>
+            <p class="tech-list">Wireless and remote connectivity via Bluetooth Low Energy (BLE), Cellular (LTE-M/NB-IoT), and MQTT protocol.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="team" aria-labelledby="team-title">
+      <div class="section-label">// CREW MANIFEST</div>
+      <h2 id="team-title" class="section-title">Engineered by <em>Specialists</em>. <span style="color:var(--ink-pure)">Owned by you.</span></h2>
+
+      <div class="team-filters" id="teamFilters">
+        <button class="team-filter active" data-filter="all">All</button>
+        <button class="team-filter" data-filter="leadership">Leadership</button>
+        <button class="team-filter" data-filter="engineering-design">Engineering Design</button>
+        <button class="team-filter" data-filter="embedded-product-engineering">Embedded &amp; Product Engineering</button>
+        <button class="team-filter" data-filter="software-engineering">Software Engineering</button>
+      </div>
+
+      <div class="team-scroll-wrap">
+      <div class="team-grid" id="teamGrid">
+
+        <div class="team-card" data-category="leadership">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Mithunkumar J</h3>
+              <span class="team-role">CEO &amp; Founder</span>
+            </div>
+          </div>
+          <p>Company strategy, partnerships, business development, client acquisition, and long-term vision for SYNDRIX.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Mithunkumar J on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Mithunkumar J on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="leadership software-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Haripriyan R</h3>
+              <span class="team-role">CTO &amp; Co-Founder</span>
+            </div>
+          </div>
+          <p>Technical direction, architecture reviews, product strategy, engineering standards, and R&amp;D leadership across all divisions.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Haripriyan R on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Haripriyan R on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="engineering-design">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Sudharsan G S</h3>
+              <span class="team-role">Senior Hardware Design Engineer</span>
+            </div>
+          </div>
+          <p>System architecture, analog design, hardware feasibility, and technology selection for next-gen electronic products.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Sudharsan G S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Sudharsan G S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="engineering-design">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Ayden Joshua M</h3>
+              <span class="team-role">Lead Hardware Architect</span>
+            </div>
+          </div>
+          <p>Hardware architecture, FPGA development, CAD &amp; simulation, and semiconductor research leadership.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Ayden Joshua M on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Ayden Joshua M on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="engineering-design">
+          <div class="team-card-visual">
+            <img src="img/arvindh.jpg" alt="Arvindh Arjun S" loading="lazy" />
+            <div class="team-card-overlay">
+              <h3>Arvindh Arjun S</h3>
+              <span class="team-role">RTL &amp; PCB Design Engineer</span>
+            </div>
+          </div>
+          <p>RTL design, PCB development, digital logic, and FPGA-based system implementation.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Arvindh Arjun S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Arvindh Arjun S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="engineering-design">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Akhil S B</h3>
+              <span class="team-role">Digital Design Engineer</span>
+            </div>
+          </div>
+          <p>Digital hardware design, Verilog development, and system modelling for complex electronic systems.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Akhil S B on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Akhil S B on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="software-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Raghul Deepan</h3>
+              <span class="team-role">Lead Software Engineer</span>
+            </div>
+          </div>
+          <p>Full-stack development, web applications, backend systems, APIs, and AI integration for software platforms.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Raghul Deepan on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Raghul Deepan on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Chaarukesh R R</h3>
+              <span class="team-role">Embedded &amp; AI Engineer</span>
+            </div>
+          </div>
+          <p>Embedded systems, AI-enabled edge solutions, IoT integration, and automation system architecture.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Chaarukesh R R on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Chaarukesh R R on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Haresh S</h3>
+              <span class="team-role">Firmware &amp; PCB Engineer</span>
+            </div>
+          </div>
+          <p>Embedded development, EV systems, communication protocols, and real-time firmware for embedded solutions.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Haresh S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Haresh S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Sai Deepak K</h3>
+              <span class="team-role">Embedded Product Engineer</span>
+            </div>
+          </div>
+          <p>Automotive electronics, embedded control systems, microcontroller firmware, and sensor integration for embedded platforms.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Sai Deepak K on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Sai Deepak K on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <img src="img/harish.jpg" alt="T Harish" loading="lazy" />
+            <div class="team-card-overlay">
+              <h3>T Harish</h3>
+              <span class="team-role">Validation &amp; PCB Engineer</span>
+            </div>
+          </div>
+          <p>Product testing, manufacturing support, validation workflows, and production-ready hardware release.</p>
+          <div class="team-social">
+            <a href="#" aria-label="T Harish on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="T Harish on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Abhisek KR</h3>
+              <span class="team-role">Lead Product Engineer</span>
+            </div>
+          </div>
+          <p>PCB architecture, prototyping, manufacturing support, product realization, and hardware bring-up for production systems.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Abhisek KR on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Abhisek KR on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="embedded-product-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>GK Venkatesan</h3>
+              <span class="team-role">AI Automation &amp; Embedded Engineer</span>
+            </div>
+          </div>
+          <p>AI automation, embedded systems, computer vision, and intelligent edge solutions.</p>
+          <div class="team-social">
+            <a href="#" aria-label="GK Venkatesan on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="GK Venkatesan on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="software-engineering">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Samraj Joshua S</h3>
+              <span class="team-role">Full-Stack &amp; AI Developer</span>
+            </div>
+          </div>
+          <p>Web platforms, client portals, internal engineering tools, and full-stack frontend/backend systems.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Samraj Joshua S on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Samraj Joshua S on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+        <div class="team-card" data-category="leadership">
+          <div class="team-card-visual">
+            <div class="team-card-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0"/></svg></div>
+            <div class="team-card-overlay">
+              <h3>Tharun</h3>
+              <span class="team-role">CFO</span>
+            </div>
+          </div>
+          <p>Financial planning, budget management, pricing strategy, vendor relations, resource allocation, and growth planning.</p>
+          <div class="team-social">
+            <a href="#" aria-label="Tharun on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://github.com/syndrixoff/" aria-label="Tharun on GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          </div>
+        </div>
+
+      </div>
+      <button class="team-scroll-btn team-scroll-prev" id="teamScrollPrev" aria-label="Scroll team left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="team-scroll-btn team-scroll-next" id="teamScrollNext" aria-label="Scroll team right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <div class="team-scroll-dots" id="teamScrollDots"></div>
+      </div>
+    </section>
+
+    <!-- ─── Operations & IP ─── -->
+    <section class="section" id="operations" aria-labelledby="ops-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="kicker">The Engine</p>
+          <h2 id="ops-title">Infrastructure behind the engineering.</h2>
+        </div>
+        <p>We operate our own prototyping lab and maintain a strict client-first IP policy — because trust is engineered, not assumed.</p>
+      </div>
+
+      <div class="operations-grid reveal delay-1">
+        <div class="ops-card">
+          <div class="ops-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M19 10h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2M12 2v16M8 6l4-4 4 4" />
+            </svg>
+          </div>
+          <h3>In-House Prototyping Lab</h3>
+          <p class="ops-location">Based in India</p>
+          <p class="ops-text">Our physical prototypes are assembled, debugged, and validated directly inside our dedicated in-house hardware laboratory. Equipped with high-precision testing gear, logic analyzers, and reflow stations, we maintain total quality control over PCB bring-up before shipping globally to your door.</p>
+        </div>
+
+        <div class="ops-card ip-highlight">
+          <div class="ops-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 11l2 2 4-4" />
+            </svg>
+          </div>
+          <h3>Client-First IP Policy</h3>
+          <p class="ops-location">100% IP Ownership Guarantee</p>
+          <p class="ops-text">All intellectual property, including schematic designs, PCB layouts, RTL models, firmware source code, and software components developed during our partnership, belongs exclusively and unconditionally to you. We execute strict NDAs and transfer all rights upon milestone delivery.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CTA / Contact ─── -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="cta-panel reveal-scale">
+        <div class="bg-grid"></div>
+        <div class="cta-layout">
+          <div class="cta-top-row">
+            <div class="cta-text-head">
+              <p class="kicker">Free consultation</p>
+              <h2 id="contact-title" class="contact-heading">Bring a concept.<br>Leave with an engineering<br>direction.</h2>
+            </div>
+            <div class="terminal-block">
+              <div class="term-wrap">
+                <div class="term-bar">
+                  <div class="dot d1"></div>
+                  <div class="dot d2"></div>
+                  <div class="dot d3"></div>
+                  <span class="term-label">SYNDRIX — SIGNAL PATH TERMINAL</span>
+                </div>
+                <div class="term-body" id="termOutput"></div>
+              </div>
+            </div>
+          </div>
+          <p class="cta-text-body">Tell SYNDRIX what you need engineered — custom electronics, embedded system, PCB design, IoT solution, or a complete product development package. The initial consultation is free so you can evaluate the fit before committing. Or reach us directly at <a href="mailto:syndrixoff@gmail.com">syndrixoff@gmail.com</a></p>
+          <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="nameInput">Name</label>
+                  <input id="nameInput" name="name" type="text" placeholder="Name" autocomplete="name" required>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="emailInput">Email</label>
+                  <input id="emailInput" name="email" type="email" placeholder="Email" autocomplete="email" required>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="companyInput">Company</label>
+                  <input id="companyInput" name="company" type="text" placeholder="Company" autocomplete="organization">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="budgetInput">Budget (e.g., ₹50K - ₹2L)</label>
+                  <input id="budgetInput" name="budget" type="text" placeholder="₹50K - ₹2L" autocomplete="off">
+                </div>
+              </div>
+              <div class="form-field form-field-full">
+                <label class="form-label" for="projectInput">Describe your project</label>
+                <input id="projectInput" name="project" type="text" placeholder="Custom sensor board + embedded firmware for environmental monitoring…" autocomplete="off" required>
+              </div>
+              <button class="btn btn-primary btn-full" type="submit">Start my project</button>
+              <p class="form-note">No commitment. No spam. Just a clear engineering direction.</p>
+            </form>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Closing Statement ─── -->
+  <div class="section closing-statement reveal">
+    <p>SYNDRIX stands at the intersection of intelligence and engineering, transforming concepts into dependable electronic solutions through precision, innovation, and technical excellence.</p>
+    <span class="tagline">Engineered with Intelligence.</span>
+  </div>
+
+  <footer class="page-footer">
+    <small>&copy; 2026 SYNDRIX &mdash; All rights reserved.</small>
+  </footer>
+</div>
+  <!-- Toast notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal root -->
+  <div id="modal-root"></div>
+
+</body>
+</html>
