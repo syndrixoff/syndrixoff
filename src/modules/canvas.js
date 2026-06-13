@@ -5,7 +5,7 @@ export function initCanvas() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let W, H, particles;
-  let maxParticles = 110;
+  let maxParticles = 60;
   let currentMax = 110;
   const mouse = { x: -9999, y: -9999 };
   const packets = [];
@@ -101,13 +101,13 @@ export function initCanvas() {
     packets.push({ ax: a, bx: b, t: 0, speed: 0.006 + Math.random() * 0.006, copper: a.copper || b.copper });
   }
 
-  function draw(now) {
+  function draw() {
     if (prefersReducedMotion) return;
-    if (paused) { requestAnimationFrame(draw); return; }
+    if (paused) { setTimeout(draw, 33); return; }
 
-    monitorFPS(now);
+    monitorFPS(performance.now());
     ctx.clearRect(0, 0, W, H);
-    const t = now / 1000;
+    const t = performance.now() / 1000;
 
     packetSpawnTimer += 1;
     if (packetSpawnTimer > 90) { packetSpawnTimer = 0; spawnPacket(); }
@@ -186,11 +186,11 @@ export function initCanvas() {
       ctx.fill();
     }
 
-    requestAnimationFrame(draw);
+    setTimeout(draw, 33);
   }
 
   window.addEventListener('resize', resize);
   window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
   resize();
-  setTimeout(() => requestAnimationFrame(draw), 200);
+  setTimeout(() => draw(), 200);
 }
