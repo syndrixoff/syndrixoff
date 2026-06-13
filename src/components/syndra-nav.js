@@ -72,6 +72,7 @@ const style = `
 const template = document.createElement('template');
 template.innerHTML = `
 <style>${style}</style>
+<nav class="nav">
 <a href="#main" class="brand" id="wordmark" aria-label="SYNDRIX home">SYNDRIX</a>
 <div class="nav-links">
   <div class="nav-indicator"></div>
@@ -90,6 +91,7 @@ template.innerHTML = `
   </button>
   <a class="nav-cta" href="#contact">Start a Project</a>
 </div>
+</nav>
 `;
 
 customElements.define('syndra-nav', class extends HTMLElement {
