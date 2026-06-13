@@ -3,11 +3,32 @@ import { createClient } from 'jsr:@supabase/supabase-js@2'
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const turnstileSecret = Deno.env.get('TURNSTILE_SECRET_KEY')
+const DISCORD_WEBHOOK = Deno.env.get('DISCORD_WEBHOOK_URL')
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
+}
+
+function sendDiscord(name: string, email: string, company: string | null, budget: string | null, project: string) {
+  const embed = {
+    title: 'New Lead',
+    color: 0xc4863f,
+    fields: [
+      { name: 'Name', value: name, inline: true },
+      { name: 'Email', value: email, inline: true },
+      { name: 'Company', value: company || '—', inline: true },
+      { name: 'Budget', value: budget || '—', inline: true },
+      { name: 'Project', value: project, inline: false },
+    ],
+    timestamp: new Date().toISOString(),
+  }
+  fetch(DISCORD_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ embeds: [embed] }),
+  }).catch(() => {})
 }
 
 Deno.serve(async (req) => {
@@ -50,6 +71,8 @@ Deno.serve(async (req) => {
     })
 
     if (error) throw error
+
+    if (DISCORD_WEBHOOK) sendDiscord(name, email, company, budget, project)
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
