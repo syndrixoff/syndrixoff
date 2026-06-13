@@ -1,9 +1,10 @@
 import "./style.css";
-import "./components/syndra-nav.js";
+import { initNav } from './modules/nav.js';
 import { initCanvas } from './modules/canvas.js';
 import { initTerminal } from './modules/terminal.js';
 import { initTypewriter } from './modules/typewriter.js';
 import { initTeam } from './modules/team.js';
+import { initTheme } from './modules/theme.js';
 import { initModal } from './modules/modal.js';
 import { initReveal } from './modules/reveal.js';
 import { initToast } from './modules/toast.js';
@@ -12,18 +13,21 @@ import { initMagnetic } from './modules/magnetic.js';
 
 const _ = (fn, ms) => setTimeout(fn, ms);
 
+initNav();
+
 _(initReveal, 50);
 _(initCounters, 100);
 _(initTeam, 150);
-_(initModal, 200);
+_(initTheme, 200);
+_(initModal, 250);
 
 document.addEventListener("DOMContentLoaded", () => {
-  _(initCanvas, 250);
-  _(initToast, 300);
-  _(initMagnetic, 350);
-  _(initTerminal, 400);
-  _(initTypewriter, 450);
-  _(initContactForm, 500);
+  _(initCanvas, 300);
+  _(initToast, 350);
+  _(initMagnetic, 400);
+  _(initTerminal, 450);
+  _(initTypewriter, 500);
+  _(initContactForm, 550);
 });
 
 function initContactForm() {
