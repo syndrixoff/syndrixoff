@@ -2,7 +2,7 @@ import { createClient } from 'jsr:@supabase/supabase-js@2'
 
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-const turnstileSecret = Deno.env.get('TURNSTILE_SECRET_KEY')!
+const turnstileSecret = Deno.env.get('TURNSTILE_SECRET_KEY')
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,6 +14,12 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
   try {
+    if (!turnstileSecret) {
+      return new Response(JSON.stringify({ error: 'Server misconfigured: missing Turnstile secret.' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      })
+    }
+
     const { name, email, company, budget, project, turnstileToken } = await req.json()
 
     if (!name || !email || !project || !turnstileToken) {

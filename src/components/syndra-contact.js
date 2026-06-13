@@ -249,13 +249,13 @@ class SyndraContact extends HTMLElement {
           })
         });
         if (!res.ok) {
-          const data = await res.json();
+          const data = await res.json().catch(() => ({}));
           throw new Error(data.error || 'Server error');
         }
         form.reset();
         alert("Message sent! We'll be in touch shortly.");
-      } catch {
-        alert('Something went wrong. Email us directly at syndrixoff@gmail.com.');
+      } catch (err) {
+        alert(err.message || 'Something went wrong. Email us directly at syndrixoff@gmail.com.');
       } finally {
         setLoading(false);
       }
