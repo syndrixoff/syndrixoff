@@ -11,12 +11,12 @@ import { initToast } from './modules/toast.js';
 import { initCounters } from './modules/counters.js';
 import { initMagnetic } from './modules/magnetic.js';
 
-setTimeout(initNav, 0);
-setTimeout(initReveal, 0);
-setTimeout(initCounters, 0);
-setTimeout(initTeam, 0);
-setTimeout(initTheme, 0);
-setTimeout(initModal, 0);
+initNav();
+initReveal();
+initCounters();
+initTeam();
+initTheme();
+initModal();
 
 document.addEventListener("DOMContentLoaded", () => {
   initCanvas();
