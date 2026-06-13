@@ -13,14 +13,14 @@ const corsHeaders = {
 
 function sendDiscord(name: string, email: string, company: string | null, budget: string | null, project: string) {
   const embed = {
-    title: 'New Lead',
+    title: '\u{1F4E8} New Lead',
     color: 0xc4863f,
     fields: [
-      { name: 'Name', value: name, inline: true },
-      { name: 'Email', value: email, inline: true },
-      { name: 'Company', value: company || '—', inline: true },
-      { name: 'Budget', value: budget || '—', inline: true },
-      { name: 'Project', value: project, inline: false },
+      { name: '\u{1F464} Name', value: name, inline: true },
+      { name: '\u{2709}\u{FE0F} Email', value: email, inline: true },
+      { name: '\u{1F3E2} Company', value: company || '—', inline: true },
+      { name: '\u{1F4B0} Budget', value: budget || '—', inline: true },
+      { name: '\u{1F4CB} Project', value: project, inline: false },
     ],
     timestamp: new Date().toISOString(),
   }
