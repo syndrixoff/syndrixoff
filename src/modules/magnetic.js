@@ -8,13 +8,18 @@ export function initMagnetic() {
     let animId = null;
     let ox = 0, oy = 0;
     let tx = 0, ty = 0;
+    let cachedRect = null;
+    let needsRectUpdate = true;
 
-    function lerp(a, b, t) { return a + (b - a) * t; }
+    function refreshRect() {
+      cachedRect = el.getBoundingClientRect();
+      needsRectUpdate = false;
+    }
 
     function onMove(e) {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
+      if (needsRectUpdate) refreshRect();
+      const cx = cachedRect.left + cachedRect.width / 2;
+      const cy = cachedRect.top + cachedRect.height / 2;
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.hypot(dx, dy);
@@ -36,6 +41,7 @@ export function initMagnetic() {
     }
 
     el.addEventListener('mouseenter', () => {
+      refreshRect();
       if (!animId) animId = requestAnimationFrame(animate);
     });
     el.addEventListener('mousemove', onMove);
@@ -50,4 +56,9 @@ export function initMagnetic() {
       }, 600);
     });
   });
+
+  window.addEventListener('scroll', () => { needsRectUpdate = true; }, { passive: true });
+  window.addEventListener('resize', () => { needsRectUpdate = true; }, { passive: true });
 }
+
+function lerp(a, b, t) { return a + (b - a) * t; }
