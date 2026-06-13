@@ -81,9 +81,18 @@ class SyndraTeam extends HTMLElement {
       let members = await fetchTeamMembers();
 
       members.sort((a, b) => {
-        const aSort = a.sort_order ?? 999;
-        const bSort = b.sort_order ?? 999;
-        if (aSort !== bSort) return aSort - bSort;
+        const catsA = (a.category || '').split(' ');
+        const catsB = (b.category || '').split(' ');
+        const isCLevelA = catsA.includes('leadership');
+        const isCLevelB = catsB.includes('leadership');
+
+        if (isCLevelA && !isCLevelB) return -1;
+        if (!isCLevelA && isCLevelB) return 1;
+        if (isCLevelA && isCLevelB) return (a.sort_order ?? 99) - (b.sort_order ?? 99);
+
+        if (a.is_lead && !b.is_lead) return -1;
+        if (!a.is_lead && b.is_lead) return 1;
+
         return a.name.localeCompare(b.name);
       });
 
